@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	function addWheel(obj,fn){
+		
+		obj.addEventListener('mousewheel',wheel);
+		obj.addEventListener('DOMMouseScroll',wheel);
+		
+		function wheel(ev){
+			var down = true;
+			if(ev.wheelDelta){
+				down = ev.wheelDelta > 0? true : false;
+			}else{
+				down = ev.detail < 0 ? true : false;
+			}
+			
+			fn && fn(down);
+		};
+	}
+	addWheel(document,function(o){
+		if(o){
+			alert('上');
+		}else{
+			alert('下');
+		}
+	});
+	
+	
+	
+	/*
+		1:div1.addEventListener('click',fn1,false);
+		2:div1.addEventListener('click',fn1,true);
+		3:div1.addEventListener('click',function(){},true);
+		4:div1.addEventListener('click',function(){},false);
+	*/
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var a = 10;//window.a
+	function fn(){
+		var b = c = 20;	
+	}
+	
+	fn();
+	
+	delete this.a;
+	
+	alert(this.a);//10
+	
+	alert(this.b);//undefined
+	
+	alert(this.c);//20
+	
+	
+	var obj = {name:'chenbin'};
+	
+//	function fnx(){
+//		"use strict"
+//		var d = 0;
+//	
+//		alert(d);
+//	}
+//	fnx()
+	
+	
+//	console.log(obj.pangzi);
+	
+	
+</script>
+</body>
+</html>

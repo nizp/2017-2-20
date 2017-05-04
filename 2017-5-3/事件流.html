@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+div{
+	padding: 100px;
+}	
+#div1{
+	background: red;
+}
+#div2{
+	background: blueviolet;
+}
+#div3{
+	background: yellowgreen;
+}
+#div4{
+	background: skyblue;
+}
+	
+	
+</style>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2">
+			<div id="div3">
+				<div id="div4">
+					<button id="btn">按钮</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	var div1 = document.getElementById('div1');
+	var div2 = document.getElementById('div2');
+	var div3 = document.getElementById('div3');
+	var div4 = document.getElementById('div4');
+	var btn = document.getElementById('btn');
+	
+	
+//	div1.addEventListener('click',function(){
+//		alert('x')
+//	},false);
+//	div2.addEventListener('click',fn2,true);//'紫色'  2
+//	btn.addEventListener('click',fn5,false);
+//	div3.addEventListener('click',fn3,true); //'黄色'  3
+//	div2.addEventListener('click',fn2,false);
+//	div4.addEventListener('click',fn4,false);
+//	div1.addEventListener('click',fn1,false);
+//	btn.addEventListener('click',fn5,true);//'按钮'  5
+//	div1.addEventListener('click',fn1,true);// 'red'  1
+	
+	
+	
+	
+	/*
+		目标阶段按照顺序执行
+	*/
+	
+	div3.addEventListener('click',function(){
+		alert('333344444')
+	},false);
+	div3.addEventListener('click',function(){
+		alert('333')
+	},true);
+
+	btn.addEventListener('click',fn1,false);
+	btn.addEventListener('click',fn2,true);
+	btn.addEventListener('click',fn3,false);
+	btn.addEventListener('click',fn4,true);
+	
+	//2413    1234
+	
+	
+	//5 4 2 1
+	function fn1(){
+		alert('1');
+	}
+	function fn2(){
+		alert('2');
+	}
+	function fn3(){
+		alert('3');
+	}
+	function fn4(){
+		alert('4');
+	}
+	function fn5(){
+		alert('5');
+	}
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

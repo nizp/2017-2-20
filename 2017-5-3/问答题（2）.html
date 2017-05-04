@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+#div2{
+	width:100px;
+	height: 100px;
+	background: blue;
+	position: absolute;
+	top:0;
+	left:100px;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	
+	function Drag(id){
+		var box = document.getElementById(id);
+		
+		box.addEventListener('mousedown',down);
+		
+		function down(ev){
+			var disX = ev.clientX - this.offsetLeft;
+			var disY = ev.clientY - this.offsetTop;
+			
+			document.addEventListener('mousemove',move);
+			
+			document.addEventListener('mouseup',up);
+			
+			function move(ev){
+				
+				box.style.left = ev.clientX - disX + 'px';
+				box.style.top = ev.clientY - disY + 'px';
+			}
+			
+			function up(){
+				document.removeEventListener('mousemove',move);
+				document.removeEventListener('mouseup',up);
+			}
+			
+			ev.preventDefault();
+		}
+	}
+	
+	
+	Drag('div1');
+	Drag('div2');
+	
+	
+</script>
+</body>
+</html>

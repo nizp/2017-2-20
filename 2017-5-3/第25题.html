@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	function fn1(){
+//		var a = 0;
+//		function fn2(){
+//			++a;
+//			alert(a);
+//		}
+//		return fn2;
+//	}
+//	
+//	fn1()();//1
+//	
+//	var newFn = fn1();
+//
+//	newFn();
+//	newFn();
+
+	var c = 10;
+	
+	function fn(){
+		var a = {
+			num:10
+		};
+		
+		function fn2(){
+			c++;
+			a.num++;
+			return a.num;
+		}
+		
+		return fn2;
+	}
+	
+	var a = fn();
+//	var b = fn();
+	
+	console.log(a == a);
+	
+	
+	//console.log(fn() == fn());
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

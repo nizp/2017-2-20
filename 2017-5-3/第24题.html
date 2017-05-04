@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var a = 10;
+	function test(){
+		//var a = un;
+		a = 100;
+		alert(a);//100
+		alert(this.a);//window  10
+		var a;
+		alert(a);//100
+	}
+	test();
+	
+	
+</script>
+</body>
+</html>

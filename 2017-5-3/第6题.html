@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	var ul = document.getElementById('ul')
+	var lis = ul.getElementsByTagName('li');
+	
+	/*
+		ul.innerHTML = ul.innerHTML + '<li>'+(i+1)+'</li>'
+		
+	*/
+	
+	
+	for(var i=0;i<6;i++){
+		ul.innerHTML += '<li>'+(i+1)+'</li>';
+	}
+	for(var i=0;i<6;i++){
+		lis[i].onclick = function(){
+			alert(this.innerHTML);
+		}
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

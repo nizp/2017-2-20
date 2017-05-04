@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/git">
+	
+	git与github是2个东西
+	
+	git:
+		版本控制工具
+	
+	github:网站
+		社交平台，开源项目，远程仓库
+
+	
+	svn与git区别
+	
+	svn:
+		为集成式(要进行版本控制一定要联网[要经过中央服务器才能进行版本控制]),很依赖中央服务器
+		
+	
+	git:
+		分布式(不用网络就能进行版本控制,在本机进行版本控制即可)
+		
+	
+	github + git
+	
+	https://github.com
+	
+	
+	1.安装git
+	
+	2.注册github账号
+	
+	3.关联:
+		ssh-keygen -t rsa -C "注册邮箱"   --拿到秘钥
+		
+		验证是否关联:
+			ssh -T git@github.com
+			
+	4.创建一个项目(github)
+	
+	5.把仓库中的代码复制到本地
+	
+		cd c:
+			ls || ll 查看有哪些目录
+		
+		返回上一层
+			cd ..
+		
+		补全
+			tab	
+			
+		克隆:
+			git clone 填写仓库地址
+			
+		粘贴:
+			shift + insert
+			ctrl + v
+			右键git工具顶部 -> 编辑 -> 粘贴
+			
+		
+		进入项目(出现了master,就说明在版本控制返回)
+		
+		
+	git的三个区
+		工作区
+		暂存区
+			作为过渡层
+			避免误操作
+			保护工作区和版本区
+			分支处理
+		版本区（库）
+		
+	查看状态：
+		git status
+	
+	工作区到暂存区
+		git add 文件名
+		
+		快捷方式：
+			git add . (一次性将一个或者多个文件放到暂存区)
+		
+	暂存区到版本区
+		git commit -m "注释"
+		
+		快捷方式(直接从工作区到版本区):
+			git commit -a -m "注释"(新建文件第一次要放当暂存区才能使用这个命令)
+		
+	查看版本号：
+		git log
+		
+	清屏:
+		clear
+		
+	从本地传到远程仓库：
+		git push origin master
+	
+	
+	查看每个区域的差异：
+		
+		1.工作区与暂存区差异：
+			git diff
+			
+		2.暂存区与版本区的差异:
+			git diff --cached
+			
+		3.工作区与版本区的差异:
+			git diff master
+			
+	
+	撤销:
+		git reset HEAD <file.name>（暂存区撤销到工作区）
+			
+		git checkout -- <file.name> （工作区代码还原暂存区或版本区）
+		
+		暂存区有内容优先还原暂存区，没有就直接版本区
+	
+		
+		已经提交了一个版本，但是这个版本按理来说还需要别的文件
+		（这个文件还没提交），把未提交的代码提交到暂存区
+		通过git commit -m "注释" --amend
+		
+		这个时候多个文件就合并成了一个版本，之前那个版本就被覆盖为当前的版本
+		
+		
+	删除:
+		git rm <file.name>  (工作区手动删除之后也想删除暂存区)
+			
+		git rm -f <file.name> (用代码删除指定文件)
+			
+		git rm -rf 文件夹名字  (删除文件夹)
+		
+		
+	恢复:
+		
+		*git reset --hard 版本ID   回滚整个历史记录
+		
+		*git checkout 版本ID 文件名   指定回滚单个文件
+		
+		git reset --hard HEAD^   回滚上一个版本（多次写入会以当前版本的上个版本回滚）
+		
+		git reset --hard HEAD~1  回滚倒数第三个历史记录 （跳过了2个）
+			
+		
+		如果git log 查看不到版本id，那么可以通过 git reflog来查看已经操作的历史记录
+		
+		
+	同步远程仓库:
+		查看当前仓库的名字:
+			git remote  --> 默认为origin
+			
+		查看上传下载的地址:
+			git remote -v
+			
+		同步:
+			git push origin(仓库名字) master(master分支)
+		
+		
+		
+		
+		
+
+		
+		
+		
+	
+		
+		
+		
+		
+	
+	
+
+		
+	
+	
+	
+	
+	
+ 
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

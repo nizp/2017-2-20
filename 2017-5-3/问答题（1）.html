@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li li2"></li>
+		<li></li>
+		<li></li>
+		<li class="li"></li>
+	</ul>
+<script type="text/javascript">
+	
+	//var lis = document.getElementsByClassName('li');
+	
+	//classList.contains  http://www.runoob.com/jsref/prop-element-classlist.html
+	
+	var lis = $('.li');
+	console.log($('li'))
+	
+	function $(sClass,parent){
+		
+		parent = parent || document;
+		
+		aEle = sClass.charAt();
+
+		var arr = [];
+		var e = parent.getElementsByTagName('*');
+//		console.log(e)
+		
+		if(aEle === '#'){
+			var sClass = sClass.substring(1);
+			return document.getElementById(sClass);
+		}else if(aEle === '.'){
+			var sClass = sClass.substring(1);
+			if(parent.getElementsByClassName){
+				return parent.getElementsByClassName(sClass);
+			}else{
+				for(var i=0;i<e.length;i++){
+					
+					var c = e[i].className.split(' ');
+					
+					for(var j=0;j<c.length;j++){
+						
+						if(c[j] === sClass){
+							arr.push(e[i]);
+						}
+					}
+				}
+				return arr;
+			}
+		}else{
+			return parent.getElementsByTagName(sClass);
+		}
+		
+	}
+
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.background = 'red';
+	}
+	
+	
+	
+</script>
+</body>
+</html>

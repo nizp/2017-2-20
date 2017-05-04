@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var b = 10;
+	function fn(){
+		var a = b = 20;
+		b++;
+	}
+	fn();//21
+	fn();//21
+	alert(b);//21
+	alert(a);//报错
+	
+	
+</script>
+</body>
+</html>
