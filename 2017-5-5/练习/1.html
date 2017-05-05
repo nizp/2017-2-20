@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	var div2 = document.getElementById('div2');
+	var div1 = document.getElementById('div1');
+	var div3 = document.getElementById('div3');
+	var box = document.getElementById('box');
+	var wrap = document.querySelector('.warp');
+	var down =  document.getElementById('top');
+	var up =  document.getElementById('bottom');
+	for(var i = 1;i <= arrCity.length;i++){
+		var li = document.createElement('li');
+		if(arrCity[i]){
+			li.innerHTML = arrCity[i].name;
+			ul.appendChild(li);
+		}
+	}
+	
+	
+	//拖动
+	
+	div3.onmousedown = function(ev){
+		var disY = ev.pageY - div3.offsetTop;
+		
+		document.onmousemove = function(ev){
+			var t = ev.pageY - disY;
+			move(t);
+			
+		}
+		
+		document.onmouseup = function(ev){
+			document.onmousemove = document.onmouseup = null;
+		}
+		return false;
+	};
+	
+	
+	//长按上键
+	div1.timer = null;
+	div1.onmousedown = function(ev){
+		var t = div3.offsetTop;
+		
+		div1.timer = setInterval(function(){
+			
+			if(ev.target.id === 'top'){
+				t -= 5;
+				move(t);
+			}else if(ev.target.id === 'bottom'){
+				t += 5;
+				move(t);
+			}else{
+				
+			//console.log(div3.getBoundingClientRect().top > ev.clientY )
+				//上
+				if(div3.getBoundingClientRect().top > ev.clientY){
+					t -= 5;
+					move(t);
+				}else if(div3.getBoundingClientRect().bottom < ev.clientY){
+					t += 5;
+					move(t);
+				}else{
+					clearInterval(div1.timer);
+				}
+			}
+		},20);
+
+	}
+	
+	wrap.onmouseup = function(){
+		
+		clearInterval(div1.timer);
+	}
+	
+	//滚动
+	
+	addWheel(wrap,function(o){
+		var t = div3.offsetTop;
+		if(o){
+			t-=5;
+			move(t);
+		}else{
+			t+=5;
+			move(t);
+		}
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	function addWheel(obj,fn){
+		
+		obj.addEventListener('mousewheel',wheel);
+		obj.addEventListener('DOMMouseScroll',wheel);
+		
+		function wheel(ev){
+			var down = true;
+			if(ev.wheelDelta){
+				down = ev.wheelDelta > 0? true : false;
+			}else{
+				down = ev.detail < 0 ? true : false;
+			}
+			
+			fn && fn(down);
+			
+			ev.preventDefault();			
+		};
+	}
+	
+	
+	function move(t){
+		
+		if(t < 0){
+			t = 0
+		}else if(t > div2.offsetHeight - div3.offsetHeight){
+			t = div2.offsetHeight - div3.offsetHeight;
+		}
+		var scaleY = t/(div2.offsetHeight - div3.offsetHeight);
+		
+		ul.style.top = scaleY * (box.offsetHeight - ul.scrollHeight) + 'px';
+		
+		
+		
+		div3.style.top = t + 'px';
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

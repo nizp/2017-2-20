@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击" id="btn"/>
+<script type="text/javascript">
+	
+	var arr = [
+		52,10,13,26,57,71,58,34,4,23,42,45,30,86,88,87,12,24,39,49,90,95,75
+		,67,89,37,74,20,66
+	]
+	btn.onclick = function(){
+		
+		console.log(arr.sort(function(a,b){
+			return a-b
+		}).join());
+		
+		/*
+			4,10,12,13,20,23,24,26,30,34,37,39,42,45,49,52,57,58,66,67,71,74,75,86,87,88,89,90,95
+		*/
+		//console.log(Math.ceil(Math.random()*100));
+	}
+	
+	
+	
+</script>
+</body>
+</html>
