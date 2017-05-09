@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/正则注释">
+		正则：
+			不知道，什么玩意儿，晕着看，解决字符串的
+			
+			^\w+@[a-z0-9]+(\.[a-z]+){1,3}$
+			
+			专门用来操作（检索,替换）字符串的一种规则(擅长处理模糊范围的字符串)
+			
+</script>
+<script type="text/javascript">
+	
+	/*
+		1.找到下列字符串中带有数字的字符，并且把它放到数组中
+			在低版本中获取字符串的某个要使用 charAt()
+			
+		2.找到下列字符串中带有数字的数字（连续），并且把它放到数组中
+		
+			var temp = '';
+			temp += 6
+			
+			[6,17]
+			
+			temp = ''
+			
+			temp += 1
+			temp += 7  => 17
+			
+	*/
+	
+	var str = 'dh6s17a1 a3d232hi21dhsa32ds8'; //6,1,7,1,3,2,1,3,2
+	
+	//6,17,1,21,32
+	
+	var arr = [];
+	
+	var temp = '';
+	
+	for(var i=0;i<str.length;i++){
+		if(parseInt(str[i])){
+			temp += str[i];
+		}else{
+			if(temp){
+				arr.push(temp);
+				temp = '';
+			}	
+		}
+	}
+	if(temp){
+		arr.push(temp);
+		temp = '';
+	}
+	
+	
+	//console.log(arr);
+	
+	console.log(str.match(/\d+/g));
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+
+</body>
+</html>

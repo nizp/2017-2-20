@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<input type="text" id="txt"/>
+<script type="text/javascript">
+	
+	var btn = document.getElementById('btn');
+	var txt = document.getElementById('txt');
+	
+	/*
+		首位不能为0
+		长度 5-11
+		
+		|31321321| |32132132|
+		
+		
+		^如果不在中括号中就为开始
+		
+		$代表结束
+		
+		^ $ 代表某段字符串整体是否匹配正则
+		
+		str.trim()   str  = '         dd sa     '; ->dd sa
+		
+	*/
+	
+	btn.onclick = function(){
+		var val = txt.value;
+		//9   1234
+		if(/^[1-9]\d{4,10}$/.test(val)){
+			alert('是qq');
+		}else{
+			alert('不是qq');
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+	<script src="data.js" type="text/javascript" charset="utf-8"></script>
+	<script src="Mtween2.js"></script>
+	<script type="text/javascript">
+		var list = document.getElementById('ul');
+		var up = document.getElementById('top');
+		var bottom = document.getElementById('bottom');
+		var div3 = document.getElementById('div3');
+		var div2 = document.getElementById('div2');
+		var str = '';
+		for(var i =0;i<arrCity.length;i++){
+			str += `<li>${arrCity[i].name}</li>`
+		}
+		list.innerHTML = str;
+		
+		//滚轮封装
+		function addMouseScroll(init){
+			init.ele.onmousewheel = fn;
+			init.ele.addEventListener('DOMMouseScroll',fn)
+			function fn(ev){
+				var onOff = null;
+				//true:向上，false:向下
+				if(ev.wheelDelta){
+					//谷歌，ie
+					onOff = ev.wheelDelta>0?true:false;
+				}else{
+					//火狐
+					onOff = ev.detail<0?true:false;
+				}
+				if(onOff){
+					typeof init.fnUp == 'function' && init.fnUp();
+				}else{
+					typeof init.fnDown == 'function' && init.fnDown();
+				}
+			}
+		}
+		
+		addMouseScroll({
+			ele:box,
+			fnDown:function(){
+				if(div3.offsetTop+div3.clientHeight>=bottom.offsetTop){
+					div3.style.top = bottom.offsetTop - div3.clientHeight + 'px';
+					clearInterval(timer)
+				}else{
+					div3.style.top = div3.offsetTop + 10 + 'px';
+					ul.style.top = ul.offsetTop - 25 + 'px';
+				}
+			},
+			fnUp:function(){
+				if(div3.offsetTop<=0){
+					div3.style.top = 0;
+					clearInterval()
+				}else{
+					div3.style.top = div3.offsetTop - 10 + 'px';
+					ul.style.top = ul.offsetTop + 25 + 'px';
+				}
+			}
+		})
+		
+		//点击下面
+		var timer = null;
+		bottom.onmousedown = function(){
+			timer = setInterval(function(){
+				if(div3.offsetTop+div3.clientHeight>=bottom.offsetTop){
+					div3.style.top = bottom.offsetTop - div3.clientHeight + 'px';
+					clearInterval(timer)
+				}else{
+					div3.style.top = div3.offsetTop + 10 + 'px';
+					ul.style.top = ul.offsetTop - 25 + 'px';
+				}
+			},100)	
+		}
+		bottom.onmouseup = function(){
+			clearInterval(timer);
+		}
+		
+		
+		var timer1 = null;
+		up.onmousedown = function(){
+			timer1 = setInterval(function(){
+				if(div3.offsetTop<=0){
+					div3.style.top = 0;
+					clearInterval()
+				}else{
+					div3.style.top = div3.offsetTop - 10 + 'px';
+					ul.style.top = ul.offsetTop + 25 + 'px';
+				}
+			},100)	
+		}
+		up.onmouseup = function(){
+			clearInterval(timer1);
+		}
+	
+		//拖拽
+		div3.onmousedown = function(ev){
+			var oldY = ev.clientY-div3.getBoundingClientRect().top;
+			document.onmousemove = function(ev){
+				ev.preventDefault()
+				var y = ev.clientY-oldY-box.offsetTop;
+				var maxY = bottom.offsetTop-div3.offsetHeight;
+				if(y<0){
+					y = 0;
+				}
+				if(y>maxY){
+					y = maxY;
+				}
+				div3.style.top = y +'px';
+				list.style.top = -y*2.5 + 'px';
+			}
+			document.onmouseup = function(){
+				document.onmousemove = document.onmouseup = null;
+			}
+		}
+		
+		
+//		div2.onclick = function(ev){
+//			var t = ev.clientY;
+//			div3.style.top = t - div3.offsetHeight - box.offsetTop +'px';
+//		}
+	</script>
+</body>
+</html>

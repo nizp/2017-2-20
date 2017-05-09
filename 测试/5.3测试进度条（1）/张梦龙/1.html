@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+	overflow: hidden;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+
+</body>
+</html>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var oBox = document.getElementById('box');
+    var oUl = document.getElementById('ul');
+    var	oTop = document.getElementById('top');
+    var oBottom = document.getElementById('bottom');
+    var oDiv2 = document.getElementById('div2');
+    var oDiv3 = document.getElementById('div3');
+    var str = '';
+    var n = oDiv2.offsetHeight - oDiv3.offsetHeight;
+    var timer = null;
+    var timer2 = null;
+
+    arrCity.forEach(function (item) {
+        str += '<li>'+ item.name +'</li>'
+    })
+    oUl.innerHTML = str;
+
+    var b = (oUl.offsetHeight - oBox.offsetHeight)/(oDiv2.offsetHeight - oDiv3.offsetHeight) ;
+
+    // 滚轮
+    oUl.onmousewheel = function (ev) {
+        if (ev.wheelDelta < 0){
+            oDiv3.style.top = oDiv3.offsetTop + 10 + 'px';
+            if (oDiv3.offsetTop > n ){
+                oDiv3.style.top = n + 'px';
+            }
+        }else {
+            oDiv3.style.top = oDiv3.offsetTop - 10 + 'px';
+            if (oDiv3.offsetTop < 0){
+                oDiv3.style.top = 0;
+            }
+        }
+    }
+
+    // 拖动滚动条
+    oDiv3.onmousedown = function (ev) {
+        ev.cancelBubble = true;
+        var h = ev.offsetY;
+        oDiv3.onmousemove = function (ev) {
+            ev.cancelBubble = true;
+            oDiv3.style.top = ev.clientY - oDiv2.getBoundingClientRect().top - h + 'px';
+            if (oDiv3.offsetTop < 0){
+                oDiv3.style.top = 0;
+            }
+            if (oDiv3.offsetTop > n){
+                oDiv3.style.top = n + 'px';
+            }
+        }
+        oDiv3.onmouseup = oDiv3.onmouseout = function () {
+            oDiv3.onmousemove = null;
+        }
+    }
+
+    // 点击滚动条区域
+    oDiv2.onmousedown = function (ev) {
+        var mY = ev.offsetY;
+        timer = setInterval(function () {
+            if (mY < oDiv3.offsetTop){
+                oDiv3.style.top = oDiv3.offsetTop - 2 + 'px';
+            }
+            if (mY > oDiv3.offsetTop + oDiv3.offsetHeight){
+                oDiv3.style.top = oDiv3.offsetTop + 2 + 'px';
+            }
+        },20)
+        oDiv2.onmouseup = function () {
+            clearInterval(timer)
+        }
+    }
+
+    // 向上
+    oTop.onmousedown = function () {
+        timer2 = setInterval(function () {
+            if (oDiv3.offsetTop < 0){
+                clearInterval(timer2);
+                oDiv3.style.top = 0 + 'px';
+            }
+            oDiv3.style.top = oDiv3.offsetTop - 2 + 'px';
+        },20)
+        oTop.onmouseup = function () {
+            clearInterval(timer2);
+        }
+    }
+
+    // 向下
+    oBottom.onmousedown = function () {
+        timer2 = setInterval(function () {
+            if (oDiv3.offsetTop > n){
+                clearInterval(timer2);
+                oDiv3.style.top = n + 'px';
+            }
+            oDiv3.style.top = oDiv3.offsetTop + 2 + 'px';
+        },20)
+        oBottom.onmouseup = function () {
+            clearInterval(timer2);
+        }
+    }
+
+    // 同步内容
+    function fn() {
+        oUl.style.top = -b*oDiv3.offsetTop + 'px';
+    }
+    setInterval(fn,20)
+</script>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		将下列字符的字节数统计出来
+		假设中文为2个字节，英文为一个字节
+		
+		[\u4e00-\u9fa5] 中文区间范围
+	*/
+	
+	var str = 'Hi!今天下午不是太闷!hehe!'; //25
+	var num = 0;
+	for(var i=0;i<str.length;i++){
+		if(/[\u4e00-\u9fa5]/.test(str[i])){
+			num += 2;
+		}else{
+			num++;
+		}
+	}
+	
+	console.log(num)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

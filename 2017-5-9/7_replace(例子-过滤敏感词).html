@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	var str = '中国共产党总书记习近平说：法轮功是邪教';
+	
+	/*
+		**** 
+		
+		| -> 或 
+		
+		每查询到一次，就会执行回调函数
+		
+		回调函数中的第一个参数：
+			当前匹配到的字符
+			
+		回调函数中的第二个参数：
+			当前匹配到的字符索引
+		
+		回调函数中的第三个参数：
+			整个字符串
+		
+		回调函数中的第四个参数之后：
+			undefined
+	
+	*/
+	
+	console.log(str.replace(/共产党|习近平|法轮/g,function($0,$1,$2,$3,$4){
+		
+		var n = '';
+		for(var i=0;i<$0.length;i++){
+			n += '*';
+		}
+		
+		
+		console.log($4)
+		
+		return  n;
+		
+		
+	}));
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

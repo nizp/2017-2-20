@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var ul = document.getElementById('ul');
+	var lis = ul.getElementsByTagName('li');
+	var Top  =document.getElementById('top');
+	var bottom = document.getElementById('bottom');
+	var div3 = document.getElementById('div3');
+	var warp = document.getElementsByClassName('warp')[0];
+	var maxH = ul.scrollHeight-ul.clientHeight;
+	var div2 = document.getElementById('div2');
+	var div1 = document.getElementById('div1');
+	var str = '';
+	var timer =null;
+	for(var i=0;i<arrCity.length;i++){
+		str += '<li>'+arrCity[i].name+'</li>'
+	}
+	ul.innerHTML = str;
+function addMouseScroll(init){
+		init.ele.onmousewheel = fn;
+		init.ele.addEventListener('DOMMouseScroll',fn);
+		function fn(ev){
+			var onOff = null;
+			//true:向上，false:向下
+			if(ev.wheelDelta){
+				//谷歌，ie
+				onOff = ev.wheelDelta>0?true:false;
+			}else{
+				//火狐
+				onOff = ev.detail<0?true:false;
+			}
+			if(onOff){
+				typeof init.fnUp == 'function' && init.fnUp();
+			}else{
+				typeof init.fnDown == 'function' && init.fnDown();
+			}
+	}
+}
+			addMouseScroll({
+				ele:box,
+				fnDown:down,//下
+				fnUp:up//上
+			})
+	function fn1(){
+		div3.style.top= -((div2.offsetHeight-div3.offsetHeight)*(30/(ul.offsetHeight-box.offsetHeight)))+'px';
+		if(ul.offsetTop>=(box.offsetHeight-ul.offsetHeight) && ul.offsetTop<0){
+			ul.style.top = ul.offsetTop+30+'px';
+		}else{
+			ul.style.top = 0+'px';
+		}
+		
+	}
+	function fn2(){
+		div3.style.top= ((div2.offsetHeight-div3.offsetHeight)*(30/(ul.offsetHeight-box.offsetHeight)))+'px';
+		if(ul.offsetTop>(box.offsetHeight-ul.offsetHeight)){
+			ul.style.top = ul.offsetTop-30+'px';
+		}else{
+			ul.style.top = box.offsetHeight-ul.offsetHeight+'px';
+		}
+	}
+	//点击下拉框  拖拽
+		div3.onmousedown = function(ev){
+			ev.preventDefault();
+			var a = ev.pageY;//鼠标 到整个网页	
+			console.log(a)
+			var t = div3.offsetTop;//div 到定位父级的高度
+			console.log(t)
+			document.onmousemove = function(ev){
+			var b = t+ev.pageY - a;//就是滑块的高度
+			var maxY = div2.offsetHeight-div3.offsetHeight;//滑块运动最大范围
+			if(b<0){
+					b = 0;
+				}
+				if(b>maxY){
+					b = maxY;
+				}
+				div3.style.top = b+'px';
+				ul.style.top = -(b/maxY*(ul.offsetHeight-box.offsetHeight))+'px';
+			}
+			document.onmouseup = function(){
+			document.onmousemove = document.onmouseup = null;
+			}
+		}
+		
+		
+		
+	bottom.onclick = function(){
+		
+	}
+	Top.onclick = function(){
+		
+	}
+	function down(){
+		fn2();
+	}
+	function up(){
+		fn1();
+	}
+</script>
+</body>
+</html>

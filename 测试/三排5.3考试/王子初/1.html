@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	var box = document.getElementById('box');
+	var div2 = document.getElementById('div2');
+	var div3 = document.getElementById('div3');
+	var t = document.getElementById('top');
+	var b = document.getElementById('bottom');
+	var str = '';
+	for(var i=0;i<arrCity.length;i++){
+		str += '<li>'+arrCity[i].name+'</li>';
+	}
+	ul.innerHTML = str;
+	var H = box.scrollHeight-box.clientHeight;
+	div3.onmousedown = function(ev){
+		ev.preventDefault();
+		var y = ev.clientY-this.getBoundingClientRect().top;
+		var y$ = div2.getBoundingClientRect().top;
+		document.onmousemove = function(ev){
+			var y_ = ev.clientY-y;
+			var Y = div2.clientHeight-div3.offsetHeight;
+			var y3 = y_-y$;
+			if(y3<0){
+				y3 = 0;
+			}
+			if(y3>Y){
+				y3 = Y;
+			}
+			div3.style.top = y3+'px';
+			var n = y3/Y;
+			ul.style.top = -H*n+'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+		}
+	}
+	t.onclick = function(ev){
+		ev.preventDefault();
+		var T = div3.getBoundingClientRect().top-210;
+		var Y = div2.clientHeight-div3.offsetHeight;
+		var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+		var n = T-10;
+		if(n<0){n=0;}
+		div3.style.top = n+'px';
+		ul.style.top = -H*m+'px';
+	}
+	b.onclick = function(ev){
+		ev.preventDefault();
+		var T = div3.getBoundingClientRect().top-210;
+		var n = T+10;
+		var Y = div2.clientHeight-div3.offsetHeight;
+		var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+		if(n>Y){n=Y;}
+		div3.style.top = n+'px';
+		ul.style.top = -H*m+'px';
+	}
+	div2.onclick = function(ev){
+		ev.preventDefault();
+		var y = ev.clientY;
+		var Y = div3.getBoundingClientRect().top;
+		var Y_ = div3.getBoundingClientRect().top+div3.offsetHeight;
+		if(y<Y){
+			var T = div3.getBoundingClientRect().top-210;
+			var Y = div2.clientHeight-div3.offsetHeight;
+			var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+			var n = T-10;
+			if(n<0){n=0;}
+			div3.style.top = n+'px';
+			ul.style.top = -H*m+'px';
+		}
+		if(y>Y_){
+			var T = div3.getBoundingClientRect().top-210;
+			var n = T+10;
+			var Y = div2.clientHeight-div3.offsetHeight;
+			var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+			if(n>Y){n=Y;}
+			div3.style.top = n+'px';
+			ul.style.top = -H*m+'px';
+		}
+	}
+			function addMouseScroll(init){
+				init.ele.onmousewheel = fn
+				init.ele.addEventListener('DOMMouseScroll',fn)
+				function fn(ev){
+					var onOff = null;
+					//true:向上，false:向下
+					if(ev.wheelDelta){
+						//谷歌，ie
+						onOff = ev.wheelDelta>0?true:false;
+					}else{
+						//火狐
+						onOff = ev.detail<0?true:false;
+					}
+					if(onOff){
+						typeof init.fnUp == 'function' && init.fnUp();
+					}else{
+						typeof init.fnDown == 'function' && init.fnDown();
+					}
+				}
+			}
+
+			addMouseScroll({
+				ele:box,
+				fnUp:function(){
+					var T = div3.getBoundingClientRect().top-210;
+					var Y = div2.clientHeight-div3.offsetHeight;
+					var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+					var n = T-10;
+					if(n<0){n=0;}
+					div3.style.top = n+'px';
+					ul.style.top = -H*m+'px';
+				}
+			})
+			addMouseScroll({
+				ele:ul,
+				fnDown:function(){
+					var T = div3.getBoundingClientRect().top-210;
+					var n = T+10;
+					var Y = div2.clientHeight-div3.offsetHeight;
+					var m = (div3.getBoundingClientRect().top-div2.getBoundingClientRect().top)/Y;
+					if(n>Y){n=Y;}
+					div3.style.top = n+'px';
+					ul.style.top = -H*m+'px';
+				}
+			})
+</script>
+</body>
+</html>

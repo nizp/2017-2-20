@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>-->
+				<!--<li>北京</li>-->
+				<!--<li>北京</li>-->
+				<!--<li>北京</li>-->
+				<!--<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var list = document.getElementById('ul');
+	var div3 = document.getElementById('div3');
+	var box = document.getElementById('box');
+	var div1 = document.getElementById('div1');
+	var div2 = document.getElementById('div2');
+	var maxH = div1.scrollHeight - div1.clientHeight;
+	var tp = document.getElementById('top');
+	var bot = document.getElementById('bottom');
+	var n = 30;
+	var timer = null;
+	
+	var str = '';
+	for(var i=0;i<arrCity.length;i++){
+	    str += `<li>${arrCity[i].name}</li>`;
+	}
+	list.innerHTML = str;
+	var scale = n/div2.offsetHeight;
+	console.log(scale)
+	//向下
+	bot.onmousedown = function(){
+		timer = setInterval(function(){
+			div3.style.top = div3.offsetTop+n+'px';
+			list.style.top = list.offsetTop - list.offsetHeight*scale + 'px';
+		},100)
+	}
+	bot.onmouseup = function(){
+		clearInterval(timer)
+	}
+	//向上
+	tp.onmousedown = function(){
+		timer = setInterval(function(){
+			div3.style.top = div3.offsetTop-n+'px';
+			list.style.top = list.offsetTop + list.offsetHeight*scale + 'px';
+		},100)
+	}
+	tp.onmouseup = function(){
+		clearInterval(timer)
+	}
+	//滚动条
+	addMouseScroll({
+		ele:box,
+		//向下滚动
+		fnDown:function(ev){
+			div3.style.top = div3.offsetTop + n + 'px';
+			if(parseFloat(div3.style.top)>=div2.offsetHeight-div3.offsetHeight){
+				div3.style.top = div2.offsetHeight - div3.offsetHeight + 'px';
+				list.style.top = list.offsetHeight - box.offsetHeight + 'px';
+			}else{
+				div3.style.top = div3.offsetTop + n + 'px';
+				list.style.top = list.offsetTop - list.offsetHeight*scale + 'px';
+			}
+		},
+		//向上滚动
+		fnUp:function(ev){
+			if(parseFloat(div3.style.top)<=0){
+				div3.style.top=0;
+				list.style.top = list.offsetHeight + box.offsetHeight + 'px';
+			}else{
+				div3.style.top = div3.offsetTop - n + 'px';
+				list.style.top = list.offsetTop + 'px';
+			}
+		}
+	})
+	
+	function addMouseScroll(init){
+		init.ele.onmousewheel = fn
+		init.ele.addEventListener('DOMMouseScroll',fn)
+		function fn(ev){
+			var onOff = null;
+			//true:向上，false:向下
+			if(ev.wheelDelta){
+				//谷歌，ie
+				onOff = ev.wheelDelta>0?true:false;
+			}else{
+				//火狐
+				onOff = ev.detail<0?true:false;
+			}
+			if(onOff){
+				typeof init.fnUp == 'function' && init.fnUp();
+			}else{
+				typeof init.fnDown == 'function' && init.fnDown();
+			}
+		}
+	}
+	
+	
+
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	height: 387px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	var box = document.getElementById('box');
+	var div2 = document.getElementById('div2');
+	var div3 = document.getElementById('div3');
+	var top1 = document.getElementById('top');
+	var bottom1 = document.getElementById('bottom');
+	//初始化渲染数据
+	var str = '';
+	for(var i=1;i<arrCity.length;i++){
+		str += '<li>' + arrCity[i].name + '</li>';
+	}
+	ul.innerHTML = str;
+	//点击滚动条
+	var maxH = ul.scrollHeight-ul.clientHeight;
+	var maxt = div2.clientHeight-div3.offsetHeight;
+	var t2 = 0;
+	div3.onmousedown = function(ev){
+		ev = ev || window.event;
+		ev.preventDefault();
+		var t = ev.clientY - this.getBoundingClientRect().top;
+		document.onmousemove = function(ev){
+			ev = ev || window.event;
+			var t1 = ev.clientY -div2.getBoundingClientRect().top - t;
+			fn1(t1);
+		}
+		document.onmouseup = function(){
+			document.onmousemove = document.onmouseup = null;
+			t2 = div3.offsetTop;
+		}
+	}
+	//点击空白区域
+	div2.onclick = function(ev){
+		ev = ev || window.event;
+		if(ev.target.id=='div3'){
+			return
+		}
+		var t = ev.clientY - div2.getBoundingClientRect().top;
+		fn1(t);
+		t2 = div3.offsetTop;
+	}
+	
+	//点击上
+	var top1onoff = true;
+	top1.onclick = function(ev){
+		if(top1onoff){
+			ev.preventDefault();
+			t2 -= 2;
+			jia();
+		}
+	}
+	//点击下
+	var bottom1onoff = true;
+	bottom1.onclick = function(ev){
+		if(bottom1onoff){
+			ev.preventDefault();
+			t2 += 2;
+			jia();
+		}
+	}
+	//按着不动下
+	var timer = null;
+	bottom1.onmousedown = function(ev){
+		bottom1onoff = false;
+		ev.preventDefault();
+		clearInterval(timer1);
+		clearInterval(timer);
+		timer = setInterval(function(){
+			t2 += 2;
+			jia();
+		},40)
+		bottom1.onmouseup = function(){
+			clearInterval(timer);
+			bottom1onoff = true;
+		}
+	}
+	
+	//按着不动上
+	var timer1 = null;
+	top1.onmousedown = function(ev){
+		top1onoff = false;
+		ev.preventDefault();
+		clearInterval(timer1);
+		clearInterval(timer);
+		timer1 = setInterval(function(){
+			t2 -= 2;
+			jia();
+		},40)
+		top1.onmouseup = function(){
+			clearInterval(timer1);
+			top1onoff = true;
+		}
+	}
+	//滚轮
+	function addMouseScroll(init){
+		init.ele.onmousewheel = fn
+		init.ele.addEventListener('DOMMouseScroll',fn)
+		function fn(ev){
+			var onOff = null;
+			//true:向上，false:向下
+			if(ev.wheelDelta){
+				//谷歌，ie
+				onOff = ev.wheelDelta>0?true:false;
+			}else{
+				//火狐
+				onOff = ev.detail<0?true:false;
+			}
+			if(onOff){
+				typeof init.fnUp == 'function' && init.fnUp(ev);
+			}else{
+				typeof init.fnDown == 'function' && init.fnDown(ev);
+			}
+		}
+	}
+	//滚轮
+	addMouseScroll({
+		ele:box,
+		fnDown:function(ev){
+			ev.preventDefault();
+			t2 += 10;
+			jia();
+		},
+		fnUp:function(ev){
+			ev.preventDefault();
+			t2 -= 10;
+			jia();
+		}
+	})
+	//上下
+	function jia(){
+		if(t2<0){
+			t2 = 0;
+		}
+		if(t2>maxt){
+			t2 = maxt;
+		}
+		div3.style.top = t2 + 'px';
+		var scale = t2/maxt;
+		ul.style.top = -maxH*scale+'px';
+	}
+	//需再整合函数
+	function fn1(t1){
+		if(t1<0){
+			t1 = 0;
+		}
+		if(t1>maxt){
+			t1 = maxt;
+		}
+		div3.style.top = t1 + 'px';
+		var scale = t1/maxt;
+		ul.style.top = -maxH*scale+'px'
+	}
+	
+</script>
+</body>
+</html>

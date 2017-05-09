@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	var top1 = document.getElementById('top');
+	var bottom1 = document.getElementById('bottom');
+	var str = '';
+	var timer = null;
+	arrCity.forEach(function(a){
+		str +='<li>'+a.name+'</li>';
+	})
+	ul.innerHTML = str;
+	var div3 = document.getElementById('div3');
+	var div2 = document.getElementById('div2');
+	var j = 0;
+		function judge(){
+			if((div3.offsetHeight+j)>div2.offsetHeight){
+						j=div2.offsetHeight-div3.offsetHeight;
+					}
+				if(j<0){
+					j=0;
+				}
+			div3.style.top = j+'px';
+			ul.style.top = -j+'px';
+		}
+	//滑轮触发事件，通过定时器每滑一次都进行一次定位更新。
+	ul.onmousewheel = function(ev){
+		ev.preventDefault();
+		//判断滑轮方向，小于0向下滑
+		if(ev.wheelDelta<0){
+			setTimeout(function(){
+				j = j+30;
+				judge();
+			},100)
+		}
+		//判断滑轮方向，大于0向上滑
+		if(ev.wheelDelta>0){
+			setTimeout(function(){
+				j = j-30;
+				judge();
+			},100)
+		}
+	}
+	div3.onmousedown = function(ev){
+		ev.preventDefault();
+		var ot = ev.clientY;
+		var disY = div3.offsetTop;
+		document.onmousemove = function(ev){
+			ev.preventDefault();
+			var nt = ev.clientY;
+			j = disY+nt-ot;
+			judge();
+		}
+		document.onmouseup = function(){
+			document.onmousedown = null;
+			document.onmousemove =null;
+			clearInterval();
+		}
+	}
+	top1.onmousedown = function(ev){
+		ev.preventDefault();
+		timer = setInterval(function(){
+			j = j-30;
+			judge();
+		},100)
+		top1.onmouseup = function(){
+			//top1.onmousedown = null;
+			clearInterval(timer);
+		}
+	}
+	bottom1.onmousedown = function(ev){
+		ev.preventDefault();
+		timer = setInterval(function(){
+			j = j+30;
+			judge();
+		},100)
+		bottom1.onmouseup = function(){
+			//top1.onmousedown = null;
+			clearInterval(timer);
+		}
+	}
+</script>
+</body>
+</html>

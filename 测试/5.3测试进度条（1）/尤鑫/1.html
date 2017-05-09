@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var ul  = document.getElementById('ul');
+	var top1 = document.getElementById('top');
+    var div2 = document.getElementById('div2');
+	var div3 = document.getElementById('div3');
+	var bottom1 = document.getElementById('bottom');
+    var maxH = ul.scrollHeight-box.clientHeight;
+	var str = '';
+    var maxY = div2.clientHeight-div3.offsetHeight;
+	for(var i=1;i<arrCity.length;i++){
+        str +=`<li>${arrCity[i].name}</li>`
+	}
+	    ul.innerHTML = str;
+	//滚动条拖拽,内容移动
+    div3.onmousedown = function(ev){
+        ev.preventDefault();
+        var oldY = ev.clientY-this.getBoundingClientRect().top;
+        document.onmousemove = function(ev){
+            var y = ev.clientY-oldY-div2.getBoundingClientRect().top;
+
+            if(y<0){
+                y = 0;
+            }
+            if(y>maxY){
+                y = maxY;
+            }
+            div3.style.top = y +'px';
+            var scale = y/maxY;
+
+			ul.style.top = maxH*scale+'px'
+        }
+
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+    //点击向下
+    bottom1.onclick  = function () {
+        var t = div3.getBoundingClientRect().top-div2.getBoundingClientRect().top;
+        var t1 = t+5;
+        if(t1>295){
+			t1=295
+		}
+		div3.style.top = t1+'px';
+		//内容走
+		var scale = t1/maxY;
+        ul.style.top = maxH*scale+'px';
+    }
+    //向上
+    top1.onclick  = function () {
+        var t = div3.getBoundingClientRect().top-div2.getBoundingClientRect().top;
+        var t1 = t-5;
+        if(t1<0){
+            t1=0
+        }
+        div3.style.top = t1+'px';
+        //内容走
+        var scale = t1/maxY;
+        ul.style.top = maxH*scale+'px';
+    }
+    //滚轮
+    function addMouseScroll(init){
+        init.ele.onmousewheel = fn
+        init.ele.addEventListener('DOMMouseScroll',fn)
+        function fn(ev){
+            var onOff = null;
+            //true:向上，false:向下
+            if(ev.wheelDelta){
+                //谷歌，ie
+                onOff = ev.wheelDelta>0?true:false;
+            }else{
+                //火狐
+                onOff = ev.detail<0?true:false;
+            }
+            if(onOff){
+                typeof init.fnUp == 'function' && init.fnUp();
+            }else{
+                typeof init.fnDown == 'function' && init.fnDown();
+            }
+        }
+    }
+    //向下
+    addMouseScroll({
+        ele:ul,
+        fnDown:function(){
+            var t = div3.getBoundingClientRect().top-div2.getBoundingClientRect().top;
+            	 t1 = t+5;
+            if(t1>295){
+                t1=295;
+            }
+            div3.style.top = t1+'px';
+            //内容走
+            var scale = t1/maxY;
+            ul.style.top = maxH*scale+'px';
+        }
+    })
+	//向上
+    addMouseScroll({
+        ele:ul,
+        fnUp:function(){
+                var t = div3.getBoundingClientRect().top-div2.getBoundingClientRect().top;
+				t1 = t-5;
+                if(t1<0){
+                    t1=0;
+                }
+                div3.style.top = t1+'px';
+                //内容走
+                var scale = t1/maxY;
+                ul.style.top = maxH*scale+'px';
+        }
+    })
+	//点击空白区域
+	div2.onclick = function (ev) {
+		var x = ev.clientY;
+		var x1 = div2.getBoundingClientRect().top;
+		if((x-x1)>295){
+            div3.style.top =295+'px';
+		}else{
+            div3.style.top =(x-x1)+'px';
+		}
+
+        //内容走
+        var scale = (x-x1)/maxY;
+        ul.style.top = maxH*scale+'px';
+    }
+</script>
+</body>
+</html>

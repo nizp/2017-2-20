@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<textarea name="" rows="" cols="" id="txt1"></textarea><br />
+	<button id="btn">走你</button><br />
+	<textarea name="" rows="" cols="" id="txt2"></textarea>
+<script type="text/javascript">
+	
+	var btn = document.getElementById('btn');
+	
+	var txt1 = document.getElementById('txt1');
+	
+	var txt2 = document.getElementById('txt2');
+	
+	btn.onclick = function(){
+		var val = txt1.value;
+		
+//		console.log('<div>321</div>'.match(/<.+>/g))
+		
+//		console.log(val.replace(/^<>\s/g,''))
+		
+		/*
+			个人认为 以 (<起) [排除 <]{1,}只要不是<别的都被选中  (>结尾 ) 
+		*/
+		
+		txt2.value = val.replace(/<>/g,'');
+		
+	};
+	
+
+	
+	
+	
+</script>
+</body>
+</html>

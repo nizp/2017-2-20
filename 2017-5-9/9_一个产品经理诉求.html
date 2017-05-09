@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+//	var str = '2017.5.9';
+//	var str = '2017-5-9';
+//	var str = '2017/5/9';
+//	var str = '2017年5月9日';
+	var str = '2017----------------5////9';
+	
+	/*
+		
+		量词
+			? 最小可以没有，最多有一个
+			
+			
+	*/
+	
+	console.log(str.replace(/(\d+)\D+(\d+)\D+(\d+)\D?/,function($0,$1,$2,$3){
+		return $1 + '年' + $2 + '月' + $3 + '日';
+//		console.log($1,$2,$3); 
+	}));
+	
+	
+</script>
+</body>
+</html>

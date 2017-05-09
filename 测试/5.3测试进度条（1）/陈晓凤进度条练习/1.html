@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+	transition: 1s;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var ul = document.getElementById('ul');
+	var div1 = document.getElementById('div1');
+	var top1 = document.getElementById('top');
+	var div2 = document.getElementById('div2');
+	var div3 = document.getElementById('div3');
+	var bottom = document.getElementById('bottom');
+
+	//拿数据渲染页面
+	var str = '';
+	for(var i=0;i<arrCity.length;i++){
+	    str += '<li>'+ arrCity[i].name +'</li>';
+	}
+	ul.innerHTML = str;
+    var maxH = ul.scrollHeight-box.clientHeight;
+    var scale = maxH/(div2.clientHeight - div3.offsetHeight);
+
+    //鼠标滚动
+	ul.onmousewheel = function (ev) {
+		ev.preventDefault();
+		if(ev.wheelDelta>0){
+			fnUp();
+		}else{
+			fnDown();
+		}
+    };
+
+    //向上
+    function fnUp() {
+        if(div3.offsetTop<=0){
+            div3.style.top = '0px';
+        }else{
+            div3.style.top = div3.offsetTop - 10 + 'px';
+        }
+        ul.style.top = -scale*div3.offsetTop + 'px';
+    }
+    //向下
+	function fnDown() {
+        if(div3.offsetTop>=div2.clientHeight - div3.offsetHeight){
+            div3.style.top = (div2.clientHeight - div3.offsetHeight) + 'px';
+        }else{
+            div3.style.top = div3.offsetTop + 10 + 'px';
+        }
+        ul.style.top = -scale*div3.offsetTop + 'px';
+    }
+
+	//鼠标按住拖动
+	div3.onmousedown = function (ev) {
+        ev.preventDefault();
+		var y = ev.clientY;
+		var disY = y - div3.getBoundingClientRect().top;
+		document.onmousemove = function (ev) {
+			var t = ev.clientY;
+			var nexY = t-disY-div2.getBoundingClientRect().top;
+			var maxY = div2.clientHeight-div3.offsetHeight
+			if(nexY<=0){
+			    div3.style.top = '0px';
+			    return;
+			}
+            if(nexY>maxY){
+                div3.style.top = div2.clientHeight-div3.offsetHeight + 'px';
+                return
+			}
+            var scale = nexY/maxY;
+            ul.style.top = -maxH*scale+'px';
+			div3.style.top = nexY + 'px';
+        }
+        document.onmouseup = function () {
+			document.onmousedown = document.onmousemove = null;
+        }
+    };
+
+    //点击滚动条空白处
+	var timer = null;
+	div2.onclick = function (ev) {
+	    clearInterval(timer);
+		if(ev.target.id == 'div2'){
+            if(ev.clientY>div3.getBoundingClientRect().top){
+                timer = setInterval(function () {
+                    fnDown();
+                    if(div3.offsetTop>=ev.clientY-div2.getBoundingClientRect().top){
+                        div3.style.top = (ev.clientY-div2.getBoundingClientRect().top) + 'px';
+                        clearInterval(timer);
+                    }
+                },20)
+
+			}else{
+                timer = setInterval(function () {
+                    fnUp();
+                    if(div3.offsetTop<=ev.clientY-div2.getBoundingClientRect().top){
+                        div3.style.top = (ev.clientY-div2.getBoundingClientRect().top) + 'px';
+                        clearInterval(timer);
+                    }
+                },20)
+			}
+		}
+    };
+
+	//长按top
+	top1.onmousedown = function () {
+		top1.timer = setInterval(function () {
+			fnUp();
+        },20)
+		top1.onmouseup = function () {
+			clearInterval(top1.timer);
+        }
+    }
+
+    //长按bottom
+	bottom.onmousedown = function () {
+		bottom.timer = setInterval(function () {
+			fnDown();
+        },20)
+        bottom.onmouseup = function () {
+            clearInterval(bottom.timer);
+        }
+    }
+</script>
+</body>
+</html>

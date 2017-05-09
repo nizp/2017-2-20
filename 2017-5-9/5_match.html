@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		
+		match:
+			找到正则匹配的字符，返回值为数组，会将匹配到的字符放到这个数组中
+			
+			
+		补充:
+			如果正则没有匹配到，那么返回 null
+			
+		
+		\d  代表*一个*数字
+		
+		
+		如果查询到的字符在数组中的位值为0，并且这个数组的长度为1的情况下：
+		
+			1.查找到的字符
+			
+			2.查找到字符的索引
+			
+			3.显示整个字符串
+		
+		
+		
+		量词:
+			+  至少有1个，最多不限
+			
+		
+		修饰符:
+			g -> global 全局
+		
+		
+		惰性：
+			让它找一种字符它绝对不会找多种字符
+			
+		贪婪:
+			如果加了量词之后，会尽可能的查找匹配的字符。
+		
+	*/
+	
+	
+	var str = 'dh63435435477a1 a3d232hi21dhsa32ds8';
+	
+	console.log(str.match(/\d+/g));
+	
+	
+
+	
+	
+
+	
+	
+</script>
+</body>
+</html>

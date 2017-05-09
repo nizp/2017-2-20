@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var ul = box.getElementsByTagName('ul')[0];
+	arrCity.forEach(function(a,b){
+		if (b == 0) {
+			return;
+		}
+		var li = document.createElement('li');
+		li.innerHTML = a.name;
+		ul.insertBefore(li,null);
+	})
+
+	function addMouseScroll(init){
+		init.ele.onmousewheel = fn
+		init.ele.addEventListener('DOMMouseScroll',fn)
+		function fn(ev){
+			ev.preventDefault();
+			var onOff = null;
+			//true:向上，false:向下
+			if(ev.wheelDelta){
+				//谷歌，ie
+				onOff = ev.wheelDelta>0?true:false;
+			}else{
+				//火狐
+				onOff = ev.detail<0?true:false;
+			}
+			if(onOff){
+				typeof init.fnUp == 'function' && init.fnUp();
+			}else{
+				typeof init.fnDown == 'function' && init.fnDown();
+			}
+		}
+	}
+
+	var div3 = document.getElementById('div3');
+	var div2 = document.getElementById('div2');
+	var maxT = div2.clientHeight - div3.offsetHeight;
+	var num = 10;
+
+	div3.on = true;
+	var the_obj = {
+		ele:box,
+		fnDown:function(){
+			wtf(div3.offsetTop + num)
+		},
+		fnUp:function(){
+			wtf(div3.offsetTop - num)
+		}
+	};
+	addMouseScroll(the_obj);
+
+	function wtf(t){
+		if(t > maxT){
+				t = maxT;
+		}
+		if(t < 0){
+				t = 0
+		}
+		div3.style.top = t +'px';
+		var scale = t/maxT;
+		var ul_maxT = ul.offsetHeight - box.clientHeight;
+		ul.style.top = -scale*ul_maxT + 'px';
+	}
+
+	var top_div = document.getElementById('top');
+	var bottom_div = document.getElementById('bottom');
+
+	var timer = null;
+	var onOff = true;
+	top_div.onmousedown = function(){
+		div3.on = false;
+		if (onOff) {
+			timer = setInterval(function(){
+				the_obj.fnUp();
+			},50);
+			onOff = !onOff;
+		}
+	}
+	top_div.onmouseup = function(){
+		clearInterval(timer);
+		onOff = !onOff;
+		div3.on = true;
+	}
+
+	bottom_div.onmousedown = function(){
+		div3.on = false;
+		if (onOff) {
+			timer = setInterval(function(){
+				the_obj.fnDown();
+			},50);
+			onOff = !onOff;
+		}
+	}
+	bottom_div.onmouseup = function(){
+		clearInterval(timer);
+		onOff = !onOff;
+		div3.on = true;
+	}
+
+	div2.onOff = true;
+	div2.onclick = function(ev){
+		if (ev.target == div3) {
+			console.log('buzhixing');
+			return;
+		}
+		if (div2.onOff && div3.on) {
+			div2.onOff = !div2.onOff;
+			var div2_timer = null;
+			var div2_onOff = true;
+
+			if (ev.offsetY >= (div3.offsetTop + div3.offsetHeight)) {
+				if (div2_onOff) {
+					div2_timer = setInterval(function(){
+						the_obj.fnDown();
+						if (div3.offsetTop >= (ev.offsetY - div3.offsetHeight)) {
+								clearInterval(div2_timer);
+								div2_onOff = !div2_onOff;
+								div2.onOff = !div2.onOff;
+								div3.on = true;
+								wtf(ev.offsetY - div3.offsetHeight);
+						}
+					},50);
+					div2_onOff = !div2_onOff;
+				}
+			} else {
+				if (div2_onOff) {
+					div2_timer = setInterval(function(){
+						the_obj.fnUp();
+						if (div3.offsetTop <= ev.offsetY) {
+								clearInterval(div2_timer);
+								div2_onOff = !div2_onOff;
+								div2.onOff = !div2.onOff;
+								div3.on = true;
+								wtf(ev.offsetY);
+						}
+					},50);
+					div2_onOff = !div2_onOff;
+				}
+			}
+		}
+	}
+</script>
+</body>
+</html>

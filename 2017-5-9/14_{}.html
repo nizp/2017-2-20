@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		量词：
+			+
+				{1,}
+			?
+				{0,1}
+				
+			*  {0,}
+			
+			{n,m}
+			
+			{n以哪个开始,m到多少个结束}
+	*/
+	
+	var str = 'a1ca22ca333ca4567caca456789ca4fnds789c';
+	
+//	console.log(str.match(/a\d{1,4}c/g));
+	
+//	console.log(str.match(/a\d{1,}c/g));
+	
+//	console.log(str.match(/a\d{0,1}c/g));
+
+	console.log(str.match(/a\d*c/g));
+
+	
+</script>
+</body>
+</html>

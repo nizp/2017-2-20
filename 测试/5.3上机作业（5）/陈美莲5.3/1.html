@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+body{
+	background: #2f2a78;
+}	
+.warp{
+	width:101px;
+	height: 387px;
+	background: #fff;
+	margin: 200px auto;
+}
+#box{
+	width:88px;
+	height: 387px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+}
+#div1{
+	width:13px;
+	height: 387px;
+	float: right;
+	position:relative;
+	background: #ccc;
+}
+#div3{
+	width:9px;
+	height:72px;
+	background:url(bg.png) 0px -12px no-repeat;
+	position: absolute;
+	top:0;
+	left: 2px;
+}
+#div2{
+	width:13px;
+	height: 367px;
+	margin-top: 10px;
+	position: relative;
+}
+#top{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) 0 0 no-repeat;
+	position: absolute;
+	top:0;
+	left:1px;
+}
+#bottom{
+	width:11px;
+	height: 10px;
+	background:url(bg.png) -12px 0 no-repeat;
+	position: absolute;
+	bottom:0;
+	left:1px;
+}
+#ul{
+	list-style: none;
+	width:88px;
+	position: absolute;
+	top:0;
+}
+li{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<section class="warp">
+		<div id="box">
+			<ul id="ul">
+				<!--<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>
+				<li>北京</li>-->
+			</ul>
+		</div>
+		<div id="div1">
+			<div id="top"></div>
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+			<div id="bottom"></div>
+		</div>
+	</section>
+<script src="data.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var ul=document.getElementById('ul');
+	var str='';
+	arrCity.forEach(function(a,b){
+		if(b>0){
+			str+='<li>'+a.name+'</li>';
+		}
+		
+	})
+	ul.innerHTML=str;
+	var box = document.getElementById('box');
+	var div3 = document.getElementById('div3');
+	var div2 = document.getElementById('div2');
+	var top=document.getElementById('top');
+	var bottom=document.getElementById('bottom');
+	var maxH = box.scrollHeight-box.clientHeight;
+//	//拖拽
+//	div3.onmousedown = function(ev){
+//		ev.preventDefault();
+//		var oldY = ev.clientY-this.offsetTop;
+//		document.onmousemove = function(ev){
+//		var y = ev.clientY-oldY;
+//		var maxY = div2.clientHeight-div3.offsetHeight;
+//		if(y<0){
+//			y = 0;
+//		}
+//		if(y>maxY){
+//			y = maxY;
+//		}
+//		div3.style.top = y +'px';
+//		var scale = y/maxY;
+//		ul.style.top = -maxH*scale+'px';
+//
+//		}
+//		document.onmouseup = function(){
+//			document.onmousemove = document.onmouseup = null;
+//		}
+//	}
+	//滚轮
+	var num=0;
+	ul.onmousewheel=function(ev){
+		var maxY = div2.clientHeight-div3.offsetHeight;
+		ev.preventDefault();
+		if(ev.wheelDelta<0){
+			setTimeout(function(){
+				num+=10;
+				if((div3.offsetHeight+num)>div2.offsetHeight){
+					num=div2.offsetHeight-div3.offsetHeight;
+				}
+				div3.style.top = num +'px';
+				var scale = num/maxY;
+				ul.style.top = -maxH*scale+'px';
+				
+			},100)
+		}
+		if(ev.wheelDelta>0){
+			setTimeout(function(){
+				num-=10;
+				if(num<0){
+					num=0;
+				}
+				div3.style.top = num +'px';
+				var scale = num/maxY;
+				ul.style.top = -maxH*scale+'px';
+			},100)
+		}
+	}
+	top.onclick=function(ev){
+		ev.stopPropagation();
+		if(ev.target.id=='top'){
+			var maxY = div2.clientHeight-div3.offsetHeight;
+			num-=10;
+			if(num<0){
+				num=0;
+			}
+			div3.style.top = num +'px';
+			var scale = num/maxY;
+			ul.style.top = -maxH*scale+'px';
+		}
+		
+		
+	}
+	bottom.onclick=function(ev){
+		ev.stopPropagation();
+		var maxY = div2.clientHeight-div3.offsetHeight;
+		num+=10;
+		if((div3.offsetHeight+num)>div2.offsetHeight){
+			num=div2.offsetHeight-div3.offsetHeight;
+		}
+		div3.style.top = num +'px';
+		var scale = num/maxY;
+		ul.style.top = -maxH*scale+'px';
+	}
+//	div2.onclick=function(ev){
+//		ev.stopPropagation();
+//		var maxY = div2.clientHeight-div3.offsetHeight;
+//		var y=ev.clientY-div3.offsetHeight;
+//		if(maxY<y){
+//			y=maxY;
+//		}
+//		div3.style.top = y +'px';
+//		var scale = y/maxY;
+//		ul.style.top = -maxH*scale+'px';
+//	}
+	
+</script>
+</body>
+</html>
