@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li class="li li2"></li>
+		<li></li>
+		<li></li>
+		<li class="li"></li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		箭头函数：
+			
+			function getByClass(){
+				return 123
+			}
+			
+			var getByClass = () => 123;
+		
+		=======================================
+		
+			function getByClass(a){
+				var b = 10;
+				return a+b;
+			}
+			
+			var getByClass = (a) => {
+				var b = 10;
+				return a+b;
+			};
+		
+		=======================================
+			
+		注意：this,箭头函数中的this跟父函数的this有关，如果没有父函数，this指向widnow
+		事件函数不要直接使用箭头函数
+		
+		
+		RegExp('\\b'+sClass+'\\b','g')
+		
+		'\\n'
+		
+		/sClass/gi
+			
+	*/
+	var lis = document.querySelectorAll('li');
+	
+	// "|li| |li2| |li5|"
+	
+	
+	
+	var getByClass = (sClass) => {
+		//获取所有的元素，因为要从所有的元素中找到对应的className
+		var aEle = document.getElementsByTagName('*');
+		//为了使用数组的方法，把类数组转为真数组
+		aEle = Array.from(aEle);
+		//为了存放匹配上的元素
+		var arr = [];
+		//正则（|li1|）
+		var re = new RegExp('\\b'+sClass+'\\b');  //还有别的方法吗？
+		aEle.forEach((ele,i) => {
+			//如果有className能够被正则匹配，说明有这个元素，就push到arr中
+			if(re.test(ele.className)){
+				arr.push(ele);
+			}
+			
+//			if(ele.className === sClass){
+//				arr.push(ele);
+//			}
+		});
+		return arr;
+	}
+	console.log(getByClass('li'));
+	
+	
+	
+	
+//	
+	
+	//var getByClass = () => 123;
+	
+	
+//	var get = 
+	
+
+//	((a) => {
+//		alert(a);
+//	})(1)
+	
+//	document.onclick = function(){
+//		//alert(this)
+//		
+//		get();
+//	}
+	
+	
+	
+	
+
+	
+	
+	//console.log(getByClass(10));
+	
+</script>
+</body>
+</html>

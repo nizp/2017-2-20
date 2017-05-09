@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		计算下列字符串中字符的个数，并且找到出现次数最多的字符 
+		
+		a:10次
+		
+		'aaaaabbbbb'
+		(a)\1+
+	*/
+	
+	var str = 'adhsaajdahs321a8aid32a1a8sasaadsjadyc879a3a72a';
+	
+	
+//	var json = {};
+//	
+//	for(var i=0;i<str.length;i++){
+//		if(!json[str[i]]){
+//			json[str[i]] = 1;
+//		}else{
+//			json[str[i]]++;
+//		}
+//	}
+//	
+//	var max = -Infinity;
+//	var index = '';
+//	for(var attr in json){
+//		if(max < json[attr]){
+//			max = json[attr];
+//			index = attr;
+//		}
+//	}
+	
+	//console.log(index+'出现的次数最多'+'出现了'+max+'次');
+	
+	
+	
+	
+	var arr = str.split('');
+	var max = -Infinity;
+	var index = '';
+	str = arr.sort().join('');
+	
+	/*
+		\w+\1
+		
+		aabbccc
+	*/
+	
+	str.replace(/(\w)\1+/g,function($0,$1){
+		if($0.length > max){
+			max = $0.length;
+			index = $1;
+		}
+		//console.log($0,$1)
+	})
+	
+	console.log(index+'出现的次数最多'+'出现了'+max+'次');
+	
+	
+	
+	
+</script>
+</body>
+</html>

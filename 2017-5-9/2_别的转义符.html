@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		\d
+		\D
+		\s
+		\S 非空格
+		\w:数字、字母、下划线
+		\W:非数字、字母、下划线
+		\n
+		\b:边界符:{
+			注意:符号没有边界符,会把非边界的字符分割为带边界的字符
+		}
+		\B:非边界符
+	*/
+	
+	//var str = 'abca2ca_caca34hj56a&c';
+	
+//	console.log(str.match(/a\w+c/g));
+
+//	console.log(str.match(/a\W+c/g));
+
+//	var str = 'my name "is" x!xx!\\m';
+	
+	var str = 'my name is xxx';
+	
+	console.log(str.replace(/\S/g,'|'));
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

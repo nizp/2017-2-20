@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		重复子项:
+			当某个正则有子项的时候，有几个子项就写几个\x(\1\2....)
+			
+			(a(b(c))\2)\1\3
+			
+			(a)\1  \2就称为重复子项，这些符号一定等于子项
+			
+			如果在正则中乱写重复项，那么replace方法最后的返回值将整个字符串返回(本次正则失效)
+			
+			如果是match最后的返回值为null(本次正则失效)
+			
+			
+			如果重复项在该子项的前面，那么重复项会被忽略
+			
+	*/
+	
+//	var str = 'aabbbcddfff';
+	
+//	var str = 'abcbcabcbcc';
+
+	var str = 'abcbcabcbc';
+	
+	console.log(str.match(/(a(b\3(c))\2)\1/));
+	
+	
+//	console.log(str.match(/\1(a)/));
+	
+	
+	//console.log(str.replace(/(a(b(c))\2)\1\3/,function($0,$1,$2,$3){
+		/*
+			abc bc abcbc c
+			
+			
+			abcbc
+	
+			abc
+			
+			$1  abcbc
+			$2  bc
+			$3  c
+		*/
+		
+		//console.log($0,$1,$2,$3);
+	//}))
+	
+	
+//	console.log(str.replace(/(a)\1(b)\2+(c)\4/,($0,$1,$2,$3)=>{
+//		
+////		console.log($0);
+//	}));
+	
+	
+	//console.log(str.match(/(a)\1/));
+	
+</script>
+</body>
+</html>

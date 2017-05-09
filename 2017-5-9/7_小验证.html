@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		6~18个字符，可使用字母、数字、下划线，需以字母开头
+		
+		^[a-zA-Z]\w{5,17}$
+		
+		ndsad@163.com
+		
+		n_ndsad@126.com
+		
+		kn123_321lovegg@sina.cn
+		 
+	*/
+	
+//	var str = 'a321312_3214555556565465565';
+	
+	console.log(/^[a-zA-Z]\w{5,17}@[0-9a-zA-Z]{2,8}\.(com|cn|net)$/.test('n_ndsad@sina.cn'))
+	
+	
+	
+//	console.log(/^[a-zA-Z]\w{5,17}$/.test(str))
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

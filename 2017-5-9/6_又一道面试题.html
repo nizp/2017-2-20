@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	
+	var obj = {
+		name:"陈斌",
+		age:1000,
+		weight:'10000kg'
+	}
+	
+	var str = '我的名字叫${name},芳龄${age}岁,其实我很轻只有${weight}肿';
+	
+	console.log(str.replace(/\${(\w+)}/g,function($0,$1){
+		return obj[$1];
+	}));
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

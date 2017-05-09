@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body class="li">
+	<ul>
+		<li class="li li2"></li>
+		<li></li>
+		<li></li>
+		<li class="li"></li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		/\bli\b/.test('li li2')
+		
+		li li2
+		
+		li
+		
+		li2 li li1
+		
+		(^|\s)+sClass+(\s|$)
+		
+	*/
+	
+	var getByClass = (sClass) => {
+		var arr = [];
+		var aEle = document.getElementsByTagName('*');
+		//var re = new RegExp('\\b'+ sClass + '\\b');//'\bli\b';
+		
+		var re = new RegExp('(^|\\s)'+ sClass + '(\\s|$)');
+		aEle = Array.from(aEle);
+		
+		aEle.forEach((elem,i)=>{
+			if(re.test(elem.className)){
+				arr.push(elem);
+			}
+		});
+		
+		return arr;
+		
+	}
+	
+	console.log(getByClass('li'))
+	
+	
+	//console.log(/\b\b/.test('li'))
+	
+	
+	
+</script>
+</body>
+</html>
