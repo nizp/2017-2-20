@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	
+	function Person(name,age){//Person构造函数
+		this.name = name;
+		this.age = age;
+	}
+	
+//	console.dir(Person)
+	
+	
+	
+	Object.prototype.say = function(){
+		alert('我在obj肚子里');
+	}
+
+
+//	Person.say = function(){
+//		alert('cccccc');
+//	}
+
+	Function.prototype.say = function(){
+		alert('我在function体内');
+	}
+
+	Person.prototype.say = function(){
+		alert('12345');
+	}
+	
+	console.dir(Person);
+	
+	Person.say();
+	
+	
+//	
+	
+	
+	
+	
+	//var p = new Person('陈利',12);//对象  {name:..,age:...,say:fn}
+//	p.say = function(){
+//		alert('p的say');
+//	}
+	//p.say();
+	
+	//console.dir(p);
+	
+	
+	
+</script>
+</body>
+</html>

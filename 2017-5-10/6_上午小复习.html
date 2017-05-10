@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	function Person(name,age){
+		this.name = name;
+		this.age = age;
+		
+		this.say = function(){
+			alert(this.name);
+			//return '呵呵!'
+		}
+	}
+	
+	var p = new Person('陈利',80);//p为Person的实例（实例化对象）
+	
+	
+	
+	
+	
+	var p2 = {
+		name:'陈利3',
+		age:80,
+		say:function(){
+			alert(this.name);
+		}
+	}
+	
+	p2.say();
+	
+	console.log(p,p2)
+	
+	p.say();
+	
+	
+	
+	
+	
+	//console.log(Person('陈利').say());
+	
+//	Person.say = function(){
+//		alert(1)
+//	}
+//	
+//	Person.say();
+	
+	
+	
+</script>
+</body>
+</html>

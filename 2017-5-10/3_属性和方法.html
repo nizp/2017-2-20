@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		变量: 前面是无主的  
+		
+		属性: 有主就叫
+		
+		方法: 前面有主函数
+		
+		函数: 前面是无主的函数
+		
+		div.index
+	*/
+	
+	var a = 5;
+	a++;
+	
+	var arr = [1,2,3];
+	
+	arr.a = 5;
+	
+	arr.a++;
+	
+	//console.dir(window)
+	
+	//alert(arr.a);
+	
+	var str = '';
+	
+	str.a = 10;
+	
+	str.a++;
+	
+	//alert(str.a);  //A:11 B:未定义 C:报错
+	
+	
+	function fn(){
+		alert(this);
+	}
+//	
+	fn();
+
+	arr.fn = function(){
+		alert(this);
+	}
+	
+	arr.fn();
+	
+	
+	
+</script>
+</body>
+</html>

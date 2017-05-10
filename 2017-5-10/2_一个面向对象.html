@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		构造函数 ：
+			构造对象的函数(函数return一个对象，这个函数就叫构造函数)
+			
+	*/
+	
+	var name = '陈利';
+	var age = '12';
+	var say = function(){
+		alert('叔叔还我钱');
+	}
+	
+//	var name2 = '刘钊';
+//	var age2 = '18';
+//	var say2 = function(){alert('张宗乾是小姨子')};
+
+	function person(name,age,s){ //构造函数
+		var name = name;
+		var age = age;
+		var say = function(){
+			alert(s);
+		}
+		return {
+			name:name,
+			age:age,
+			say:say
+		}
+	}
+	
+	
+	var p1 = person('陈利',12,'叔叔还我钱');//实例（实例化对象|过程）
+	
+	p1.say();
+	
+	
+	//console.log()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

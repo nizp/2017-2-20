@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		new Date();
+		
+		new 运算符
+			专门运算函数
+		
+		使用new之后：
+			
+			1.如果不传参等同于函数调用
+			2.默认不再返回undefined而是返回obj
+			3.如果加return，后面是对象类型，那么返回值就为return后的那个对象，
+			如果不是对象类型，那么会返回new出来的那个对象
+			4.this，this指向new出来的这个对象
+			
+		new Array
+		new RegExp
+		new String
+		
+	*/
+	
+	function Person(name,age,say){//工厂函数（构造函数）
+		//var obj = {};//原材料
+		
+		//加工
+		this.name = name;
+		this.age = age;
+		this.say = function(){
+			console.log(say);
+			//console.log(this)
+			//alert(this);
+		}
+		//出厂
+		//return obj;   return this
+		
+		//return [];
+	}
+	var p = new Person('陈利',12,'叔叔还我钱');//实例化过程
+	
+	console.log(p);
+	
+	
+	
+//	var idate = new Date; 
+//	
+	function fn(){
+		
+		console.log(this);
+	}
+	
+	console.log(new fn());
+//	
+//	console.log(idate)
+//	
+	
+	
+	
+	
+</script>
+</body>
+</html>

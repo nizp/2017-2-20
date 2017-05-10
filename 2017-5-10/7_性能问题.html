@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		
+		原型:
+			
+			.class ->obj.proptype.say
+			style -> this.say
+		
+			prototype
+			
+			每个函数都自带有属性或者方法，其中有个属性就为prototype
+			
+			prototype的****值为对象****
+			
+			***prototype只给该构造函数的实例化对象使用***
+			
+		
+		解决实例化对象使用方法时性能的问题
+		
+		js有个特性：
+		
+			实例化对象上如果没有某个属性或者方法，那么一定会去构造函数的原型上
+			
+			找这个属性或者方法。
+		
+	*/
+	
+	
+	function Person(name,age){
+		this.name = name;
+		this.age = age;
+		
+//		this.say = function(){
+//			alert(this.name);
+//		}
+	}
+	
+	
+	Person.prototype.say = function(){
+		console.log('我在这儿')
+	}
+	
+	//console.dir(Person);
+	
+	
+	var p = new Person('陈利',80);//p为Person的实例（实例化对象）
+//	
+	var p2 = new Person('陈斌',8);
+	
+	
+	
+	//alert(Person.prototype.say);
+	
+	
+	
+	p.say();
+
+	console.log(p.say == p2.say);
+	
+	
+	
+//	p.say();
+//	p2.say();
+
+	/*
+		陈斌的益达
+		
+		陈利的益达
+	*/
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+//	var arr = [];
+//	
+//	
+//	Array.prototype.push = function(){
+//		alert('呵呵,我把你给改了')
+//	}
+//	
+//	arr.push();
+	
+	
+//	var arr2 = [];
+//	
+//	console.log(arr.push == arr2.push);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		new Date(); 
+	*/
+	
+	function Person(name,age,say){//工厂函数（构造函数）
+		var obj = {};//原材料
+		
+		//加工
+		obj.name = name;
+		obj.age = age;
+		obj.say = function(){
+			console.log(say);
+			//console.log(this)
+			//alert(this);
+		}
+		//出厂
+		return obj;
+	}
+	var p = new Person('陈利',12,'叔叔还我钱');
+	
+//	console.log(p.name)
+//	
+	p.say();
+	
+	console.log(p)
+	
+	
+	
+	
+	
+//	function fn(){
+//		var obj = {
+//			name:'momo',
+//			age:90,
+//			say:function(){
+//				console.log(this);
+//			}
+//		}
+//		return obj;
+//	}
+//	
+//	var p2 = fn()
+//	p2.say();
+	
+	
+</script>
+</body>
+</html>

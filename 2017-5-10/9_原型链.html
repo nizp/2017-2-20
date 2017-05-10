@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		一个构造函数：
+			属性放在构造函数内
+			
+			方法放在构造函数的原型下
+			
+		__proto__   对象身上一定有原型链，一定没有原型
+		
+		*** 原型链就是实例化对象与构造函数原型的桥梁
+		
+		
+		*** 实例化对象的原型链 等于 构造函数的原型
+		
+		
+		
+		
+		
+		
+	*/
+	
+	function Person(name,age){//Person构造函数
+		this.name = name;
+		this.age = age;
+	}
+	
+	Object.prototype.say = function(){
+		alert('我在obj肚子里');
+	}
+	
+//	Function.prototype.say = function(){
+//		alert('我在fn肚子里')
+//	}
+
+	
+	
+//	Person.prototype.say = function(){
+//		alert(this.name);
+//	}
+	
+	var p = new Person('陈利',12);//对象  {name:..,age:...,say:fn}
+	
+	
+//	p.say();
+	Person.say();
+	
+	//console.log(p.__proto__ === Person.prototype)
+	
+//	console.log(p.constructor);
+	
+	
+	
+	console.dir(p);
+	
+	
+	
+</script>
+</body>
+</html>
