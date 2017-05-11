@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div {
+	width:150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+	</div>
+<script type="text/javascript">
+	/*
+		面向对象最擅长复杂的东西简单化，
+		越复杂越能感受到它的便利
+		写法极为优雅,条理极为清晰,耦合度极为不高（组合度高）
+		
+		
+		let:变量
+			1.申明变量的时候不会在window下注册这个变量
+			2.暂存死区（没有预解析，先申明再使用，不然会报错）
+			3.支持块级作用域  {}
+	*/
+	
+	var box = document.getElementById('box')
+	var btns = box.getElementsByTagName('input');
+	var divs = box.getElementsByTagName('div');
+	var oBtn = btns[0];
+	var oDiv = divs[0];
+	
+	
+	for(let i=0;i<btns.length;i++){
+		btns[i].onclick = function(){
+			
+			oBtn.className = '';
+			
+			oDiv.className = '';
+			
+			this.className = 'active';
+			
+			divs[i].className = 'show';
+			
+			
+			oBtn = this;
+			oDiv = divs[i];
+		}
+	}
+	
+	
+
+
+/****************************let************************************/
+	
+//	btns[0].onclick = function(){
+//		alert(0);
+//	}
+//	btns[1].onclick = function(){
+//		alert(1);
+//	}
+	
+	
+	//alert(a);
+	
+	
+//	{
+//		let a = 10;
+//		{
+//			alert(a);
+//		}
+//	}
+	
+	
+	//console.dir(window);
+	
+	
+	
+	
+</script>
+</body>
+</html>

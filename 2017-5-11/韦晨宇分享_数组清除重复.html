@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		var arr = [1,3,4,'w',5,56,4,7,8,7,7,'w','w','w','w'];
+		
+		console.log([...new Set(arr)])
+		
+		
+		
+			function fnArr1(){  
+            	var arr1 = [];    //定义一个临时数组  
+            for(var i = 0; i < arr.length; i++){    //循环遍历当前数组  
+                //判断当前数组下标为i的元素是否已经保存到临时数组  
+                //如果已保存，则跳过，否则将此元素保存到临时数组中  
+                if(arr1.indexOf(arr[i]) == -1){  
+                    arr1.push(arr[i]);  
+                }  
+            }  
+            return arr1;  
+        } 
+        console.log(fnArr1())
+        
+        
+          
+       
+       function fnArr2(){
+            //直接定义结果数组  
+            var arr1 = [];  
+            for(var i = 0; i < arr.length; i++){    //从数组第二项开始循环遍历此数组  
+                //对元素进行判断：  
+                //如果数组当前元素在此数组中第一次出现的位置不是i  
+                //那么我们可以判断第i项元素是重复的，否则直接存入结果数组  
+                if(arr.indexOf(arr[i]) == i){  
+                    arr1.push(arr[i]);  
+                }  
+            }  
+            return arr1;  
+        } 
+        console.log(fnArr2())
+        
+        
+        
+        
+        function fnArr3(){  
+            //将数组进行排序  
+            arr.sort();  
+            //定义结果数组  
+            var arr1 = [arr[0]];  
+            for(var i = 1; i < arr.length; i++){    //从数组第二项开始循环遍历数组  
+                //判断相邻两个元素是否相等，如果相等说明数据重复，否则将元素写入结果数组  
+                if(arr[i] !== arr1[arr1.length - 1]){  
+                    arr1.push(arr[i]);  
+                }              
+            }  
+            return arr1;  
+              
+        } 
+        console.log(fnArr3())
+        
+        
+        /*
+                方法1和方法2都用到了数组的indexOf()方法，此方法主要用来查找元素在数组中第一次出现的位置。
+    	方法3是先将数组排序，然后一次比较相邻的两个元素的值，排序使用的是js原生的sort()方法。
+         * */
+		</script>
+	</body>
+</html>

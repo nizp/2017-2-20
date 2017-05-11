@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		包装对象 :
+		
+			当简单类型去调用某个属性或者方法的时候，那么系统会偷偷地
+			在内部将简单类型的系统对象的属性或者方法查找（调用出来）
+			输出之后（使用之后），这个对象自动被销毁。
+			
+			注意：
+				包装对象的属性只能读不能写
+			
+			做好事不留名的。
+	*/
+	
+	var arr = [];
+	
+//	arr.num = 5;
+//	
+//	arr.num++;
+//	
+//	alert(arr.num);
+
+	var str = '3231321';
+	
+	//因为s已经是对象类型了，所以可以在这个对象上加属性或者方法，但是属性不能被修改，改变方法也只能针对这个对象使用，不会影响别人使用。
+	var s = new String('3231321');
+	
+	//s.name = '陈利';
+	
+	s.length = 1;
+	
+//	alert(s.length);
+
+	
+	String.prototype.substring = function(){
+		alert('呵呵哒!');
+	}
+	
+	
+	
+	//s.length = 2;
+	
+//	s.substring = function(){
+//		alert(1);
+//	}
+
+//	console.log(s.charAt())
+	
+	
+//	str.substring();
+	
+	//console.log(typeof str)
+	
+	//console.dir(str);
+	
+	
+	//str.num = 0;
+	
+//	str.num++;
+	
+	
+	//alert(str.substring(1));
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
