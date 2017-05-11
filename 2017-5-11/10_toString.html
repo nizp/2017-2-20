@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		toString
+			把当前数据转成字符串的方法，每种属性类型都有toString方法
+			
+		当你使用了alert()这个系统方法的时候，那么自动回调用这个数据类型的toString
+		
+		
+		new String
+		new Object
+		new Array
+		
+		
+		如何查看下面的数据是个数组？
+		
+		[object Object]
+	*/
+	
+	var arr = [1,2,3,4];
+	var obj = {name:'momo'}
+	var str = '232131';
+	
+	var lis = document.getElementsByTagName('li');
+	
+	console.log(lis.slice);
+	
+	
+	lis = Array.prototype.slice.apply(lis);
+	
+	console.log(lis.slice);
+	
+	//lis.push(5);
+	
+	lis.forEach(function(e,i){
+		e.style.background = 'red';
+	});
+	
+	console.log(lis);
+	
+	
+
+	
+	console.log(Object.prototype.toString.call(str))
+	
+//	console.log(Object.prototype.toString.call(arr) === '[object Array]')
+	
+	//alert(typeof arr)
+	
+	//console.log(Number(0).toString())
+	
+	
+	//console.log(new Array('a').toString())
+	
+	
+//	alert(obj);
+//	console.log(obj);
+//	console.log(obj.toString());
+	
+//	alert(arr);
+//	console.log(arr);
+//	console.log(arr.toString());
+	
+	
+	
+	
+</script>
+</body>
+</html>

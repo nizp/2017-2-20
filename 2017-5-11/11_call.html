@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		call :
+			修改this指向
+			第一个参数：
+				修改后this
+			第二个参数起:
+				实参（可以有若干的参数）
+				
+		apply:
+			修改this指向，只有2个参数
+			
+			第一个参数：
+				修改后this
+			
+			第二个参数:
+				数组:将实参放到数组中
+			
+	*/
+	
+	
+	
+	function fn(a,b,c){
+		alert(this);
+		console.log(a+b+c);
+	}
+//	fn();
+
+	//fn.call(document,5,6,7);
+	
+	fn.apply(document,[5,6,7]);
+	
+	console.dir(fn);
+	
+	
+	
+	
+</script>
+</body>
+</html>

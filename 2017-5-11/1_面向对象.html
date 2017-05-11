@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		小明今年18，男，喜欢跑步运动，边跑边说，天天锻炼身体好！
+		
+		obj.__proto__ === Fn.prototype
+		
+		
+	*/
+	
+	function Fn(name,age,like){
+		this.name = name;
+		this.age = age;
+		this.like = like;
+	}
+	
+	
+	Fn.prototype.running = function(say){
+		alert('我叫'+this.name+'今年'+this.age+say);
+	}
+	
+	
+	Object.prototype.running = function(){
+		alert('obj肚子里');
+	}
+	
+	console.dir(Object);
+	
+//	Function.prototype.running = function(){
+//		alert('呵呵');
+//	}
+	
+	var f = new Fn('小明',18,'跑步');
+	
+	/*
+		原型链一定是找实例化对象的 ，构造函数下的原型
+		
+		
+	*/
+	
+	
+	Fn.running();
+	
+	console.dir(Fn);
+	
+	
+	
+	/*
+		Fn -> Function实例化对象 
+		
+		除了function 别的实例化对象前面加new都报错。
+	*/
+	
+//	console.log(new f);
+
+	console.dir(Fn)
+	
+	
+	
+	//f.running('天天锻炼身体好!');
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

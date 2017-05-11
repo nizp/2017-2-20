@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#box{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	left:0;
+	top:0;
+}	
+
+</style>
+</head>
+<body>
+	<div id="box"></div>
+<script type="text/javascript">
+	
+	function Drag(id){
+		this.box = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+		var _this = this;
+		this.box.onmousedown = function(ev){
+			_this.down(ev);
+		}
+	}
+	Drag.prototype.down = function(ev){
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		var _this = this;
+		document.onmousemove = function(ev){
+			_this.move(ev);
+		}
+		document.onmouseup = function(){
+			_this.up();
+		}
+	}
+	Drag.prototype.move = function(ev){
+		this.box.style.left = ev.pageX - this.disX + 'px';
+		this.box.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	Drag.prototype.up = function(){
+		document.onmousemove = document.onmouseup = null;
+	}
+	
+	
+	new Drag('box');
+	
+	
+</script>
+</body>
+</html>

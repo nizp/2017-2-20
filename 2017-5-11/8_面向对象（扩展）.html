@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div,#box2 div {
+	width:150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show,#box2 div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+	</div>
+	
+	<div id="box2">
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+	</div>
+	
+	<input type="button" id="btn1" value="点击之后第一关" />
+	<input type="button" id="btn2" value="点击之后第二开" />
+	<input type="button" id="btn3" value="点击之后全开" />
+	<input type="button" id="btn4" value="点击之后反向开" />
+	
+<script type="text/javascript">
+	
+	/*
+		1. 能多个tab切换
+		
+		2.都能自动播放
+		
+		3.让第一个自动播放，第二个不用
+		
+		4.
+	*/
+	function Tab(box){ //类
+		this.box = document.getElementById(box);
+		this.btns = this.box.getElementsByTagName('input');
+		this.divs = this.box.getElementsByTagName('div');
+		this.oBtn = this.btns[0];
+		this.oDiv = this.divs[0];
+		this.timer = null;
+		this.num = 0;
+		
+		this.init();
+	}
+
+	Tab.prototype.init = function(){
+		//console.log(this);//new Tab
+		let _this = this;
+		for(let i=0;i<this.btns.length;i++){
+			this.btns[i].onclick = function(){
+				//this->input    input.change -> new Tab.change
+				_this.change(i);
+			}
+		}	
+	}
+	
+	Tab.prototype.change = function(i){
+		
+		this.oBtn.className = '';
+		
+		this.oDiv.className = '';
+		
+		this.btns[i].className = 'active';
+		
+		this.divs[i].className = 'show';
+		
+		this.oBtn = this.btns[i];
+		this.oDiv = this.divs[i];
+	}
+	
+	Tab.prototype.autoPlay = function(){
+		var _this = this;
+		clearInterval(this.timer);
+		this.timer = setInterval(function(){
+			_this.num++; 
+			
+			_this.change(_this.num%=3);
+		},500);
+	}
+	
+	Tab.prototype.stop = function(){
+		clearInterval(this.timer);
+		this.timer = null;
+	}
+	
+	Tab.prototype.isPlay = function(){
+		return !!this.timer;//this.timer->!this.timer=> !false
+	}
+	
+	var t1 = new Tab('box');
+	var btn1 = document.getElementById('btn1');
+	
+	btn1.onclick = function(){
+		t1.stop();
+	}
+	
+	t1.autoPlay();
+	
+	var t2 = new Tab('box2');
+	
+	var btn2 = document.getElementById('btn2');
+	
+	btn2.onclick = function(){
+		t2.autoPlay();
+	}
+	
+	var btn3 = document.getElementById('btn3');
+	btn3.onclick = function(){
+		t1.autoPlay();
+		t2.autoPlay();
+	}
+	
+	var btn4 = document.getElementById('btn4');
+	
+	btn4.onclick = function(){
+		if(t1.isPlay()){
+			t1.stop();
+		}else{
+			t1.autoPlay();
+		}
+		
+		if(t2.isPlay()){
+			t2.stop();
+		}else{
+			t2.autoPlay();
+		}
+	}
+	
+	
+	
+	//t2.autoPlay();
+
+</script>
+</body>
+</html>

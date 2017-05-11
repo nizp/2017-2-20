@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div,#box2 div {
+	width:150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show,#box2 div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+	</div>
+	
+	<div id="box2">
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+	</div>
+	
+	<input type="button" id="" value="点击之后第一关" />
+	<input type="button" id="" value="点击之后第二开" />
+	<input type="button" id="" value="点击之后全开" />
+	<input type="button" id="" value="点击之后反向开" />
+	
+<script type="text/javascript">
+	
+	/*
+		1. 能多个tab切换
+		
+		2.都能自动播放
+		
+		3.让第一个自动播放，第二个不用
+		
+		4.
+	*/
+	
+	tab('box',true);
+	tab('box2');
+	
+	function tab(id,onOff){
+		var box = document.getElementById(id)
+		var btns = box.getElementsByTagName('input');
+		var divs = box.getElementsByTagName('div');
+		var oBtn = btns[0];
+		var oDiv = divs[0];
+		var timer = null;
+		var num = 0;
+		
+		if(onOff){
+			timer = setInterval(function(){
+				num++;
+				oBtn.className = '';
+				oDiv.className = '';
+				btns[num%=3].className = 'active';
+				divs[num%=3].className = 'show';
+				oBtn = btns[num%=3];
+				oDiv = divs[num%=3];
+				
+			},500);
+		}
+		
+		for(let i=0;i<btns.length;i++){
+			btns[i].onclick = function(){
+				
+				oBtn.className = '';
+				
+				oDiv.className = '';
+				
+				this.className = 'active';
+				
+				divs[i].className = 'show';
+				
+				oBtn = this;
+				oDiv = divs[i];
+			}
+		}
+	}
+	
+
+
+</script>
+</body>
+</html>
