@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		http://www.68design.net/cool/ 
+	*/
+	
+	var arr = [1,2,3,4,5,6];
+	
+	Array.prototype.forEach = function(fn,that){
+		//console.log(this);
+		that = that || window;
+		for(var i=0;i<this.length;i++){
+			fn.call(that,this[i],i,this);
+			
+			//call(this,1,2,3,4)
+		}
+	}
+	
+	var fn = function(e,i,all){
+		console.log(e,i,all,this)
+	}
+	
+	arr.forrEach(fn,document);
+	
+	
+//	arr.forEach(function(e,i,all){
+//		console.log(e,i,all,this);
+//	},document);
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		事件函数中的this指向该事件的对象。
+		
+		函数直接调用默认走window。
+		
+		单纯只要函数名 + 括号，this就是window
+		
+		方法的this默认为绑定方法的对象。arr.fn()
+		
+		
+		1.事件调用
+		2.自己调用
+		3.new
+		4.call、apply
+		5.定时器
+		
+		
+	*/
+	
+	
+//	document.onclick = function(){
+//		alert(this);
+//	};;
+	
+	
+//	document.onclick = fn();
+//	function fn(){
+//		alert(this);
+//	};
+	
+	
+//	document.onclick = fn;
+//	
+//	function fn(){
+//		alert(this);
+//	};
+	
+	
+//	document.onclick = function(){
+//		fn();
+//	}
+//	
+//	function fn(){
+//		let arr = [1,2,3,4];
+//		alert(this);
+//		arr.fn2 = function (){
+////			alert(this);
+//		}
+//		arr.fn2();
+//	};
+
+
+	
+//	document.onclick = function(){
+//		
+//		function fn(){
+//			alert(this);
+//		}
+//		
+//		fn();
+//	}
+
+	
+//	document.onclick = function(){
+//		
+//		function fn(){
+//			console.log(this);
+//		}
+//		
+//		/*
+//			***内置对象的方法是不能new的，
+//			人为写的方法是可以new的
+//			
+//			new fn.call()
+//		*/
+//		
+//		alert(tfn.call = function(){
+//			his);
+//		}
+//		
+//		console.log(new fn.call);
+//		
+//		
+//		
+//		
+////		var arr = [1,2,3,4];
+////		
+////		console.log(new Array.prototype.push)
+//		
+//	}
+
+	
+	
+//	var arr = [];
+//	
+//	arr.das = function(){
+//		console.log(this);
+//	}
+//	
+//	document.onclick = arr.das;
+	
+	//console.dir(arr.fn)
+//	
+//	arr.fn();
+	
+	//console.dir(document);
+	
+	
+//	var obj = {
+//		name:'nizp',
+//		say:function(){
+//			//alert(this.name);
+//			console.log(this);
+//		}
+//	}
+	//console.dir(window);
+//	setTimeout(obj.say,1000);
+//	setTimeout(obj.say(),1000);
+
+	
+	
+	/*
+		new
+		function
+		
+		fn() < 事件 < new < call
+	*/
+	
+	document.onclick = function(){
+		
+		alert(this);//document
+		
+		fn1();//window
+		
+		new fn1;//fn1{}
+		
+		//new fn1.call(document);//报错
+		
+		setTimeout(function(){
+			
+			new fn1;//fn1{}
+			
+			fn1.call(document);
+		},1000);
+	}
+	
+	function fn1(){
+		alert(this);
+	}
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#box{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}	
+</style>
+</head>
+<body>
+	<div id="box"></div>
+<script type="text/javascript">
+	
+	/*
+		
+		继承:
+			
+			自身有父辈的一些特征，自己也有自己的特征
+		
+	*/
+	
+	function Drag(id){
+		const _this = this;
+		this.box = document.getElementById(id);
+		
+		this.box.addEventListener('mousedown',function(ev){
+			_this.down(ev);
+		});
+		
+	}
+	Drag.prototype.down = function(ev){
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		const _this = this;
+		let FnMove = function (ev){
+			_this.move(ev);
+		}
+		let FnUp = function (ev){
+			_this.up(ev,FnMove,FnUp);
+		}
+		
+		document.addEventListener('mousemove',FnMove);
+		
+		document.addEventListener('mouseup',FnUp);
+		
+	};
+	
+	Drag.prototype.move = function(ev){
+		//console.log(this);
+		this.box.style.left = ev.pageX - this.disX + 'px';
+		this.box.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	Drag.prototype.up = function(ev,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	var d = new Drag('box');
+	
+	
+	
+</script>
+</body>
+</html>

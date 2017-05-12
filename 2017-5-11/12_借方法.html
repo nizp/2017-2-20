@@ -22,7 +22,13 @@
 	var o = true;
 	
 	//window.fn.call(document)
-	
+	/*
+		[object Object] 
+		
+		[1,2,3,4]
+		
+		1,2,3,4
+	*/
 	
 	console.log(obj.toString.call(arr) === '[object Array]');
 	
@@ -33,6 +39,24 @@
 	
 	
 //	Object.prototype.toS
+
+	
+	function Fn(){
+		
+	}
+	
+	Fn.prototype = {
+		constructor:Fn,
+		say(){
+			alert(1);
+		}
+	}
+	
+	var t = new Fn();
+	t.say();
+	
+	console.dir(t)
+	
 	
 	
 </script>

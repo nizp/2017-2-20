@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		constructor:
+			
+			某个对象是哪个构造函数构造出来的.
+			
+			虚的（提供查找构造函数的线索）只能参考
+			
+			因为constructor本身容易被修改，所以说在有可能被修改的时候
+			人为主动添加一个constructor属性指向正确的构造函数
+	*/
+	
+	
+	
+	function Person(name){
+		this.name = name;
+	}
+	
+	//console.dir(Person)
+	
+	console.log(Person.prototype)
+	
+	Person.prototype = {
+//		constructor:Person,
+		say:function(){
+			console.log(this)
+			alert(123456);
+		},
+		running:function(){
+			
+		}
+	}
+	
+	
+	
+	//console.log(Person.prototype)
+	
+	
+	
+	var p = new Person('陈利');
+	
+	console.dir(p);
+	
+//	console.log(p.constructor);
+	
+	
+	var arr = [];
+	
+	var obj = {name:123,say(){console.log(this)}};
+	
+	//obj.say()；
+	
+	
+	
+	//console.log(obj.constructor == Object);
+	
+//	console.log(arr.constructor == Array);
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

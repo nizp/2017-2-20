@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	var num = 0;
+//	
+//	var num2 = num;
+//	
+//	num2 ++;
+//	
+//	alert(num);
+//
+//	var arr = [1,2];
+//	
+//	var arr2 = arr;
+//	
+//	arr2.push(3);
+//	
+//	alert(arr);
+
+	
+	/*
+		浅拷贝：
+			通过for in 将简单类型值，赋值给另一个对象（赋值）
+			
+			但是如果for in中遇到了复合类型依然是赋址。
+	*/
+	
+	var obj = {
+		name:'momo',
+		age:10,
+		arr:[1,2,3]
+	}
+	var obj2 = {};
+	
+//	obj.name = 'momo';
+//	
+//	obj2.name = obj.name;
+//	
+//	obj2.name = 'leo胖!';
+	
+		
+	//console.log(obj2);
+	
+	
+	//var obj2 = obj;
+	
+	
+	
+	for(var attr in obj){
+		obj2[attr] = obj[attr];
+	}
+	
+	obj2.arr.push(5);
+	
+	console.log(obj.arr)
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

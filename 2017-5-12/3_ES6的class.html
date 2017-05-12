@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		hasOwnProperty() 
+		
+			某个属性是不是这个对象*自身*的属性
+		
+		class
+		
+	*/
+//	function Person(age,name){
+//		this.name = name;
+//		this.age = age;
+//	}
+//	
+//	Person.prototype.say = function(){
+//		alert(this.name+'是个胖纸!');
+//	}
+
+
+	class Person{
+		constructor(age,name){
+			this.name = name;
+			this.age = age;
+//			this.say = function (){
+//				alert(123344455);
+//			}
+		}
+		
+		say(){
+			alert(this.name+'小胖');
+		}
+		
+	}
+	
+	Person.prototype.running = function(){
+		alert(123);
+	}
+	
+	
+	var p = new Person(80,'陈斌');
+	var p2 = new Person(80,'陈斌');
+	
+	p.say();
+//	p.running();
+	
+	console.dir(p.say == p2.say)
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

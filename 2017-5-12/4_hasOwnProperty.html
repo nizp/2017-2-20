@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		obj.hasOwnProperty(属性名);
+		
+			某个属性是不是这个对象**自身**的属性
+		
+		返回值为布尔值：
+			是：true
+			否: false
+			
+		
+		Person.prototype = {
+			say(){
+				
+			}
+		}
+		
+	*/
+
+	
+	class Person{
+		constructor(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		
+		say(){
+			alert(this.name);
+		}
+	}
+	
+	var p = new Person('陈斌',99);
+	
+	console.log(Person.prototype.hasOwnProperty('say'));
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

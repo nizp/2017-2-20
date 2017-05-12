@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#box{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}	
+#box2{
+	width:100px;
+	height: 100px;
+	background: gold;
+	position: absolute;
+	top:0;
+	left:100px;
+}
+</style>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="box2"></div>
+<script type="text/javascript">
+	
+	/*
+		
+		继承:
+			
+			自身有父辈的一些特征，自己也有自己的特征
+		
+	*/
+	
+	function Drag(id){
+		const _this = this;
+		this.box = document.getElementById(id);
+		
+		this.box.addEventListener('mousedown',function(ev){
+			_this.down(ev);
+		});
+		
+	}
+	Drag.prototype.down = function(ev){
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		const _this = this;
+		let FnMove = function (ev){
+			_this.move(ev);
+		}
+		let FnUp = function (ev){
+			_this.up(ev,FnMove,FnUp);
+		}
+		
+		document.addEventListener('mousemove',FnMove);
+		
+		document.addEventListener('mouseup',FnUp);
+		
+		ev.preventDefault();
+	};
+	
+	Drag.prototype.move = function(ev){
+		let l =  ev.pageX - this.disX;
+		let t = ev.pageY - this.disY;
+		
+//		if(l < 0){
+//			l = 0;
+//		}else if(l > window.innerWidth - this.box.offsetWidth){
+//			l = window.innerWidth - this.box.offsetWidth
+//		}
+		
+		this.box.style.left = l + 'px';
+		this.box.style.top = t + 'px';
+	}
+	
+	Drag.prototype.up = function(ev,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	
+	function Drag2(id){
+		const _this = this;
+		this.box = document.getElementById(id);
+		
+		this.box.addEventListener('mousedown',function(ev){
+			_this.down(ev);
+		});
+		
+	}
+	Drag2.prototype.down = function(ev){
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		const _this = this;
+		let FnMove = function (ev){
+			_this.move(ev);
+		}
+		let FnUp = function (ev){
+			_this.up(ev,FnMove,FnUp);
+		}
+		
+		document.addEventListener('mousemove',FnMove);
+		
+		document.addEventListener('mouseup',FnUp);
+		
+		ev.preventDefault();
+	};
+	
+	Drag2.prototype.move = function(ev){
+		let l =  ev.pageX - this.disX;
+		let t = ev.pageY - this.disY;
+		
+		if(l < 0){
+			l = 0;
+		}else if(l > window.innerWidth - this.box.offsetWidth){
+			l = window.innerWidth - this.box.offsetWidth
+		}
+		
+		this.box.style.left = l + 'px';
+		this.box.style.top = t + 'px';
+	}
+	
+	Drag2.prototype.up = function(ev,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	
+	
+	
+	var d = new Drag('box');
+	var d2 = new Drag2('box2');
+	
+	
+	
+</script>
+</body>
+</html>
