@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div {
+	width:150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box"></div>
+<script type="text/javascript">
+	/*
+		面向对象最擅长复杂的东西简单化，越复杂越能感受到它的便利
+		写法极为优雅,条理极为清晰,耦合度极为不高（组合度高）
+		
+		
+		let:变量
+			1.申明变量的时候不会在window下注册这个变量
+			2.暂存死区（没有预解析，先申明再使用，不然会报错）
+			3.支持块级作用域  {}
+			
+		1.把变量提取出来
+		
+		2.拆function
+		
+		3.变量变属性，函数变方法
+		
+		4.修正this指向（99%死在this上）	
+	*/
+	
+	/*
+		Tab(box,{
+			btns:[],
+			contents:[]
+		})
+	*/
+	
+	function Tab(box,json){
+		this.box = document.getElementById(box);
+		this.btns = null;
+		this.divs = null;
+		this.settings = {
+			btns:['体育','社会','科技','军事','娱乐'],
+			contents:[
+				'今天中国队踢出宇宙',
+				'一路一带的生活...',
+				'锤子已经开始使用',
+				'三胖把美国炸了',
+				'白百何又出轨了'
+			],
+			events:'onclick'
+		}
+		
+		for(var attr in json){
+			this.settings[attr] = json[attr];
+		}
+		
+		this.createBtn();
+		this.createContent();
+		this.init();
+		
+	}
+	
+	
+	Tab.prototype.createBtn = function(){
+		
+		for(var i=0;i<this.settings.btns.length;i++){
+			var btn = document.createElement('input');
+			btn.type = 'button';
+			btn.value = this.settings.btns[i];
+			if(i==0){btn.className='active'};
+			this.box.appendChild(btn);
+		}
+		this.btns = this.box.getElementsByTagName('input');
+	}
+	
+	Tab.prototype.createContent = function(){
+		for(var i=0;i<this.settings.contents.length;i++){
+			var div = document.createElement('div');
+			div.innerHTML = this.settings.contents[i];
+			if(i==0)div.className = 'show';
+			this.box.appendChild(div);
+		}
+		this.divs = this.box.getElementsByTagName('div');
+	}
+	
+	
+	
+	
+	Tab.prototype.init = function(){
+		var _this = this;
+		for(var i=0;i<this.btns.length;i++){
+			this.btns[i].index = i;
+			this.btns[i][this.settings.events] = function(){
+				_this.change(this);
+			}
+		}
+	}
+	
+	Tab.prototype.change = function(that){
+		for(var i=0;i<this.btns.length;i++){
+			this.btns[i].className = this.divs[i].className = '';
+		}
+		that.className = 'active';
+		this.divs[that.index].className = 'show';	
+	}
+	
+	var t = new Tab('box',{
+		events:'onmouseover',
+		btns:[
+			'生活',
+			'经济',
+			'教育',
+			'健康',
+			'伦理',
+			'游戏'
+		],
+		contents:[
+			'天桥下有卖小动物的',
+			'美元又贬值了',
+			'高考取消数学',
+			'夏天不要穿牛仔裤',
+			'小姨子',
+			'暴雪风暴英雄又要火了'
+		]
+	});
+	
+//	t.init('onmouseover');
+	
+	
+</script>
+</body>
+</html>

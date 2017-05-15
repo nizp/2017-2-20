@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+	
+	/*
+		1.封装组件的原则（步骤）
+		
+			写组件的时候不要把容易修改的部分写死（最好留回调或者配置参数）
+			
+			
+		
+		2.自定义事件
+		
+	*/
+	
+	function Drag(id){
+		this.box = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+		/*
+			this.settings  属于实例化对象的
+			
+			this.settings值为对象，而对象中的this指向this.settings这个对象
+			
+			
+			var o = attr || document;
+			
+			
+			
+		*/
+		const _this = this;
+		this.settings = {
+			cdown:function(){
+				_this.box.style.background = 'yellow';
+			},
+			cmove:function(){
+				_this.box.style.background = 'green';
+			},
+			cup:function(){
+				_this.box.style.background = 'red';
+			}
+		}
+	}
+	
+	Drag.prototype.init = function(json){//callbackdown(cd)
+		
+		/*
+			有配置走配置，没配置走默认 
+		*/
+		for(var attr in json){
+//			if(this.settings.hasOwnProperty(attr)){
+//				this.settings[attr] = json[attr];
+//			}
+			
+			if(this.settings[attr] && typof this.settings[attr] == typeof json[attr]){
+				this.settings[attr] = json[attr];
+			}
+		}
+		
+//		console.log(this.settings);
+		
+		const _this = this;//实例化对象
+		this.box.addEventListener('mousedown',function(ev){
+			//this 元素
+			_this.down(ev);
+		});
+	}
+	
+	Drag.prototype.down = function(ev){
+		
+		//this.box.style.background = 'yellow';
+		
+		this.settings.cdown();
+		
+//		json.cdown && typeof json.cdown == 'function' && json.cdown();
+		
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		
+		const _this = this;
+		
+		const fnMove = function(ev){
+			_this.move(ev);
+		}
+		const fnUp = function(ev){
+			_this.up(ev,fnMove,fnUp);
+		}
+
+		document.addEventListener('mousemove',fnMove);//this.move
+		document.addEventListener('mouseup',fnUp);
+		
+		ev.preventDefault();
+	}
+	
+	Drag.prototype.move = function(ev){
+		
+		//this.box.style.background = 'green';
+		
+		this.settings.cmove();
+		
+		//json.cmove && typeof json.cmove === 'function' && json.cmove();
+		
+		this.box.style.left = ev.pageX - this.disX + 'px'; 
+		this.box.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	Drag.prototype.up = function(ev,move,up){
+		this.settings.cup();
+		//this.box.style.background = 'red';
+		//json.cup && typeof json.cup === 'function' && json.cup();
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	/*
+		按下的时候换成黄色,
+		移动的时候换成绿色
+		抬起的时候换成红色
+	*/
+	var d = new Drag('div');
+	
+//	d.init(
+//		function(){
+//			d.box.style.background = 'yellow';
+//		},
+//		function(){
+//			d.box.style.background = 'green';
+//		},
+//		function(){
+//			d.box.style.background = 'red';
+//		}
+//	)
+
+	/*
+		实参的顺序一定要跟形参对应
+		down:yellow
+		move:green
+		up:red
+		
+		
+		只想down:blue,up:pink
+		
+		
+		1.直接在组件上写配置项
+		
+		2.传参（顺序的问题）
+		
+		3.对象（默认项的问题）
+		
+		4.有配置走配置，没配置走默认
+		
+	*/
+	d.init(
+		{
+			cup:function(){
+				d.box.style.background = 'pink';
+			},
+			cdown:function(){
+				d.box.style.background = 'blue';
+			},
+			opt:true
+		}
+	)
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

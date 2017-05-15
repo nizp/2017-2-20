@@ -100,13 +100,16 @@
 
 	
 	
-//	var arr = [];
-//	
-//	arr.das = function(){
-//		console.log(this);
-//	}
-//	
-//	document.onclick = arr.das;
+	
+	var arr = [1,2,3,4];
+	arr.das = function(){
+		console.log(this);
+	}
+	
+	document.addEventListener('click',arr.das);
+	
+	//document.onclick = arr.das;
+	
 	
 	//console.dir(arr.fn)
 //	

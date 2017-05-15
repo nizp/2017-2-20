@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		1.for in赋址的问题
+		
+		2.constructor
+		
+		3.继承
+		
+		4.class
+		
+		5.this
+		
+		
+		继承:
+			拷贝继承
+				{
+					1:属性继承（调用父类并且修改（call）this）,
+					2:方法继承（for in父类原型上的方法）
+				}
+			类式继承
+		
+	*/
+	
+	
+	/*
+		简单类型只是*赋值*
+		
+		复合类型就是*赋址*
+		
+		arr.length = 0;
+		
+	*/
+	var arr = [1,2,3,4,5];  
+	
+	
+	/*
+		 [1,2,3,4,5] = [1,2,3,4,5]
+		 
+		a:[1,2,3,4,5] = b:[1,2,3,4,5]
+		
+		
+	*/
+	
+	
+	
+	var arr2 = [];//arr;
+	
+	for(var i=0;i<arr.length;i++){
+		arr2[i] = arr[i]; //arr[i] = 1,2,3,4
+	}
+	
+	arr2.push(6);
+	
+	console.log(arr2);
+	
+	
+	
+	var obj = {
+		"name":"康智",
+		"age":18
+	}
+	
+	///var obj2 = obj;   obj[i] -> obj.name -> obj["name"];
+	
+	/*
+		obj2 = obj;
+		
+		{name:'康智'} = {name:'康智'}
+		
+		{name:'康智'} 
+	*/
+	
+	var obj2 = {};
+	for(var i in obj){
+		
+		obj2[i] = obj[i];
+		
+		//console.log(i,obj[i]);
+	}
+	
+	
+	obj2.age = 20;
+	
+	console.log(obj)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

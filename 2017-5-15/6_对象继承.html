@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var obj = {
+		name:'张宗乾',
+		job:'老司机',
+		say:function(){
+			alert(this.name+'说:“我有160公斤”');
+		}
+	}
+	
+//	obj.say();
+
+	function Paohui(){}
+	Paohui.prototype = obj;
+	var obj2 = new Paohui;
+	
+//	var obj2 = obj;
+	
+	obj2.say = function(){
+		alert('我啥也不知道');
+	}
+	
+	obj2.say();
+	obj.say();
+	
+	console.log(obj2)
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	const obj = {
+		name:'张宗乾',
+		job:'老司机',
+		say:function(){
+			alert(this.name+'说:“我有160公斤”');
+		},
+		arr:[1,2,3,4,[6,7,8,{"a":'x'}]]
+	}
+	/*
+		问题：
+			
+			在for in的时候，如果值为对象类型，那么还是赋址
+			
+		解决：
+			只要遇到对象类型，就以这个对象为基准，再for in一遍直到
+			值不是对象类型为止。
+			
+			
+		Object.prototype.toString是最特殊的，它返回的是[object 内置构造函数]
+		
+		把Object.prototype.toString中的特性，借给obj用
+		Object.prototype.toString.call(obj)
+		
+	*/
+	
+	
+	function extend(obj){//深拷贝  deepClone
+//		var o = obj.push?[]:{};
+		
+		var o = Object.prototype.toString.call(obj) === '[object Array]'?[]:{};
+		
+		for(var attr in obj){
+			/*
+				如果for in的值为对象类型时，以这个对象为基准再for in
+				一直到不是对象类型为止。
+			*/
+			if(typeof obj[attr] === 'object'){
+				o[attr] = extend( obj[attr] );
+			}else{
+				o[attr] = obj[attr];
+			}
+		}
+		return o;
+	}
+	
+	let obj2 = extend(obj)
+	//let obj2 = {};
+	
+	
+	
+	
+	
+	//obj2.name = '老神仙';
+	
+	obj2.arr.push(5);
+	
+	console.log(obj2);
+	console.log(obj);
+	
+//	console.log(obj2.arr);
+//	console.log(obj.arr);
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	
+	addEvent(document,'上滚',function(){
+		alert('上滚')
+	});
+	
+	addEvent(document,'下滚',function(){
+		alert('下滚')
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	function addEvent(obj,eventName,fn){//映射器 （同事件绑定多个函数的方法） 
+		obj.zdy = obj.zdy || {};
+		
+		obj.zdy[eventName] = obj.zdy[eventName] || [];
+		
+		obj.zdy[eventName].push(fn);
+		
+	}
+	
+	function trigger(obj,events){ //触发器（循环调用的函数）
+		if(!obj.zdy[events])return;
+		
+		obj.zdy[events].forEach((e,i)=>{
+			e();
+		});
+	}
+	
+	document.onmousewheel = function(ev){
+		if(ev.wheelDelta > 0){
+			trigger(document,'上滚');
+		}else{
+			trigger(document,'下滚');
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	const obj = {
+		name:'张宗乾',
+		job:'老司机',
+		say:function(){
+			alert(this.name+'说:“我有160公斤”');
+		},
+		arr:[1,2,3,4,[6,7,8,{"a":'x'}]],
+		fn:function(){
+			
+		}
+	}
+	/*
+		问题：
+			
+			在for in的时候，如果值为对象类型，那么还是赋址
+			
+		解决：
+			只要遇到对象类型，就以这个对象为基准，再for in一遍直到
+			值不是对象类型为止。
+			
+			
+		Object.prototype.toString是最特殊的，它返回的是[object 内置构造函数]
+		
+		把Object.prototype.toString中的特性，借给obj用
+		Object.prototype.toString.call(obj)
+		
+	*/
+	
+	
+	
+	
+	//var obj2 = JSON.parse(JSON.stringify(obj)); //json2.js
+	
+	
+	var obj3 = {sex:'男不男'}
+	
+	var obj2 = Object.assign(obj,obj3);
+	
+	/*
+		{} -> "{}" -> {} 
+		
+		弊端:
+			1.不兼容
+			2.function
+	*/
+	
+	obj2.arr.push(6);
+	
+	console.log(obj2);
+	
+//	console.log(obj2.arr);
+	console.log(obj.arr)
+	
+	//console.log(obj2 == obj);
+	
+	
+	
+	
+	//console.log([1,2,3,4,[6,7,8,JSON.stringify({"a":'x'})]].join(''));
+	
+	
+	
+
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

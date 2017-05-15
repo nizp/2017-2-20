@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	/*
+		有配置走配置，没配置走默认 
+	*/
+	
+	//默认项
+	var obj = {
+		name:'张宗乾',
+		sex:'不男不女',
+		age:18
+	}
+	
+	//配置项
+	var obj2 = {
+		name:'老神仙'
+	}
+	
+	for(var attr in obj2){
+		obj[attr] = obj2[attr];
+	}
+	
+	console.log(obj);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

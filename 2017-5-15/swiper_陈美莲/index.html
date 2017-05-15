@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="swiper-3.4.2.min.css"/>
+		<style type="text/css">
+			.swiper-container{
+				width: 500px;
+				height: 400px;
+			}
+			.swiper-slide:nth-child(1){
+				background: red;
+			}
+			.swiper-slide:nth-child(2){
+				background: blue;
+			}
+			.swiper-slide:nth-child(3){
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    
+    <!-- 如果需要滚动条 -->
+    <div class="swiper-scrollbar"></div>
+</div>
+		<script type="text/javascript" src="swiper-3.4.2.min.js"></script>
+		<script type="text/javascript">
+//			http://www.swiper.com.cn/
+			var mySwiper = new Swiper('.swiper-container', {
+			autoplay: 5000,//可选选项，自动滑动
+			initialSlide :1,
+//			direction : 'vertical',
+			speed:100,
+			prevButton:'.swiper-button-prev',
+			nextButton:'.swiper-button-next',
+			effect : 'coverflow',
+			slidesPerView: 3,
+			centeredSlides: true,
+			pagination : '.swiper-pagination',
+			paginationClickable :true,
+})
+		</script>
+	</body>
+</html>
