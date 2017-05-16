@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div {
+	width:150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="show">1111</div>
+		<div>22222</div>
+		<div>33333</div>
+		<input type="button" name="" id="" value="按钮一" class="active"/>
+		<input type="button" name="" id="" value="按钮二" />
+		<input type="button" name="" id="" value="按钮三" />
+		
+	</div>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	$('input:button').click(function(){
+		
+		$('input:button').removeClass('active');
+		
+		$('#box div').removeClass('show');
+		
+		$(this).addClass('active');
+		
+		$('#box div').eq($(this).index('input')).addClass('show');
+	});
+	
+	
+</script>
+</body>
+</html>

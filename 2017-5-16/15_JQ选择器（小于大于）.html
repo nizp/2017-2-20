@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	
+	<div id="div">1</div>
+	<div class="div">2</div>
+	<div class="div">3</div>
+	<div class="div">4</div>
+	<div class="div">5</div>
+	<div class="div">6</div>
+	<div class="div">7</div>
+	
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		:lt()
+			
+			找到小于某个索引的元素
+		
+		
+		:gt()
+			
+			找到大于某个索引的元素
+			
+		
+		:first
+			
+			找到第0个元素
+			
+		
+		:last
+			
+			找到最后一个元素
+	*/
+	
+	$('div:lt(3)').css('background','red');
+	$('div:gt(2)').css('background','yellow');
+	$('div:first').css('background','blue');
+	$('div:last').css('background','pink');
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4
+			<ul class="ul2">
+				<p>ppp</p>
+				<div>div</div>
+				<li>1.11111</li>
+			</ul>
+		</li>
+		<li>5</li>
+	</ul>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	/*
+		index:
+			找到当前元素在*父级*中为第几个元素节点
+			
+		如果获取要指定范围的下标，那么需要index(获取的范围)	
+	*/
+	
+	
+	$('li').click(function(ev){
+		
+		//alert($(this).index()); //没带范围的
+		
+		alert($(this).index('.ul2 li')); //带了范围的。
+		
+		//ev.originalEvent.cancelBubble = true;
+		//return false;
+	});
+	
+	
+</script>
+</body>
+</html>

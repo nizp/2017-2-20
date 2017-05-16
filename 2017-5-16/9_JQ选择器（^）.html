@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	<div id="div"></div>
+	<div class="div"></div>
+	<div class="div"></div>
+	<div class="div"></div>
+	<div class="div"></div>
+	<div class="div"></div>
+	<div class="div"></div>
+	
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		选择器:
+			JQ中的选择器，跟css的选择器是一样的
+			
+		$(选择的规则)
+		
+		jquery 就是 js
+		
+		const $div = $()
+		
+		通过指定的属性和值找元素
+			[attribute=value]
+			
+		找到以某个字符开头的所有元素。
+			[attribute^="value"]
+		找到以某个字符开头的所有元素。	
+			[attribute$="value"]
+		
+	*/
+	$('div[class^="div"]').css('background','red');
+	
+//	$('div[class$="div"]').css('background','red');
+
+//	$('div[class*="div"]').css('background','red');
+	
+	
+	
+</script>
+</body>
+</html>

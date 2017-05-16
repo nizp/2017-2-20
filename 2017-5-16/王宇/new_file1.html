@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+	        #imgWrap{
+	            width: 840px;
+	            height:400px;
+	            margin:80px auto;
+	            perspective:800px;
+	        }
+	        #imgWrap img{
+	            float: left;
+	            height: 70px;
+	            width: 120px;
+	        }
+	        #btn{
+	            width:100px;
+	            text-align: center;
+	            font:16px/40px Arial,Verdana;
+	            color:#fff;
+	            padding:0 20px;
+	            background:rgb(0,100,0);
+	            margin:0 auto;
+	            border-radius:5px;
+	            cursor: pointer;
+	            box-shadow:2px 2px 5px rgba(0,0,0,0.5);
+	        }
+	    </style>
+	</head>
+	<body>
+		<div id="imgWrap">
+	        <img src="images/1.jpg" alt="">
+	        <img src="images/2.jpg" alt="">
+	        <img src="images/3.jpg" alt="">
+	        <img src="images/4.jpg" alt="">
+	        <img src="images/5.jpg" alt="">
+	        <img src="images/6.jpg" alt="">
+	        <img src="images/7.jpg" alt="">
+	        <img src="images/8.jpg" alt="">
+	        <img src="images/9.jpg" alt="">
+	        <img src="images/10.jpg" alt="">
+	        <img src="images/11.jpg" alt="">
+	        <img src="images/12.jpg" alt="">
+	        <img src="images/13.jpg" alt="">
+	        <img src="images/14.jpg" alt="">
+	        <img src="images/15.jpg" alt="">
+	        <img src="images/16.jpg" alt="">
+	        <img src="images/17.jpg" alt="">
+	        <img src="images/18.jpg" alt="">
+	        <img src="images/19.jpg" alt="">
+	        <img src="images/20.jpg" alt="">
+	        <img src="images/21.jpg" alt="">
+	    </div>
+	    <div id="btn">点击查看效果</div>
+		<script type="text/javascript">
+		    /*
+		     *  1.闪烁效果（瞬间将宽高都变为0，scale，并且是随机的）
+		     *  2.图片从小到大，同时透明度从1变成0（必须是当前图片上一步效果走完了，才会开始）
+		     *  3.图片旋转，同时透明度从0变成1，有层次感（位移translate）（当所有图片透明度都变为0的时候，才会开始）
+		     */
+		    function turn(btn,img){
+		    	this.btn = document.getElementById(btn);
+		    	this.imgs = document.querySelectorAll(img);
+		    	this.allEnd = 0;//判断所有的图片是否都完成了所有的运动步骤
+	        	this.onOff = true;//是否可以再次点击
+		    }
+	        turn.prototype.init = function(){
+	        	const _this = this;
+	        	this.btn.onclick = function(){
+	        		_this.Scale();
+	        	}
+	        }
+	        turn.prototype.Scale = function(){
+	        	const _this = this;
+	        	if(!this.onOff)return;
+	            this.onOff = false;
+	            let endNum = 0;//记录运动完成的图片数量
+	            for(var i=0;i<this.imgs.length;i++){
+	            	//开启定时器，每次延时时间随机
+                    setTimeout(function(i){
+                        _this.montion(_this.imgs[i],'10ms',function(){
+                        	//第一步运动
+                            this.style.transform = 'scale(0)';//因为函数用了call函数，所以可以用this，否则只能用imgs[i],缩放
+                        },function(){//第二步运动
+                            _this.montion(this,'1s',function(){
+                                this.style.transform = "scale(1)";
+                                this.style.opacity = 0;
+                            },function(){//第三步运动
+                                endNum++;//只要有一张图片完成了第二步，则加1
+                                //所有图片完成第二步，走第三步
+                                if(endNum === _this.imgs.length){
+                                    _this.toBig();
+                                }
+                            })
+                        });
+                    },Math.random()*1000,i);
+	            }
+	        }
+	        //第三步运动效果
+	        turn.prototype.toBig = function(){
+	        	const _this = this;
+	             for(var i=0;i<this.imgs.length;i++){
+	                this.imgs[i].style.transition='';
+	                //想要一个物体有css3中的动作变化，那就需要给它一个初始值
+	                //rotate旋转 ，translate位移
+	                this.imgs[i].style.transform='rotateY(0deg) translateZ(-'+Math.random()*500+'px)';
+	                (function(i){
+	                    setTimeout(function(){
+	                        _this.montion(_this.imgs[i],'2s',function(){
+	                            this.style.opacity = 1;
+	                            this.style.transform = 'rotateY(-360deg) translateZ(0)';
+	                        },function(){
+	                            _this.allEnd++;
+	                            //所有的图片完成了运动，才允许再次点击
+	                            if(_this.allEnd === _this.imgs.length){
+	                                _this.onOff = true;
+	                                _this.allEnd = 0;
+	                            }
+	                        });
+	                    },Math.random()*1000);
+	                })(i);
+	             }
+	        }
+	        //运动函数(运动的对象，运动的时间，运动的属性函数，运动完成后要做的事情)
+	        turn.prototype.montion = function(obj,time,doFn,callBack){
+	        	//运动持续时间
+	            obj.style.transition = time;
+	            doFn.call(obj);//调用函数，并且把this的指向给obj
+	           	let called = false;//为了解决transitionend调用多次的bug
+	            //transitionend事件在 CSS完成过渡后触发
+	            /*
+	            	transitionend在css3运动结束之后就会触发，
+	            	有几个动画就会重复几遍,
+	            */
+	            obj.addEventListener('transitionend',function(){
+	            	console.log(2);
+	                if(!called){
+	                	//
+	                    callBack&&callBack.call(obj);//解决如果没有传入第四个callBack参数的问题
+	                    called = true;
+	                }
+	            }); 
+	        }
+	        var p = new turn('btn','img');
+	        p.init();
+	    </script>
+	</body>
+</html>

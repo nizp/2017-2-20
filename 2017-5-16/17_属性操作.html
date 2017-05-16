@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div"></div>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		attr -> getAttribute -> setAttribute 
+		
+		removeAttr -> removeAttribute()
+			
+	*/
+	
+	$('#div').attr('index',1);
+
+	//console.log($('#div').attr('index'))
+	
+	document.onclick = function(){
+		$('#div').removeAttr('index');
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

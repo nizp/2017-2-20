@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+div{
+	width:100px;
+	height: 100px;
+	background: red;
+	display: none;
+}	
+div.show{
+	display: block;
+}
+
+</style>
+</head>
+<body>
+	<input type="button" id="" value="按钮" />
+	<div class="show"></div>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	var onOff = false;
+	/*
+		
+		如果使用组选择器，如果只有一个，那么默认设置为第一个。
+		$('.show')  就是选择到的那一个
+		
+		
+		css:
+			2个参数：
+				key：value来设置
+			
+			1个参数的时候
+				字符串：
+					获取元素的样式
+				对象:
+					设置多个样式，以键值对的方式添加
+					
+				
+	*/
+
+	$('input:button').click(function(){
+//		$('.show').css('width','200');
+//		
+//		console.log($('.show').css('width'))
+		
+		$('.show').css({
+			width:200,
+			border:'10px solid #000'
+		});
+		
+	});
+	
+</script>
+</body>
+</html>

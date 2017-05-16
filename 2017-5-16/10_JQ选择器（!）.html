@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	<div id="div" class="div">1</div>
+	<div class="ddv">2</div>
+	<div class="dcv">3</div>
+	<div class="div">4</div>
+	<div class="dov">5</div>
+	<div class="div">6</div>
+	<div class="div">7</div>
+	
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		选择器:
+			JQ中的选择器，跟css的选择器是一样的
+			
+		$(选择的规则)
+		
+		jquery 就是 js
+		
+		const $div = $()
+		
+		找到不是某个（些）属性的元素（找一组）
+			[attribute!="value"]
+			
+	*/
+	
+	$('div[class!="div"]').css('background','red');
+
+	
+	
+	
+</script>
+</body>
+</html>

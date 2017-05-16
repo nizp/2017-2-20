@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	class Person{
+		constructor(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		
+		say(){
+			alert(this.name);
+		}
+	}
+	
+	/*
+		class 子类   extends 父类{
+			constructor(name,age,job){
+				***this.job = job;  //报错
+				super(name,age);
+				添加的属性一定要放在super下面
+				this.job = job //不报错
+			}
+		}
+	*/
+	
+	class Pice extends Person{
+		constructor(name,age,job){
+			//如果要使用父类的属性那么一定要带super，不带就报错
+			super(name,age);
+			this.job = job;
+		}
+		
+		say(){
+			alert(this.job);
+		}
+	}
+	
+	var p1 = new Person('詹佳',20,'制服警察');
+	var p2 = new Pice('詹佳',10,'制服警察');
+	
+	p1.say();
+	p2.say();
+	
+	
+	
+</script>
+</body>
+</html>

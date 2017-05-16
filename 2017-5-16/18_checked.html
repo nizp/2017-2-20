@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="点击选中"/>
+	<input type="checkbox"/>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		prop:
+			获取在匹配的元素集中的第一个元素的属性值。
+		返回值为布尔值：
+			成立：true  否则：false
+	*/
+	
+	
+	$('input:button').click(function(){
+		
+		console.log($('input:checkbox').prop('checked'))
+		
+		if(!!$('input:checkbox').prop('checked')){
+			$('input:checkbox').prop('checked',false);
+		}else{
+			$('input:checkbox').prop('checked',true);
+		}
+		
+		
+//		if($('input:checkbox').attr('checked') == true){
+//			$('input:checkbox').attr('checked',false);
+//		}else{
+//			$('input:checkbox').attr('checked',true);
+//		}
+	});
+	
+</script>
+</body>
+</html>

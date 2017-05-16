@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		1.自定义事件
+		2.toString
+		3.Es6的继承
+	*/
+	
+	/*
+		自定义事件：
+			1.这个事件在什么情况下会触发（一般来说都是依据系统事件来写（改写））
+			2.如何拿到某个事件的多个绑定函数
+			3.触发之后做什么
+			
+		在某个事件触发的时候让对应事件绑定的所有函数都执行
+		
+		obj.zdy = {
+			'点击':[fn,fn2],
+			'移动':[fn1,fn2]
+		}
+		
+		obj.zdy['点击'] = [fn,fn2];
+		
+		obj.zdy = {
+			
+		}
+		
+		obj.zdy? = {
+			'点击':[fn,fn2]
+		}
+		
+		obj.zdy? = {
+			'点击':[fn,fn2,fn3]
+		}
+		
+		
+		
+		
+		
+	*/
+	
+	addEvent(document,'点击',function(){
+		console.log(1);
+	});
+	
+//	addEvent(document,'点击',function(){
+//		console.log(2)
+//		console.log(this);
+//	});
+//	
+//	addEvent(document,'移动',function(){
+//		console.log(3)
+//	});
+	
+	//映射
+	function addEvent(obj,evName,fn){
+		/*
+			第一次没有zdy属性就等同于没有 {}
+			
+			没有{}就创建一个对象
+			
+			第一次之后
+				因为已经有了zdy = {}
+				以之前创建的那个对象为基准，添加属性和函数
+		*/
+		
+		obj.zdy = obj.zdy || {};
+		
+//		obj.zdy['点击']
+		
+		obj.zdy[evName] = obj.zdy[evName] || [];
+		
+		
+		obj.zdy[evName].push(fn);
+		
+	}
+	
+	/*
+		1.为了让forEach中的this指向目标， 要改变trigger的this
+		
+		2.绑定函数中的this
+	*/
+	function trigger(obj,evName){
+		if(!obj.zdy[evName])return;
+		console.log(this); //window
+		obj.zdy[evName].forEach((e,i)=>{
+//			e.call(this);
+			e.call(obj);
+		});
+	}
+	
+	document.onclick = function(){
+		/*
+			trigger默认this指向window
+			
+			箭头函数的this跟着父函数走，父函数this指向谁，箭头函数的this就是谁
+	
+		*/
+		trigger.call(this,this,'点击');
+	}
+	
+	
+	console.log(document.zdy)
+	
+	
+</script>
+</body>
+</html>

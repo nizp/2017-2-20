@@ -59,7 +59,7 @@
 	}
 	
 	Drag.prototype.init = function(json){//callbackdown(cd)
-		
+		console.log(json)
 		/*
 			有配置走配置，没配置走默认 
 		*/
@@ -68,7 +68,7 @@
 //				this.settings[attr] = json[attr];
 //			}
 			
-			if(this.settings[attr] && typof this.settings[attr] == typeof json[attr]){
+			if(this.settings[attr] && typeof this.settings[attr] == typeof json[attr]){
 				this.settings[attr] = json[attr];
 			}
 		}

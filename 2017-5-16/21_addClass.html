@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+div{
+	width:100px;
+	height: 100px;
+	background: red;
+	display: none;
+}	
+div.show{
+	display: block;
+}
+
+</style>
+</head>
+<body>
+	<input type="button" id="" value="按钮" />
+	<div class="show"></div>
+<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	var onOff = false;
+	/*
+		removeClass:
+			删除指定class名
+		addClass
+			添加指定的class名
+		
+		toggleClass：
+			有的删没的加
+		
+	*/
+//	$('input:button').click(function(){
+//		if(onOff){
+//			$('div').removeClass('show');
+//		}else{
+//			$('div').addClass('show');
+//		}
+//		onOff = !onOff;
+//	});
+
+	$('input:button').click(function(){
+		$('div').toggleClass('show');
+	});
+	
+</script>
+</body>
+</html>

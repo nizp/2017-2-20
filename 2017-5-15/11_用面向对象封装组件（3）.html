@@ -73,10 +73,10 @@
 		ev.preventDefault();
 	}
 	
-	Drag.prototype.move = function(ev,json){
+	Drag.prototype.move = function(ev,abc){
 		
 		//this.box.style.background = 'green';
-		json.cmove && typeof json.cmove === 'function' && json.cmove();
+		abc.cmove && typeof json.cmove === 'function' && abc.cmove();
 		
 		this.box.style.left = ev.pageX - this.disX + 'px'; 
 		this.box.style.top = ev.pageY - this.disY + 'px';

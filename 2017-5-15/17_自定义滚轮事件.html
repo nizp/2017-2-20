@@ -17,6 +17,12 @@
 		alert('下滚')
 	});
 	
+	addEvent(document,'上滚',function(){
+		alert('上滚')
+	});
+	
+	
+	
 	
 	
 	
@@ -32,6 +38,7 @@
 		obj.zdy[eventName].push(fn);
 		
 	}
+	
 	
 	function trigger(obj,events){ //触发器（循环调用的函数）
 		if(!obj.zdy[events])return;
