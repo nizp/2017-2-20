@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="box" style="width:100px"></div>
+	<div style="width:50px"></div>
+	<div style="width:8px"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	//1.第一步
+//	function Jquery(select){
+//		return new Jquery.fn.init(select);
+//	}
+//	
+//	Jquery.prototype.css = function(){
+//		console.log('我是css');
+//	}
+//	
+//	
+//	Jquery.fn = Jquery.prototype.fn = function(select){
+//		
+//	}
+//	
+//	Jquery.fn.init = Jquery.prototype.fn;
+//	
+//	Jquery.fn.init.prototype = Jquery.prototype;
+	
+	
+	//第二步
+	
+	(function(global,factory){
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		
+		function Jquery(select){
+			return new Jquery.fn.init(select);
+		}
+	
+		Jquery.prototype.css = function(){
+			console.log('我是css');
+		}
+		
+		
+		Jquery.fn = Jquery.prototype.fn = function(select){
+			
+		}
+		
+		Jquery.fn.init = Jquery.prototype.fn;
+		
+		Jquery.fn.init.prototype = Jquery.prototype;
+		
+		//把私有的开放到全局。
+		//global.$ = Jquery;
+			
+	});
+	
+	
+	
+	
+	//var d = new Jquery('#box');
+	
+//	var d = Jquery('#box');
+//	d.css();
+
+//	var d = $('#box');
+//	d.css();
+
+	//console.log($)
+	var d2 = $('div');
+	console.log(d2.css('width'))
+	
+	
+</script>
+</body>
+</html>

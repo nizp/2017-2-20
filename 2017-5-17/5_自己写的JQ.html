@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div"></div>
+	<div class="d-1">1</div>
+	<div class="d-d">1</div>
+	<div class="dic">1</div>
+	<div class="ddv">1</div>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	(function(global,factory){
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		
+		const jQuery = function(select){
+			return new jQuery.fn(select)
+		}
+		
+		jQuery.prototype = {
+			
+			constructor:jQuery,
+			
+			fn:function(select){
+				let arr = Sizzle(select);
+				
+				for(var i=0;i<arr.length;i++){
+					this[i] = arr[i];
+				}
+				
+				//因为实例化对象没有length，但是arr有length，赋值之后
+				//实例化对象就有arr的length了。
+				this.length = arr.length;
+				
+				//console.log(arr);
+			},
+			css:function(){
+				//如果只传了一个参数
+				if(arguments.length === 1){
+					if(typeof arguments[0] === 'object'){
+						//说明批量设置
+						for(var i=0;i<this.length;i++){
+							for(var attr in arguments[0]){
+								this[i].style[attr] = arguments[0][attr];
+							}
+						}
+						
+					}else{
+						//说明查询样式
+						if(this[0].style[arguments[0]]){
+							return this[0].style[arguments[0]];
+						}else{
+							return getComputedStyle(this[0])[arguments[0]];
+						}
+					}
+				}else if(arguments.length === 2){
+					
+					//设置
+					
+					for(var i=0;i<this.length;i++){
+						this[i].style[arguments[0]] = arguments[1];
+					}
+				}
+				
+				//console.log(this);
+			}
+		}
+		
+		jQuery.fn = jQuery.prototype.fn;
+		
+		jQuery.fn.prototype = jQuery.prototype;
+		
+		global.$ = jQuery;
+		
+	});
+	
+	const $divs = $('div');
+	
+	console.log($divs);
+	
+	/*
+		css('') //获取
+		css(key,value)
+		css({
+			width:'100px'
+		})
+	*/
+	
+	
+//	var $box = $('#div');
+//	
+//	console.log($box.css('width'))
+	
+	
+	
+	$divs.css({
+		width:'100px',
+		height:'100px',
+		background:'red'
+	});
+	
+	$divs.css('width','200px');
+	
+
+	//console.log($divs.css('width'))
+	
+	
+	
+</script>
+</body>
+</html>

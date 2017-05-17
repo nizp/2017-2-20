@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		1.使变量、参数、方法为私有化这个时候使用闭包 
+		
+		2.
+		
+			typeof window !== 'undefined'?window:this
+			
+			看看typeof window之后是不是undefined，如果不是undefined
+			golbal为window，否则为this
+			
+			因为jq不一定在浏览器环境下运行，
+			所以加了这个判断为了保证this指向当前环境下的全局对象
+			
+		3.noGlobal（undefined）
+			
+			undefined在低版本浏览器下会被修改，为了避免修改所以利用
+			函数参数的特性，不传参就为undefined
+		
+		
+	*/
+//	(function(global, factory){
+//		"use strict"
+//		factory(global);
+//	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+//		
+//		var abc = '10';
+//		console.log('这是这正的代码区')
+//	});
+	
+	//console.log(abc);
+	
+	
+//	var undefined = 10;
+	(function(global, factory){
+		"use strict"
+		factory(global);
+		
+		console.log(this);//undefined
+		
+//		console.log(global)
+		
+	})(this,function(global,noGlobal){
+		console.log(global);
+//		console.log(noGlobal);
+		
+		//在低版本下undefined会被修改。
+		//var undefined = 10;
+	
+//		var a = 10;
+//		
+//		a = undefined;
+//		
+//		a = '23';
+		
+		alert(noGlobal)
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//typeof window !== 'undefined'?window:
+	
+	
+//	function fn2(){
+//		var fn = () => {
+//			"use strict"
+//			console.log(this);//加了严格模式之后还是走老爹
+//		}
+//		fn();
+//	}
+//	
+//	fn2.call(document);
+	
+	
+	/*
+		普通函数没有加严格模式之前默认this指向window
+		而加了严格模式之后默认this指向undefined
+	*/
+	function fn(f){//var f
+		//"use strict"
+		console.log(this);
+	}
+	fn();
+	
+	
+	
+</script>
+</body>
+</html>

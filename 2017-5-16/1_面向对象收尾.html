@@ -46,7 +46,7 @@
 	*/
 	
 	addEvent(document,'点击',function(){
-		console.log(1);
+		console.log(this);
 	});
 	
 //	addEvent(document,'点击',function(){
@@ -68,11 +68,13 @@
 			第一次之后
 				因为已经有了zdy = {}
 				以之前创建的那个对象为基准，添加属性和函数
+				
+				
 		*/
 		
 		obj.zdy = obj.zdy || {};
 		
-//		obj.zdy['点击']
+//		//obj.zdy['点击']
 		
 		obj.zdy[evName] = obj.zdy[evName] || [];
 		
@@ -90,8 +92,9 @@
 		if(!obj.zdy[evName])return;
 		console.log(this); //window
 		obj.zdy[evName].forEach((e,i)=>{
-//			e.call(this);
-			e.call(obj);
+			//e();//window
+			e.call(this);
+//			e.call(obj);
 		});
 	}
 	

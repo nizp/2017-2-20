@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="box"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		1.使变量、参数、方法为私有化这个时候使用闭包 
+		
+		2.无new化操作
+		
+			typeof window !== 'undefined'?window:this
+			
+			看看typeof window之后是不是undefined，如果不是undefined
+			golbal为window，否则为this
+			
+			因为jq不一定在浏览器环境下运行，
+			所以加了这个判断为了保证this指向当前环境下的全局对象
+			
+		
+		
+		1.不能直接在Jquery中new Jquery，因为死循环
+		
+		2.目的：实例化对象上的方法又等同于Jquery原型下的方法
+		
+		
+		解决:
+			1.在构造函数下的原型上添加一个方法
+			
+			2.让这个方法的原型等于Jquery的原型（保证这个方法的实例化对象可以直接使用Jquery原型下的方法）
+			
+			3.return 这个方法的实例化对象
+		
+		
+	*/
+	
+	function Jquery(select){
+		
+		return new Jquery.prototype.fn(select);
+		
+		//new Jquery(select);
+	}
+	Jquery.prototype.css = function(){
+		console.log('我是css');
+	}
+	
+	
+	
+	
+	var fn = Jquery.prototype.fn = function(select){
+		
+	}
+	
+	//fn.prototype = Jquery.prototype;
+	
+	Jquery.prototype.fn.prototype = Jquery.prototype;
+	
+	
+	
+//	var j = Jquery('#box');
+//	
+//	console.log(j)
+//	
+//	j.css();
+
+	//console.log(new jQuery)
+	
+	
+//	var $div = jQuery('#box');
+//	
+//	console.log($div)
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
