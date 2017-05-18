@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width: 100px;
+	height: 100px;
+	background: blue;
+}
+</style>
+</head>
+<body>
+	<input type="button" value="点击添加"/>
+	
+	<div id="div1">
+		<span>span</span>
+	</div>
+	<hr />
+	<div id="div2"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		clone():
+			克隆元素，默认将元素及元素下的所有节点都克隆一份，
+			但是默认不能克隆事件
+			
+			如果在括号中填写true，那么就可以克隆事件
+	*/
+	
+	$('#div1').click(function(){
+		alert('我是红色');
+	});
+	
+	$('input').click(function(){
+		$('#div2').after($('#div1').clone(true));
+	});
+	
+	
+</script>
+</body>
+</html>

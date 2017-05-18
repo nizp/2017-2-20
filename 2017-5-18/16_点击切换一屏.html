@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+
+*{
+	margin: 0;
+	padding: 0;
+}
+ol{
+	position: fixed;
+	top:50%
+}
+li{
+	margin:5px;
+	font-size: 20px;
+}
+/*body,html{
+	transition:1s;
+}*/
+</style>
+</head>
+<body id="body">
+	<ol>
+		
+	</ol>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	const arr = ['pink','gold','skyblue','yellow','purple'];
+	
+	const iH = $(window).innerHeight();
+	
+	arr.forEach((e,i)=>{
+		var $div = $('<div style="height:'+iH+'px;background:'+e+'"></div>');
+		
+		 $('<li style="width:20px;height:20px;border:1px solid #000;">'+i+'</li>').appendTo($('ol'));
+		$('#body').append($div);
+	});
+	
+//	$('li').click(function(){
+//		window.scrollTo(0,$('div').eq($(this).index()).offset().top);
+//	});
+	
+	
+	$('li').click(function(){
+		$('html,body').animate({
+			scrollTop:$('div').eq($(this).index('li')).offset().top
+		});
+	});
+</script>
+</body>
+</html>

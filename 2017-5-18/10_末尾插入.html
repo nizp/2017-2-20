@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+li{
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+	<input type="button" value="点击添加"/>
+	<ul>
+		<li>-1</li>
+		<li>0</li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		append:
+		 	往某个元素末位添加一个元素
+		 	
+		appendTo: 	
+			往某个元素末位添加一个元素
+	*/
+	
+//	$('li').on('click.tan2',function(){
+//		alert(2);
+//	});
+	
+	let num = 0;
+//	$('input:button').click(function(){
+//		num++;
+//		//$('ul').append($('<li>'+num+'</li>')).css('border','1px solid #000');
+//		
+//		var li = $('<li>'+num+'</li>');
+//		
+//		li.click(function(){
+//			$('li').eq(0).trigger('click.tan2');
+//		});
+		
+//		li.appendTo($('ul')).css('border','1px solid #000');
+//	});
+
+
+	
+	$('ul').click(function(ev){
+		if(ev.target.tagName === 'LI'){
+			alert(2);
+		}
+	});
+	
+	$('input:button').click(function(){
+		num++;
+		
+		var li = $('<li>'+num+'</li>');
+		
+		li.appendTo($('ul')).css('border','1px solid #000');
+		
+//		$('li').on('click',function(){
+//			alert(2);
+//		});
+		
+	});
+	
+	
+	
+</script>
+</body>
+</html>

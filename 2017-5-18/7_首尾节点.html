@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body class="color">
+	<ul class="color">
+		<li>1</li>
+		<li class="c">2</li>
+		<li>3</li>
+		<li class="c">4</li>
+		<li>5</li>
+		<li>6</li>
+		<li class="c">7</li>
+		
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		DOM:
+			文档对象模型
+			
+		document
+		
+		某个集合中的首尾节点；
+			
+			$(一组).first()
+				找到这一组中的第一个元素节点
+				
+			
+			$(一组).last()
+				找到这一组中的最后一个元素节点
+	*/
+	
+	
+	$('li').click(function(){
+//		$('li').first().css('background','skyblue');
+
+		$('li').last().css('background','skyblue');
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+//	$('li').click(function(){
+//		
+//	})
+
+	/*
+		循环JQ对象
+		$(obj).each(function(索引,每个){})
+		
+		注意的是each一组元素之后，函数的第二个参数为原生对象
+		原生对象不能使用JQ的方法，所以$(原生对象) - > JQ对象
+	*/
+	$('li').each(function(i,elem){
+		$(elem).click(function(){
+//			alert(i);
+			//$(elem).css('background','red');
+			//this -> 原生
+			console.log($(this));//JQ对象
+			
+		});
+	});
+	
+	
+</script>
+</body>
+</html>

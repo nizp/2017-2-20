@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body class="color">
+	<ul class="color">
+		<li>
+			
+			<a href="javascript:;">隐藏1</a>
+		</li>
+		<li class="color">
+			<ul>
+				<li>
+					<a href="javascript:;" class="color">隐藏2</a>
+					<a href="javascript:;" _class="color">隐藏2</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:;">隐藏3</a>
+		</li>
+		<li>
+			<a href="javascript:;">隐藏4</a>
+		</li>
+		
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		DOM:
+			文档对象模型
+			
+		document
+		
+		1.节点的选择
+			parent() 父级
+			
+			closest(查找条件) 找离自身最近的父级（如果自己也复合条件，优先自己）
+	*/
+	
+//	$('a').click(function(){
+//		$(this).parent().hide();
+//	});
+	
+	
+	$('a').click(function(){
+		$(this).closest('.color').css('border','1px solid #000')
+	})
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+img{
+	opacity: 0;
+	transition:2s;
+}	
+li{
+	width:200px;
+	height: 400px;
+	border: 1px solid #000;
+	margin:10px;
+}
+</style>
+</head>
+<body>
+	<ul id="ul">
+		<li>
+			<img _src="images/1.jpg" />
+		</li>
+		<li>
+			<img _src="images/2.jpg" />
+		</li>	
+		<li>
+			<img _src="images/3.jpg" />
+		</li>	
+		<li>
+			<img _src="images/4.jpg" />
+		</li>	
+		<li>
+			<img _src="images/5.jpg" />
+		</li>	
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	var iH = $(window).innerHeight();
+	var $li = $('li');
+	fn1();
+	function fn1(){
+		
+		$li.each(function(i,elem){
+			
+			//console.log(elem.getBoundingClientRect().top <=iH)
+			
+			if(elem.getBoundingClientRect().top <= iH){
+				if($('img').eq(i).attr('_src')){
+					$('img').eq(i).attr('src',$('img').eq(i).attr('_src'))
+					$('img').eq(i).css('opacity',1);
+					$('img').eq(i).removeAttr('_src');
+				}
+			}
+		});
+	}
+	$(window).scroll(fn1);
+	
+</script>
+</body>
+</html>

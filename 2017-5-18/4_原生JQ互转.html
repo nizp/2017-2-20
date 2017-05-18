@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		原生转JQ
+			$(原生对象)
+			
+		get把JQ对象转成原生对象
+			$(obj).get(num)
+			
+			个人强烈建议使用$(obj)[num]
+	*/
+	
+//	$('li').click(function(){
+//		$(this).css()
+//	});
+
+
+
+	//var li = document.getElementsByTagName('li')[0];
+	//$(li).css('background','red');
+	
+	
+	var $li = $('li');
+	
+	//$li.eq(0).text('呵呵');
+	
+	var o = document.createElement('div');
+	
+	//$li.get(0).appendChild(o);
+	
+	//console.log($li.get(0))
+	
+	$li[0].appendChild(o)
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

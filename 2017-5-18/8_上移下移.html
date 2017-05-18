@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		li{position: relative;top: 0;}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li>1111   <input type="button" value="上移" /><input type="button" value="下移" /></li>
+		<li>2222   <input type="button" value="上移" /><input type="button" value="下移" /></li>
+		<li>3333   <input type="button" value="上移" /><input type="button" value="下移" /></li>
+		<li>4444   <input type="button" value="上移" /><input type="button" value="下移" /></li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		after：
+			把目标元素.after(指定元素)
+			
+			在每个匹配的元素之后插入内容。
+			
+			
+		before:
+			把指定元素.before(目标元素)
+			
+			把指定元素放到目标元素的后面
+			
+		 
+		 
+	*/
+	
+	$('input:button').click(function(){
+		if($(this).val() === '上移'){
+			
+			$(this).parent().after($(this).parent().prev());
+		}else{
+			$(this).parent().next().insertBefore($(this).parent());
+		}
+	});
+	
+	
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+

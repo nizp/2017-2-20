@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495085437357&di=083fa5f2ebd8ac4a03f6717231738bb3&imgtype=0&src=http%3A%2F%2Fimg1.3lian.com%2F2015%2Fw22%2F38%2Fd%2F88.jpg"/>
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495085554562&di=ac19db016e58e06422d50e8d7ad4a149&imgtype=0&src=http%3A%2F%2Fimg4.cache.hxsd.com%2Fgame%2F2012%2F08%2F03%2F657350_1343960007_32.jpg"/>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	/*
+		window.onload
+			当页面中所用的静态资源加载完成之后再执行函数中的代码
+		
+		
+		DOMContentLoaded（高版本才支持）
+			当dom加载完成之后再执行函数中的代码
+		
+		onreadystatechange -> 
+			在低版本IE下，do.documentElement.doScroll('left');
+		
+	*/
+	
+//	window.onload = function(){
+//		alert(1);
+//	}
+
+
+	/*
+		当段程序出错了就走catch,避免报错之后，下面的代码不执行。
+		
+		e:报错的原因
+		
+		*** 性能极低
+		
+		try{
+			
+		}catch(e){
+			
+		}
+	*/
+	
+	
+//	try{
+//		console.log(arr);
+//	}catch(e){
+//		alert('arr有问题');
+//		console.log(e);
+//	}
+//	alert(1);
+	
+//	document.addEventListener('DOMContentLoaded',function(){
+//		alert(1);
+//	})
+
+//	$(document).ready(function(){
+//		alert(1);
+//	});
+
+	//就是ready事件
+	$(function(){
+		alert(22);
+	});
+	
+</script>
+</body>
+</html>

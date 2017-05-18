@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li style="width:100px" id="l">1</li>
+		<li style="width:80px">2</li>
+		<li style="width:50px">3</li>
+		<li>4</li>
+	</ul>
+<!--<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		链式操作 :
+			return this
+	*/
+	
+	(function(global,factory){
+		"use strict"
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		
+		function jQuery(select){
+			return new fn(select);
+		}
+		/*
+			我们知道一个构造函数的原型等于另一个构造函数的原型，
+			他们的实例化对象都可以访问同一个属性或者方法
+		*/
+		
+		jQuery.prototype = {
+			constructor : jQuery,
+			css:function(){
+				var toS = Object.prototype.toString;
+				if(arguments.length == 1){
+					//console.log(arguments[0])
+					if(typeof arguments[0] === 'string'){
+						return getComputedStyle(this[0])[arguments[0]]
+					}else if(toS.call(arguments[0])==='[object Object]'){
+						for(var i=0;i<this.length;i++){
+							for(var attr in arguments[0]){
+								this[i].style[attr] = arguments[0][attr];
+							}
+						}
+					}
+				}else if(arguments.length == 2){
+					for(var i=0;i<this.length;i++){
+						this[i].style[arguments[0]] = arguments[1];
+					}
+				}
+				return this;
+			}
+		};
+		
+		var fn = jQuery.prototype.fn = function(select){
+			var arr = Sizzle(select);
+			for(var i=0;i<arr.length;i++){
+				this[i] = arr[i];
+			}
+			
+			this.length = arr.length;
+//			console.log(arr);
+		}
+		
+		fn.prototype = jQuery.prototype;
+		
+		global.$ = jQuery;
+		
+		//console.log('呵呵哒')
+		
+	});
+	
+	//var 
+	
+	console.log($('li').css('width'));
+
+//	$('li').css({
+//		'width':'100px',
+//		'height':'100px',
+//		'background':'red'
+//	});
+//	$('li').css('background','yellow');
+	
+	//console.log($('li'))
+	
+	console.log($('li'))
+	
+	
+//	$('#l').css({
+//		'width':'100px',
+//		'height':'100px',
+//		'background':'red'
+//	}).html('<div>div</div>');
+
+
+	$('#l').css({
+		'width':'100px',
+		'height':'100px',
+		'background':'red'
+	}).css('border','10px solid #000');
+	
+	
+	
+	
+</script>
+</body>
+</html>

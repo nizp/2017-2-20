@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+li{
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+	<input type="button" value="点击添加"/>
+	<ul>
+		<li>-1</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		remove:
+			删除指定元素
+	*/
+	
+	$('input').click(function(){
+		$('li').eq(0).remove();
+	});
+	
+	
+</script>
+</body>
+</html>

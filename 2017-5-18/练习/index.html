@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap{
+            width: 350px;
+            height: 370px;
+            border:1px solid #000;
+            border-radius: 10px;
+            margin:60px auto 0;
+        }
+        form{
+            padding-top:20px;
+        }
+        form div{
+            height:36px;
+            margin-bottom:25px;
+        }
+        form label{
+            float: left;
+            width:80px;
+            height:36px;
+            line-height:36px;
+            margin-right:20px;
+            text-align: right;
+        }
+        form input{
+            outline: none;
+            float: left;
+            width:220px;
+            height: 34px;
+            border:1px solid #cdcdcd;
+            border-radius: 10px;
+            padding-left:10px;
+            font:14px/34px "";
+        }
+        form input.wrong{
+            border-color: red;
+        }
+        form input.right{
+            border-color: green;
+        }
+        form #sub{
+            float: left;
+            text-decoration: none;
+            text-align: center;
+            outline: none;
+            border:0;
+            width:150px;
+            height:40px;
+            color: #fff;
+            font:20px/40px "";
+            margin:30px 100px 0;
+           	 background: gray;
+            border-radius: 10px;
+            cursor: not-allowed;
+        }
+        form #sub.active{
+        	 cursor:pointer;
+        	background: #00a971;
+        }
+        
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <form action="http://www.baidu.com" id="form">
+        <div><label>QQ:</label><input type="text" placeholder="请输入QQ号码" _name="qq"></div>
+        <div><label>邮箱:</label><input type="text" placeholder="请输入邮箱" _name="email"></div>
+        <div><label>手机:</label><input type="text" placeholder="请输入手机号码" _name="phone"></div>
+        <div><label>出生年月:</label><input type="text" placeholder="请输入出生年月(2017-05-09)" _name="birth"></div>
+        <!--<a href="javascript:;">注册</a>-->
+        <input type="submit" value="注册" id="sub"/>
+        
+    </form>
+</div>
+<script>
+   /*
+    wrong  red
+    right
+     
+   */
+  
+  class Re{
+  	constructor(){
+  		this.input = document.getElementsByTagName('input');
+  		this.arr = [];
+  		this.callback = function(){return true};
+  		this.sub = document.getElementById('sub');
+  		this.form = document.getElementById('form');
+  		this.o = false;
+  		this.re = {
+  			'qq':/^[1-9]\d{4,10}$/,
+  			'email':/^[a-zA-Z]\w{4,11}@[0-9a-z]{2,8}\.(com|cn)$/,
+  			'phone':/^1[34578]\d{9}$/,
+  			'birth':/(\d+)\D+(\d+)\D+(\d+)\D?/
+  		}
+  	}
+  	
+  	init(callback){
+  		this.callback = typeof callback === 'undefined'?this.callback:callback;
+  		const _this = this;
+  		for(var i=0;i<this.input.length;i++){
+  			if(this.input[i].getAttribute('_name')){
+  				this.arr.push(this.input[i]);
+  				this.input[i].oninput = function(){
+  					_this.reFn(this);
+  					//console.log(this.value)
+  				};
+  			}
+  		}
+  		
+  		this.form.onsubmit = function(ev){
+  			if(!_this.o)return false;
+  		}
+  	}
+  	
+  	reFn(that){
+  		let val = that.value.trim();
+  		const attrName = that.getAttribute('_name');
+  		if(this.re[attrName].test(val)){//第一关 默认验证是否成立
+  			if(this.callback(that)){ //第二关//有没有其他需求(其他需求成不成立)
+  				that.onOff = true;
+  				that.className = 'right';
+  			}else{
+  				that.className = 'wrong';
+  				that.onOff = false;
+  			}
+  			
+  		}else{
+  			that.className = 'wrong';
+  			that.onOff = false;
+  		}
+  		
+  		
+  		this.o = this.arr.every((elem)=>{
+  			return elem.onOff;
+  		});
+  		
+  		this.sub.className = this.o?'active':'';
+  		
+//		if(o){
+//			this.sub.className = 'active';
+//		}else{
+//			
+//		}
+  	}
+  	
+  }
+  
+  var re = new Re;
+  
+  re.init(function(that){
+  	let name = that.getAttribute('_name');
+  	let val = that.value;
+  	switch(name){
+  		case 'birth':
+  			/*
+  				1.填写的日期要小于当前 
+  				2.要填写正确的时间
+  			*/
+  			
+  			var str = val.replace(re.re.birth,function($0,$1,$2,$3){
+  				return $1+'-'+$2+'-'+$3;
+  			});
+  			var arr = str.split('-');
+  			
+  			var newDate = new Date();
+  			var oldDate = new Date(arr[0],arr[1]-1,arr[2]);
+  			
+  			if(oldDate > newDate){
+  				return false;
+  			}
+  			
+  			var y = oldDate.getFullYear();
+  			var m = oldDate.getMonth()+1;
+  			var d = oldDate.getDate();
+  			
+  			if(y == arr[0] && m == arr[1] && d == arr[2]){
+  				return true;
+  			}else{
+  				return false;
+  			}
+  		break;
+  		default:
+  			return true;
+  		break;
+  	}
+  });
+  
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body class="color">
+	<ul class="color">
+		<li>1</li>
+		<li class="c">2</li>
+		<li>3</li>
+		<li class="c">4</li>
+		<li>5</li>
+		<li>6</li>
+		<li class="c">7</li>
+		
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		DOM:
+			文档对象模型
+			
+		document
+		
+		兄弟节点的选择
+			prev() //上个兄弟节点（如果没找到，可以查找它的length为0）
+			
+			next()//下个兄弟节点（如果没找到，可以查找它的length为0）
+			
+			siblings(可以传入范围) //除了自身,别的所有兄弟节点
+	*/
+	
+	
+	$('li').click(function(){
+		
+//		console.log($(this).prev())
+//		$(this).prev().css('background','green');
+//		
+//		$(this).next().css('background','green');
+
+//		$(this).siblings().css('background','green');
+	
+	
+		$(this).siblings('.c').css('background','green');
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

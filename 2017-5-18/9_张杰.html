@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;list-style: none;border: 0;}
+		.box{position: relative;width:600px;height: 200px;z-index: 1;}
+		.list{background: pink;}
+		.list:after{content: 'x';}
+		.list:hover{background: deeppink;cursor: pointer;}
+		.inp:focus{outline:none;}
+		.border{position: absolute;top: 0;left: 0;bottom: 0;right: 0;border: 1px solid #333;z-index: -1;}
+		.inp:focus + .border{border: 1px solid blue;}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<span class="list">nizp</span>
+		<span class="list">陈斌</span>
+		<span class="list">老神仙</span>
+		<span class="list">展架</span>
+		<input class="inp" type="text" />
+		<div class="border"></div>
+	</div>
+</body>
+</html>
