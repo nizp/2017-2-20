@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Document</title>
+</head>
+<body style="height: 3000px;">
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		ev.preventDefault();//阻止默认行为
+		
+		return false;//阻止默认行为
+		
+		
+		return false;即能阻止默认行为也能阻止冒泡
+	*/
+	
+	$(document).keydown(function(ev){
+		if(ev.keyCode == 32){
+//			ev.preventDefault();
+			return false;
+		}
+	});
+	
+</script>
+</body>
+</html>

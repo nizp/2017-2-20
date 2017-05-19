@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>缩略图</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.bg{
+				width: 650px;
+				height: 450px;
+				padding: 50px 150px;
+				margin: 20px auto;
+				background:url(img/bg.png);
+			}
+			.cont{
+				width: 650px;
+				position: relative;
+			}
+			#pic{
+				width: 650px;
+				height: 420px;
+				border: 0;
+				vertical-align: top;
+				border-radius: 10px;
+			}
+			.cont span{
+				width: 51px;
+				height: 51px;
+				position: absolute;
+				top: 50%;
+				margin-top: -30px;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			#prev{
+				background: url(img/left.png);
+				left: 50px;
+			}
+			#next{
+				background: url(img/right.png);
+				right: 50px;
+			}
+			#prev:hover{
+				background: url(img/left1.png);
+			}
+			#next:hover{
+				background: url(img/right1.png);
+			}
+			.btn{
+				width: 650px;
+				height: 15px;
+				text-align: center;
+				padding-top: 20px;
+			}
+			.btn li{
+				display: inline-block;
+				width: 15px;
+				height: 15px;
+				border-radius: 50%;
+				background-color: #808080;
+				cursor: pointer;
+				position: relative;
+				list-style: none;
+			}
+			.btn li.active{
+				background: yellow;
+			}
+			b{
+				width: 0;
+				height: 0;
+				border: 8px solid #000;
+				border-bottom: 0 ;
+				border-color: #000 transparent transparent transparent;
+				position: absolute;
+				left: 43px;
+				bottom: 6px;
+			}
+			.pic1{
+				position: absolute;
+				left: -45px;
+				bottom: 15px;
+				display: none;
+			}
+			.img2{
+				width: 100px;
+				height: 70px;
+				border-radius: 10px;
+				border: 2px solid #000;
+				vertical-align: top;
+				margin-bottom: 12px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bg">
+			<div class="cont">
+				<img src="img/1.png" id="pic"/>
+				<span id="prev"></span>
+				<span id="next"></span>
+				<ul class="btn">
+					<li class="active">
+						<div class="pic1" >
+							<img class="img2" src=""/>
+							<b></b>
+						</div>
+					</li>
+					<li>
+						<div class="pic1">
+							<img class="img2" src=""/>
+							<b></b>
+						</div>
+					</li>
+					<li>
+						<div class="pic1">
+							<img class="img2" src=""/>
+							<b></b>
+						</div>
+					</li>
+					<li>
+						<div class="pic1">
+							<img class="img2" src=""/>
+							<b></b>
+						</div>
+					</li>
+					<li>
+						<div class="pic1">
+							<img class="img2" src=""/>
+							<b></b>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	let num = 0; 
+	const $pic = $('#pic');
+	const $btn = $('.btn').find('li');
+	let onOff = true;
+	let timer = null;
+	$('#next').click(fn);
+	
+	timer = setInterval(fn,3000);
+	
+	$('.bg').hover(function(){
+		clearInterval(timer);
+	},function(){
+		timer = setInterval(fn,3000);
+	});
+	
+	
+	function fn(){
+		if(!onOff)return;
+		onOff = false;
+		num++;
+		
+		$btn.eq(num%5).addClass('active').siblings().removeClass('active');
+		
+		$pic.animate({
+			opacity:0
+		},function(){
+			//console.log('img/'+(num%5+1)+'.png')
+			$pic.attr('src','img/'+(num%5+1)+'.png');
+			
+			$pic.animate({
+				opacity:1
+			},function(){
+				onOff = true;
+			});
+		});
+
+	}
+	
+</script>
+</body>
+</html>

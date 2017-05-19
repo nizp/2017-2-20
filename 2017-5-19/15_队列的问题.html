@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<button>显示</button>
+	<div id="div"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		JQ的动画是走队列的，在先入队列的运动没有结束时（未出队列），
+		那么下次运动就不会开始
+		
+		
+		解决：
+			在继续点击的时候，让未完成运动的任务，出队列。
+			
+			stop();终止本次动画
+			
+		小技巧：
+			使用JQ的运动，都要在运动前使用stop()
+		
+		第一个参数:如果设置成true，则清空队列。可以立即结束动画。
+
+		第二个参数:true，让当前正在执行的动画立即完成，并且重设show和hide的原始样式，调用回调函数等。
+			
+	*/
+	
+	$('button').click(function(){
+		$('#div').stop(true,true).toggle(500);
+	});
+	
+</script>
+</body>
+</html>

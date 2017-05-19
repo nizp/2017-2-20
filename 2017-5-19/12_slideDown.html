@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+	/*display: none;*/
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<button>显示</button>
+	<div id="div"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		slideDown:运动改变高度
+		
+		slow（慢），normal（200），fast（快）
+	*/
+//	$('button').click(function(){
+//		//$('#div').slideDown('normal');
+//		$('#div').slideUp('normal');
+//	});
+
+	$('button').click(function(){
+		$('#div').slideToggle(500);
+	})
+	
+</script>
+</body>
+</html>

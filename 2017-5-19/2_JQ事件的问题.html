@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+}
+#div2{
+	width:50px;
+	height:50px;
+	background: blue;
+	position: absolute;
+	left:150px;
+}	
+
+
+
+</style>
+</head>
+<body>
+	<div id="div">
+		<div id="div2"></div>
+	</div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		当点击大的div的时候都会给div2绑定一次事件函数，
+		点击的越多，绑定的就越多，所以，当多次点击div的时候
+		再去点击小的div，这个时候，div中的事件函数会执行多次（次数是根据点击大div的次数来定的）
+		
+		
+		解决：
+			使用off()，每次点击大div的时候，就将上一次div2的绑定解除
+			
+			off()解除绑定
+			
+			***JQ中的ev是二次封装的，不是原生的event对象
+			
+		阻止冒泡
+			return false
+			
+			ev.stopPropagation
+			
+		小技巧：
+			只要使用JQ的事件，那么再加之前，清除上一次。
+	*/
+	$('#div').click(function(){
+		console.log('点击最大的div');
+		
+		$('#div2').off().click(function(ev){
+			console.log('点击最小的div');
+			//ev.stopPropagation(); //阻止冒泡
+			return false;
+		});
+	});
+	
+	
+	
+</script>
+</body>
+</html>

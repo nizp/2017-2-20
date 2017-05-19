@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<button>显示</button>
+	<div id="div"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//	let onOff = true;
+//	$('button').click(function(){
+//		if(onOff){
+//			$('#div').hide(500);
+//		}else{
+//			$('#div').show(500);
+//		}
+//		onOff = !onOff;
+//	});
+	
+	$('button').click(function(){
+		$('#div').toggle(500);
+	});
+	
+</script>
+</body>
+</html>

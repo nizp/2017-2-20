@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: blue;
+}	
+
+
+
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<div id="div2"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		scroll(); 
+		
+		在JQ中所有的事件全是事件绑定  addEvent...
+		
+		
+		
+	*/
+	
+//	$(document).click(function(){
+//		alert(1);
+//	});
+//	
+//	$(document).click(function(){
+//		alert(2);
+//	});
+	
+	//console.log(window.navigator.userAgent)
+	
+//	$(document).on('click',function(){
+//		alert(123);
+//	})
+	
+	
+	
+	//如果几个元素都在同一事件上干的事情是一样的，那么可以$('#div,#div2')
+//	$('#div,#div2').click(function(){
+//		alert(1);
+//	});
+
+
+
+	//某个（些）元素不同的事件干同一件事情，那么'mouseover click'
+//	$('#div,#div2').on('mouseover click',function(){
+//		alert(2);
+//	});
+	
+	
+	var arr = [{name:'hehe'},{name:'xixi'}];
+	
+	
+	/*
+		在事件中的第二个参数可以为数据,通过ev.data可以获取到绑定数据{}
+		
+		如：ev.data
+	*/
+	$('#div').on('click',{da:arr[0]},function(ev){
+		
+		//$(this).html(ev.data.data.name)
+		
+		console.log(ev.data.da.name)
+	});
+	
+</script>
+</body>
+</html>

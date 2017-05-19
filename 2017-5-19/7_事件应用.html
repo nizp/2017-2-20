@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: springgreen;
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	dsadsadsadsadasds
+	<div id="div1"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	$('#div1').off().mousedown(function(ev){
+		let disX = ev.pageX - $(this).position().left;
+		let disY = ev.pageY - $(this).position().top;
+		
+		$(document).mousemove(function(ev){
+			$('#div1').css({
+				left:ev.pageX - disX,
+				top:ev.pageY - disY
+			});
+		});
+		
+		$(document).mouseup(function(ev){
+			$(document).off('mousemove');
+			$(document).off('mouseup');
+		});
+		return false;
+	});
+	
+</script>
+</body>
+</html>

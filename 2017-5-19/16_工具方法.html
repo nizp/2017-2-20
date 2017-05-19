@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+//	$(function(){
+//		
+//	})
+
+	/*
+		$.xxx() //工具方法 
+		
+		$.each() //循环
+		
+		$.extend(obj1,obj);
+		
+		
+		把obj的内容赋值给obj1（如果第一个参数不是布尔值true，那么只是浅拷贝）
+		如果第一参数是true，那么走深拷贝。
+		
+		$.isFunction(obj):
+			是不是函数
+		
+	*/
+
+	var arr = [1,2,3,4];
+	
+	//$('li').each()
+	
+//	$.each(arr, function(i,e) {
+//		console.log(e);
+//	});
+
+	var obj = {
+		name:'momo',
+		age:18,
+		arr:[1,2,3,4]
+	}
+	
+	var obj3 = {
+		name:'周庆林',
+		age:120,
+		job:'前端'
+	}
+	
+	var obj2 = $.extend(true,{},obj,obj3);//如果对象名字一样，那么右边的会覆盖左边的。
+	
+	//obj2.name = '张梦龙';
+	
+	obj2.arr.push(5);
+	
+	console.log(obj2);
+	
+//	console.log(obj.arr)
+
+
+	function fn(){}
+	
+	fn = {};
+	
+	console.log($.isFunction(fn))
+	
+</script>
+</body>
+</html>

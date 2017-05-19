@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+	/*display: none;*/
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<button>显示</button>
+	<div id="div"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		fadeIn: 淡入
+		
+		fadeOut:淡出
+		
+		fadeToggle:淡入淡出
+	*/
+
+	$('button').click(function(){
+		$('#div').fadeToggle(200);
+	});
+	
+</script>
+</body>
+</html>

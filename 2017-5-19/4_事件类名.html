@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: blue;
+}	
+
+
+
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<div id="div2"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		可以给某个事件加一个类名，主要识别事件函数并且方便复用。
+		
+		事件名.a1
+		
+		trigger('事件名 || 事件名+类名') //触发器
+		
+	*/
+	$('#div').on('click.a1',function(){
+		alert(1);
+	});
+	
+	$('#div').on('click',function(){
+		alert(2);
+	});
+	
+	$('#div').on('mouseover',function(){
+		alert(2);
+	});
+	
+	$('#div2').mouseover(function(){
+//		$('#div').trigger('click.a1');
+
+		$('#div').trigger('mouseover');
+	});
+	
+//	$('#div2').bind('click',function(){
+//		alert(123);
+//	})
+	
+</script>
+</body>
+</html>

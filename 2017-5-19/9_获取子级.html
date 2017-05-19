@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li id="li">
+			<div>123</div>
+			<div class="abc">231
+				<div class="abc"></div>
+			</div>
+		</li>
+		<li>3</li>
+		<li class="a">4</li>
+	</ul>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		children(传入范围):
+		 	找到当前元素的子级（一层）
+		 	如果在()传入范围那么就找到复合条件的子级
+		 	
+		find(传入范围):缓存代码块
+		
+			找到当前元素的子孙级元素（很多层）
+			如果在()传入范围那么就找到复合条件的子孙级
+		
+	*/
+//	console.log($('ul').children('.a'));
+
+	//console.log($('ul div'));不推荐//性能不高，先找右边的再去找左边的
+	
+	/*
+		代码缓存 ，缓存代码块
+		
+	*/
+	
+	var $li = $('#li');//被缓存的代码块
+	
+	//console.log($li.find('div'));//getElementsByTagName
+	
+	console.log($li.find('div.abc'));
+	
+	
+	
+	
+</script>
+</body>
+</html>

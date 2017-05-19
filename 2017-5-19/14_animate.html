@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:relative;
+	/*display: none;*/
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<button>显示</button>
+	<div id="div"></div>
+	
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		运动的目标点
+		{
+			left:0
+		}
+		
+		第二个参数：
+			speed
+		
+		第三个参数：运动的方式，默认为swing,只可以拿linear来替换
+		
+		第四个参数:回调
+	*/
+	
+	$('button').click(function(){
+		$('#div').animate({
+			width:500
+//			height:0,
+//			opacity:0
+		},1000,'linear',function(){
+			alert(1)
+		});
+	});
+	
+</script>
+</body>
+</html>
