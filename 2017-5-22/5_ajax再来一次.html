@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<form action="php/get.php" method="get">-->
+		姓名:<input  name="user" id="user"/><span id="span"></span>
+		密码:<input  name="pass" type="password"/>
+		<input type="button" id="btn" value="提交" />
+		<!--<input type="submit" value="提交"/>-->
+	<!--</form>-->
+<script type="text/javascript">
+	
+	var user = document.getElementById('user');
+	var btn = document.getElementById('btn');
+	var span = document.getElementById('span');
+
+	
+	
+	btn.onclick = function(){
+		
+		var ajax = new XMLHttpRequest();
+		
+		ajax.open('get','php/get.php?pname='+user.value);
+		
+		ajax.send();
+		
+		ajax.onload = function(){
+			span.innerHTML = ajax.responseText;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

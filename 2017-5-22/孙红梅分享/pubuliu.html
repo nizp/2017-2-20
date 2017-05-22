@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        #contianer {
+            position: relative;
+        }
+        
+        .box {
+            padding: 5px;
+            float: left;
+        }
+        
+        .boximg {
+            padding: 5px;
+            box-shadow: 0 0 5px #ccc;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        
+        .boximg img {
+            width: 250px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <div id="container">
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/1.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/16.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/2.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/10.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/4.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/11.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/6.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/16.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/7.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/14.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/3.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/6.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/15.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/8.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/13.jpg">
+                </div>
+            </div>
+            <div class="box">
+                <div class="boximg">
+                    <img src="img/1.jpg">
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+    <script src="jquery-3.2.1.js"></script>
+    <script>
+        var wc = document.documentElement.clientWidth; //获取屏幕宽度
+        var $Width = $('#container').find('*');
+        // 每行最多容纳几张图片4
+        var num = Math.floor(wc / $Width[0].offsetWidth);
+        // 大盒子宽是4个图片的宽，居中显示
+        $('#container').css({
+            'width': $Width[0].offsetWidth * num,
+            'margin': '0 auto',
+        });
+        //创建数组, 存每一行的高度
+        var arr = [];
+        $('.box').each(function(i, ele) {
+                if (i < num) { //4，第一行
+                    arr[i] = ele.offsetHeight;
+                } else {
+                    //当大于每行存放的图片个数时Math.min.apply得到数组中的最小高度
+                    var minH = Math.min.apply(null, arr);
+                    //得到最小高度图片的下标
+                    var minh = getminIndex(arr, minH);
+                    //下一行图片应放的位置(top=高度,left=最矮的div的定位父级)
+                    $(this).css({
+                            position: 'absolute',
+                            top: minH + 'px',
+                            left: $('.box')[minh].offsetLeft
+                        })
+                        //将两张图片高度相加得到一个新的高度用来进行下一次的计算
+                    arr[minh] += ele.offsetHeight;
+                }
+            })
+            //最小高度下标的确定
+        function getminIndex(arr, min) {
+            //遍历传进来的高度数组
+            for (var attr in arr) {
+                //如果高度等于最小高度, 返回i即为该图片下标
+                if (arr[attr] == min) {
+                    return attr;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

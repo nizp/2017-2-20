@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<form action="php/get.php" method="get">-->
+		姓名:<input  name="user" id="user"/><span id="span"></span>
+		密码:<input  name="pass" type="password"/>
+		<input type="button" id="btn" value="提交" />
+		<!--<input type="submit" value="提交"/>-->
+	<!--</form>-->
+<script type="text/javascript">
+	
+	var user = document.getElementById('user');
+	var btn = document.getElementById('btn');
+	var span = document.getElementById('span');
+	
+	
+	btn.onclick = function(){
+		
+		var ajax = new XMLHttpRequest(); //new了个电话出来
+		
+		ajax.open('get','php/get.php?user='+user.value,true);//3个参数,拨号
+		
+		ajax.send(); //按绿色按钮
+		
+		ajax.onload = function(){ //等待
+			
+			span.innerHTML = ajax.responseText; //通话
+			
+		}
+
+	}
+	
+	
+	
+	
+	/*
+		打电话模式：
+			1.造电话
+			
+			2.拨电话号码
+			
+			3.按绿色按钮（发送号码）
+			
+			4.等待通话
+			
+			5.开始通话
+	*/
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

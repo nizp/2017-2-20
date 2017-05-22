@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>Document</title>
+</head>
+<body>
+	<script src="json.js" type="text/javascript" charset="utf-8"></script>
+	<input type="button" name="btn" id="btn" value="按钮" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	/*
+		xxx说，我今年xx岁，我的性别是xx，我想说:"xxx"; 
+		
+		数据，目前为写死的数据
+		
+		AJAX -> ***动态请求数据 ->本身很简单，难点是获取到数据之后，如何根据需求去操作数据。
+		
+		单词的缩写：
+			Asynchronous JavaScript and XML（异步的js和XML)
+		
+			***向后端取数据的一种技术(以前我们是自己创建数据，通过后端去获取数据)
+			
+			减少服务器压力，更新数据无刷新（只刷新局部数据，不会整个页面都刷新），前后端分离的一种数据交互技术（异步与服务器通信）。
+			
+			
+			
+		
+		XML是中数据格式
+		
+		[12,38,7]
+			
+		前端发展到现在，不只是处理XML还处理json数据
+		
+		对于ajax本身请求过来的所有数据都是字符串。
+		
+		一般来说都说json格式的。
+		
+		"{name:hehe}" "[{},{},{}]"
+			
+		{} []
+		
+		
+		
+	*/
+	
+	const btn = document.getElementById('btn');
+	const ul = document.getElementById('ul');
+	
+	btn.onclick = function(){
+		arr.forEach((e,i)=>{
+			let li = document.createElement('li');
+			li.innerHTML = `${e.name}说，我今年${e.age}岁，我的性别是${e.sex}，我想说:${e.say}`;
+			ul.appendChild(li);
+		});
+	};
+	
+	
+	
+</script>
+</body>
+</html>

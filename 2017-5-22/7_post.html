@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+		姓名:<input  name="user" id="user"/><span id="span"></span>
+<script type="text/javascript">
+	
+	/*
+		post:
+			理论上来说，post的提交可以是无限大（后端会给传输设卡）
+			
+			因为post是通过服务器发送请求，所以相对安全。
+			
+			在send发送前设置请求头信息。
+			
+	ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			
+			对于发送的字段，放在send(需要发送的字段)
+			
+			
+			更适用于用户的私人信息的传输、比较大的文件传输
+			
+			
+			
+	*/
+	
+	
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	
+	user.onblur = function(){
+		var ajax = new XMLHttpRequest();
+		
+		ajax.open('post','php/post.php');
+		
+		ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		ajax.send('user='+this.value);
+		
+		ajax.onload = function(){
+			//console.log(ajax.responseText)
+			//alert(1);
+			
+			span.innerHTML = ajax.responseText;
+		}
+	}
+	
+</script>
+</body>
+</html>
