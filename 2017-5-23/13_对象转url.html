@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	var data = {
+//		user:'momo',
+//		sex:'男',
+//		id:'2'
+//	}
+//	
+//	//user=momo&sex=男&id=2
+//	var arr = [];
+//	for(var attr in data){
+//		arr.push(attr +'='+ data[attr]);
+//	}
+//	
+//	console.log(arr.join('&'));
+
+	var str = 'user=momo&sex=男&id=2';
+	var data = {};
+	var arr = str.split('&');
+	
+	for(var i=0;i<arr.length;i++){
+		var j = arr[i].split('='); 
+		
+		//console.log(j)
+		data[j[0]] = isNaN(j[1])?j[1]:j[1]*1;
+	}
+	
+	console.log(data);
+	
+	
+	
+</script>
+</body>
+</html>

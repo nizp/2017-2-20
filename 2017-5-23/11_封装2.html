@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script type="text/javascript">
+	/*
+		页面上所有的静态资源都是同步的
+		
+		同步:从上而下，依次解读，只要中间运行不了，下面就不执行
+		
+		异步:从上而下,如果中间运行不了，下面依然执行。
+		
+	*/
+	
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	user.onblur = function(){
+		
+		ajax(
+			'get',
+			
+			'php/get.php',
+			
+			'pname='+this.value,
+			
+			function(str){
+				span.innerHTML = str;
+			}
+		);
+		
+	}
+	
+	
+	
+	function ajax(mothed,url,data,callback){
+		var ajax = new XMLHttpRequest();
+		
+		if(mothed === 'get'){
+			ajax.open(mothed,url+'?'+data,true);
+			ajax.send();
+		}else{
+			ajax.open(mothed,url,true);
+			ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			ajax.send(data);
+		}
+
+		ajax.onload = function(){
+			callback(ajax.responseText);
+		}
+	}
+	
+	
+</script>
+</body>
+</html>

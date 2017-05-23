@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" name="txt" id="user" value="" />
+	<span id="span"></span>
+<script type="text/javascript">
+	const user = document.getElementById('user');
+	const span = document.getElementById('span');
+	
+	user.onblur = function(){
+		
+		const ajax = new XMLHttpRequest;
+		
+		ajax.open('post','php/post.php');
+		
+		ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		
+		ajax.send('user='+this.value);
+		
+		ajax.onload = function(){
+			span.innerHTML = ajax.responseText;
+		}
+		
+	}
+	
+	
+	
+</script>
+</body>
+</html>

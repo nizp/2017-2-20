@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="txt" name="txt" id="txt" value="" />
+<script type="text/javascript">
+	/*
+		eval:
+			能够将字符串尽可能的转成js代码并且运行。
+	*/
+//	var str = 'alert(123);';
+
+//	var str = '[1,2,3,4]';
+	
+	
+	//(function(){alert(123)})()
+
+//	var str = "({'name':'leo'})";
+//	
+//	console.log(eval(str))
+
+//	txt.onblur = function(){
+//		
+//		alert(eval(this.value))
+//		
+//	};
+
+	//console.log(new Function('a,b','return alert(a+b)')(5,6))
+	
+	
+	var str = "{'name':'leo'}";
+	
+	console.log(new Function('','return'+str)());
+	
+	
+	
+	
+</script>
+</body>
+</html>

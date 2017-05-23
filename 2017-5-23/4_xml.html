@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" id="user" value="点击渲染" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	
+	user.onclick = function(){
+		const ajax = new XMLHttpRequest;
+		
+		ajax.open('get','php/data.xml');
+
+		ajax.send();
+		
+		ajax.onload = function(){
+			//console.log( ajax.responseXML );
+			
+			var data = ajax.responseXML;
+			
+			var persons =  data.getElementsByTagName('person');
+			
+			for(var i=0;i<persons.length;i++){
+				var li = document.createElement('li');
+				var child = persons[i].children;
+				li.innerHTML = `${child[0].innerHTML}今年${child[1].innerHTML}岁,性别:${child[2].innerHTML}--- 他说:${child[3].innerHTML}`;
+				
+				ul.appendChild(li);
+			};
+			//console.log(persons);
+		}
+	}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user" autocomplete="off"/><span id="span"></span>
+<script type="text/javascript">
+	/*
+		http状态码：
+			200-207是成功
+			
+			4开头全是错误
+			
+			5开头找后端（跟你没关系）
+			
+			ajax.status  可以查看本次请求的状态码
+	*/
+	
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	user.onblur = function(){
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function(){
+			//alert(ajax.readyState);
+			if(ajax.readyState == 4){
+				
+				if(ajax.status >= 200 && ajax.status <= 207){
+					//**********拿到接口之后，先看看数据是什么格式的
+					console.log(ajax.responseText)
+					//alert(1);
+				}
+			}
+		}
+		ajax.open('get','php/get_json.php?pname='+this.value);
+		
+		
+		
+		ajax.send();
+		
+		
+		
+		
+	}
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user" autocomplete="off"/><span id="span"></span>
+<script type="text/javascript">
+	/*
+		
+		xx=xx&xxx=xxx
+		
+		rsv_bp=0 & rsv_idx=2&tn=baidu&wd=但是%20英文
+		
+		
+		[],{}
+		
+		'[]','{}'
+		
+	*/
+	
+	//console.log(decodeURI('%20'))//小空格
+	
+	
+//	var str = '{"name":"陈宝伟"}';
+	
+//	var str = "{'name':'陈宝伟'}";
+//	
+//	console.log(JSON.parse(str))
+	
+	
+	
+	//console.log(typeof '[1,2,3]');
+	
+	const user = document.getElementById('user');
+	const span = document.getElementById('span');
+	user.onblur = function(){
+		var ajax = new XMLHttpRequest();
+		function fn1(){
+			//console.log(this);
+			ajax.open('get','php/get_json.php?pname='+user.value);
+		}
+		fn1();
+		ajax.send();
+		
+		ajax.onload = function(){
+			
+//			console.log(ajax.responseText);			
+//			console.log(JSON.parse(ajax.responseText));
+
+			//const data = //JSON.parse(ajax.responseText);
+			
+			//const data = eval('('+ajax.responseText+')');
+			
+			const data = new Function('','return'+ajax.responseText)();
+			
+			console.log(data)
+			
+			/*
+				code:0  ->成功
+				
+				code:1  ->失败
+			*/
+			if(data.code){
+				//失败
+				user.className = 'red';
+			}else{
+				user.className = 'green';
+			}
+			
+			span.innerHTML = data.msg;
+		}
+		
+	}
+	
+	
+</script>
+</body>
+</html>

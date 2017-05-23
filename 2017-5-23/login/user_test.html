@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link type="text/css" rel="stylesheet" href="common.css">
+</head>
+<body>
+<!--登陆-->
+<div class="loginBox">
+	<ul class="loginList clearfix">
+    	<li class="hTxt">用户注册</li>
+        <li class="inputBox">
+        	<input type="text" class="inputs" id="add_user">
+        </li>
+        <li class="inputBox">
+        	<input type="password" class="inputs" id="add_pass">
+        </li>
+        <li class="btns">
+            <input id="add_btn" type="button" class="reg" value="" />
+        </li>
+        <li class="look"><a href="user_view.php" target="_blank">查看已注册用户</a></li>
+    </ul>
+</div>
+<!--注册-->
+<div class="loginBox">
+	<ul class="loginList clearfix">
+    	<li class="hTxt">用户登陆</li>
+        <li class="inputBox">
+        	<input type="text" class="inputs" id="login_user">
+        </li>
+        <li class="inputBox">
+        	<input type="password" class="inputs" id="login_pass">
+        </li>
+        <li class="btns">
+            <input id="login_btn" type="button" class="login" value="" />
+        </li>
+    </ul>
+</div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+	/*
+		
+		*拿到接口先把数据打印出来看看*。
+		
+		user.php?act=xxx&user=用户名&pass=密码
+			act:
+				add——注册用户
+				login——登陆
+		
+		注册：
+			user.php?act=add&user=松松&pass=123456 -> 
+			{error: 0, desc: 文字描述信息}
+		登录:
+			user.php?act=login&user=松松&pass=123456 -> 
+			{error: 0, desc: 文字描述信息}	
+	*/
+	
+	
+	const $user = $('#add_user');
+	
+	const $add_pass = $('#add_pass');
+	
+	const $add_btn = $('#add_btn');
+	
+	$add_btn.click(function(){
+		
+		$.ajax({
+			url:'user.php',
+			data:{
+				act:'add',
+				user:$user.val(),
+				pass:$add_pass.val()
+			},
+			success:function(data){
+				var data = eval('('+data+')');
+				
+				if(data.error){
+					alert('你再想想，一会再来');
+				}else{
+					alert('恭喜你，拿到驾照，可以开车!');
+				}
+				
+			},
+			error:function(data){
+				console.log(data);
+			}
+		});
+	});
+	
+	
+	
+	const $login_user = $('#login_user');
+	
+	const $login_pass = $('#login_pass');
+	
+	const $login_btn = $('#login_btn');
+	
+	
+	$login_btn.click(function(){
+		
+		$.ajax({
+			url:'user.php',
+			data:{
+				act:'login',
+				user:$login_user.val(),
+				pass:$login_pass.val()
+			},
+			success:function(data){
+				var data = eval('('+data+')');
+				
+				if(data.error){
+					alert('用户名或密码错误');
+				}else{
+					alert('欢迎你来到魔法世界!');
+					
+					window.location.href = 'ajax_error.php';
+					
+				}
+			}
+			
+		});
+		
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	
+	var $user = $('#user');
+	var $span = $('#span');
+	
+	$user.blur(function(){
+		$.ajax({
+			url:'php/get_json2.php',
+			dataType:'json',
+			data:{
+				user:$user.val()
+			},
+			success:function(data){
+				console.log(data);
+				//var data = eval('('+data+')');
+//				$user.attr('class','');
+//				$user.addClass(data.code?'red':'green');
+//				$span.html(data.msg);
+			},
+			error:function(data){
+				console.log(data)
+				alert(data.status);
+			}
+		});
+	});
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" id="user" value="点击渲染" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		ie:10-11   textContent
+		
+		ie:9以下     text
+		
+		chrome: innerHTML
+		
+	*/
+	
+	user.onclick = function(){
+		var ajax = new XMLHttpRequest;
+		
+		ajax.open('get','php/data.xml');
+
+		ajax.send();
+		
+		//ajax.onload = function(){
+		ajax.onreadystatechange = function(){
+			
+			//console.log( ajax.responseXML );
+			if(ajax.readyState == 4){
+				
+				var data = ajax.responseXML;
+			
+				var persons =  data.getElementsByTagName('person');
+				
+				for(var i=0;i<persons.length;i++){
+					var li = document.createElement('li');
+					var name = persons[i].getElementsByTagName('name')[0];
+					var age = persons[i].getElementsByTagName('age')[0];
+					var sex = persons[i].getElementsByTagName('sex')[0];
+					var info = persons[i].getElementsByTagName('info')[0];
+					var o = window.navigator.userAgent;
+					
+					if(o.search(/MSIE\s[6-9]/) != -1){
+						isIe(li,name,age,sex,info,'text');
+					}else if(o.search(/(MSIE\s10)|rv:11/) != -1){
+						isIe(li,name,age,sex,info,'textContent');
+					}else{
+						isIe(li,name,age,sex,info,'innerHTML');
+					}
+					ul.appendChild(li);
+				};
+			}
+			//console.log(persons);
+		}
+	}
+	
+	
+	//console.log(window.navigator.userAgent)
+	function isIe(li,name,age,sex,info,txt){
+		li.innerHTML = ''+name[txt]+'今年'+age[txt]+'岁,性别:'+sex[txt]+'--- 他说:'+info[txt];
+	}
+	
+</script>
+</body>
+</html>

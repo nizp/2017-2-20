@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+}
+.green{
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user" autocomplete="off"/><span id="span"></span>
+<script type="text/javascript">
+	/*
+		onload:在IE9以下浏览器不兼容 
+		
+		onreadystatechange存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。
+		
+		0-4  数字   只要数字到了4，说明整个请求过程完毕
+		0监控不到的，因为第0步是创建
+	*/
+	
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	user.onblur = function(){
+		var ajax = new XMLHttpRequest();
+		
+		ajax.open('get','php/get_json.php?pname='+this.value);
+		
+		
+//		ajax.onload = function(){
+//			alert(ajax.readyState);
+//		}
+		
+		/*
+			如果onreadystatechange放在send的前面可以多监听一步请求的
+		 	步骤，其实对结果并没有影响，因为请求结束是4.
+		*/
+		ajax.onreadystatechange = function(){
+			
+			if(ajax.readyState == 4){
+				alert('完成');
+			}
+		}
+		
+		ajax.send();
+	}
+	
+	
+</script>
+</body>
+</html>
