@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<form action="post_file.php" method="post" enctype="multipart/form-data">-->
+		<input type="file" name="file" id="File"/>
+		<input type="button" value="上传" id="btn"/>
+		<!--<input type="submit" value="上传"/>-->
+	<!--</form>-->
+	<div id="div"></div>
+<script type="text/javascript">
+	
+	/*
+		 在工作如果遇到了如：\u4e0a,不要找后端麻烦，把这些字符放到指定元素的innerHTML中就能转成中文。
+		 
+		FormData:将传入的数据转成二进制数据
+		
+		它只有append(key,value)方法
+		当拼字段的时候将字段放入括号中		append('user','momo');
+		
+		如果有多个字段，那么继续append()
+	*/
+	//div.innerHTML = '\u4e0a\u4f20\u6210\u529f'
+	
+	
+	const btn = document.getElementById('btn');
+	const File = document.getElementById('File');
+	btn.onclick = function(){
+		
+		var ajax = new XMLHttpRequest;
+		//上传的文件大小是不固定的，不可能用get
+		ajax.open('post','post_file.php');
+		
+		//file
+		//ajax.setRequestHeader('Content-Type','multipart/form-data')
+		//ajax.send('file='+File.value);//File.value是个字符串，相当于把一个字符串传给了后端，所以后端不认，我们是想把图片这个数据传到服务器上。
+		
+		/*
+			 file这个控件元素上，有个属性叫files，它的第0个就是
+			 要上传的数据
+		*/
+		
+		
+		//ajax.send('file='+File.files[0]);
+		
+		var form = new FormData();
+		
+		form.append('file',File.files[0]);
+//		form.append('user',this.value);
+//		form.append('act','add');
+		
+		ajax.send(form);
+		
+		//console.dir(File.files[0]);
+		
+		ajax.onload = function(){
+			console.log(ajax.responseText);
+		}
+	};
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

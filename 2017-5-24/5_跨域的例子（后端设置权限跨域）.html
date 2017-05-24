@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+	color: red;
+}
+.green{
+	border: 1px solid green;
+	color: green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script src="myAjax_1.2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	
+	/*
+		解决跨域问题有很多：
+			1.在高版本浏览器下，可以通过XMLHttpRequest
+				配合后端设置一个请求头并且给权限。
+			
+			<?php
+				//header('Access-Control-Allow-Origin:*');
+				echo 'hello';
+			
+			我跟张是同一个局域网，我输入他的ip可以访问他的文件
+			
+			但是，用我的ip去访问他的文件就跨域
+			
+			2.服务器代理
+			
+			
+				
+	*/
+	
+	
+	user.onblur = function(){
+		
+		ajax({
+			//在自己的电脑上输入张梦龙ip能访问到它域下的文件,但是
+			//在自己的ip下，访问张梦龙的某个文件，这样就跨域
+			url:'http://172.20.10.5/1.php',
+			dataType:'str',
+			success:function(obj){
+				console.log(obj)
+			}
+		});
+	}
+	
+	
+	
+	
+
+	
+</script>
+</body>
+</html>

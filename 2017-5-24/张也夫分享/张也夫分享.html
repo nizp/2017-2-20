@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul{
+            display: block;
+        }
+        div{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: lightblue;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+<ul></ul>
+<div id="div1">增加</div>
+<div>删除</div>
+<p></p>
+<div class="allDiv"></div>
+<div class="allDiv"></div>
+<div class="allDiv"></div>
+<div class="allDiv"></div>
+<script>
+    //WTF？！
+    //   http://sojo.im/
+    
+    //断点调试
+    console.time('计时器')
+    function fn1(){
+        console.count('for')
+    }              //查看代码执行了多少次
+
+    var arr = {};
+    for(var i = 1;i <= 10;i++){
+            fn1();
+        arr[i] = [];
+        for (var j = 0; j <= 100; j++) {
+            arr[i].push(j)
+        }
+    }
+
+
+    //DOM断点调试
+    var ul = document.getElementsByTagName('ul')[0];
+    var divs = document.getElementsByTagName('div');
+    divs[0].onclick = function(){
+        var li = document.createElement('li');
+        li.innerHTML = 'abc';
+        ul.appendChild(li)
+    }
+//  divs[0].onmouseover = function(){
+//      
+//  }
+    divs[1].onclick = function(){
+        var lis = document.getElementsByTagName('li');
+        ul.removeChild(lis[lis.length-1])
+    }
+    console.timeEnd('计时器');
+
+    //document.designMode = 'on';  直接在页面上修改
+    //clear()  清空
+    //settings -> throtting ->模拟网速慢成马
+    //$('#div1')
+    //$$('.allDiv')
+    //getEventListeners($('#div1')) 查看元素事件
+    var peoples = [
+        {name:'大傻',age:23},
+        {name:'二傻',age:22},
+        {name:'三傻',age:21},
+        {name:'小傻',age:20},
+        {name:'最傻',age:38},
+    ];
+    //console.table(peoples)
+    //console.log('\u2764')
+    //console.log('\u263B')
+    //console.log('%c当然是选择原谅她啊','font-size:90px;color:green;font-family: "微软雅黑"')
+</script>
+</body>
+</html>

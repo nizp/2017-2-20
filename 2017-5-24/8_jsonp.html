@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	function fn(a){
+//		console.log(a);
+//	}
+</script>
+
+<script type="text/javascript">
+	/*
+		json + padding = jsonp 
+		
+		如果去访问一个变量那么，下面script标签可以查找上面script标签，但是上面如果没有，那么就报错了，而预解析只是在一个script中执行。
+	
+		iframe ->src
+		link -> href
+		img -> src 
+		
+		
+		script ->src 专门解析js的代码 (jsonp的关键标签)
+		
+		原理(下面2个条件是必须的)：
+		
+			1.数据必须为函数名+(),数据为实参
+			
+			2.前端页面中的***全局下***，要有一个对应数据的函数
+			
+		
+		fn({"name":"leo"});
+		
+		
+	*/
+	
+	
+	function fn(a){
+		console.log(a);
+	}
+	
+	
+	//alert(a);
+	
+//	var a = 10;
+//	fn(a);
+</script>
+<script src="js.txt" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

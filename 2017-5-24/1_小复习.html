@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+	color: red;
+}
+.green{
+	border: 1px solid green;
+	color: green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script src="myAjax_1.2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	
+	user.onblur = function(){
+		
+		ajax({
+			url:'php/post2.php',
+			method:'post',
+			//url:'php/data.xml',
+//			url:'php/get_json.php',
+			data:{
+				user:user.value
+			},
+			//dataType:'xml',
+			dataType:'str',
+			success:function(obj){
+				
+				console.log(obj);
+				span.innerHTML = obj;  
+//				if(obj.code){
+//					user.className = 'red';
+//				}else{
+//					user.className = 'green';
+//				}
+//				span.innerHTML = obj.msg;
+			},
+			error:function(obj){
+				console.log(obj.readyState)
+				alert(obj.status);
+			}
+		});
+		
+	}
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

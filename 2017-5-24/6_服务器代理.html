@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	border: 1px solid red;
+	color: red;
+}
+.green{
+	border: 1px solid green;
+	color: green;
+}
+</style>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script src="myAjax_1.2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	
+	/*
+		解决跨域问题有很多：
+			1.在高版本浏览器下，可以通过XMLHttpRequest
+				配合后端设置一个请求头并且给权限。
+			
+			<?php
+				//header('Access-Control-Allow-Origin:*');
+				echo 'hello';
+			
+			我跟张是同一个局域网，我输入他的ip可以访问他的文件
+			
+			但是，用我的ip去访问他的文件就跨域
+			
+			2.服务器代理
+			
+				
+				自身的文件与服务器的文件在同域，
+				所以自身可以直接访问服务器文件，
+				服务器文件可以直接访问到外域的文件，
+				
+				等同于自身的文件能访问外域的文件。
+				
+				弊端：
+					东西始终是别人的，别人变了，你的自身的也变了
+					
+			3.iframe跨域
+			
+			4.flash跨域
+			
+			5.jsonp
+			
+	*/
+	
+	
+	user.onblur = function(){
+		
+		ajax({
+			url:'php/2.get.php',
+			dataType:'str',
+			success:function(obj){
+				document.write(obj);
+//				console.log(obj)
+			}
+		});
+	}
+	
+	
+	
+	
+
+	
+</script>
+</body>
+</html>

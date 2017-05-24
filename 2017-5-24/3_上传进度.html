@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+#div1{
+	width:640px;
+	height: 5px;
+}
+#div2{
+	transition:.2s;
+	width:0;
+	height: 2px;
+	background:lightseagreen;
+	opacity: 1;
+}
+</style>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+	<!--<form action="post_file.php" method="post" enctype="multipart/form-data">-->
+		<input type="file" name="file" id="File"/>
+		<input type="button" value="上传" id="btn"/>
+		<!--<input type="submit" value="上传"/>-->
+	<!--</form>-->
+	<div id="div"></div>
+<script type="text/javascript">
+	const btn = document.getElementById('btn');
+	const File = document.getElementById('File');
+	const div2 = document.getElementById('div2');
+	/*
+		ajax.upload.onprogress:
+			监控上传进度，要放在send之前有效
+		
+		ev.loaded  当前上传的大小
+		ev.total   文件总大小
+		
+			
+			
+	*/
+	btn.onclick = function(){
+		var ajax = new XMLHttpRequest;
+		
+		ajax.open('post','post_file.php');
+		
+		var form = new FormData();
+		
+		form.append('file',File.files[0]);
+		
+		ajax.upload.onprogress = function(ev){
+			/*
+				ev.loaded  当前上传的大小
+				ev.total   文件总大小
+			*/
+			
+			div2.style.width = (ev.loaded/ev.total) * 640 + 'px';
+			
+//			console.log(ev);
+			
+		}
+		
+		ajax.send(form);
+
+		
+		
+		ajax.onload = function(){
+			var data = JSON.parse(ajax.responseText);
+			//console.log(ajax.responseText)
+			if(data.code)
+			//	alert('失败');
+				console.log('失败')
+			else
+				console.log('成功')
+				//alert('成功');
+				
+		}
+		
+	};
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
