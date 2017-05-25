@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	
+	user.oninput = function(){	
+		var oS = document.createElement('script');
+		oS.src = 'http://localhost/2017-5-25/2.data.php?callback=fn1&num=number';
+		document.getElementsByTagName('head')[0].appendChild(oS);
+		oS.remove();	
+	}
+	
+	/*
+		2种删除方式，直接创建就立马删除，是不影响请求的，因为，当你创建script标签的那一刻起，*就已经向服务器发送了一次请求*，这次请求是异步操作，响应的时间跟服务器有关，当服务器运行完返回的时候，自动会调用fn1(传入数据)，只要页面中有个fn1函数，就会执行并且成功接收数据。
+	*/
+	
+	function fn1(data){
+		console.log(data);
+//		oS.remove();
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	//jsonp({
+//			url:,
+//			data:{},
+//			success:function(data){
+//				
+//				
+//			}
+//		});
+	user.oninput = function (){
+		jsonp(
+			'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+			'wd='+user.value+'&cb=fn1'
+		);
+	}
+	
+	function jsonp(url,data){
+		var oS = document.createElement('script');
+		oS.src = url+'?'+data;
+		document.getElementsByTagName('head')[0].appendChild(oS);
+		oS.remove();
+	}
+
+	function fn1(data){
+		var html = '';
+		data.s.forEach((e,i)=>{
+			if(i > 3){
+				return;
+			}
+			html += '<li>'+e+'</li>';
+		});
+		ul.innerHTML = html;
+//		oS.remove();
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

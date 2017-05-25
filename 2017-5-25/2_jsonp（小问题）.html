@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1,#div2{
+	width:100px;
+	height: 100px;
+	border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	
+	
+	div1.onclick = function(){
+		var oS = document.createElement('script');
+		oS.src = 'http://localhost/2017-5-25/2.data.php?callback=fn1';
+		document.getElementsByTagName('head')[0].appendChild(oS);
+	}
+	
+	div2.onclick = function(){
+		var oS = document.createElement('script');
+		oS.src = 'http://localhost/2017-5-25/2.data.php?callback=fn2';
+		document.getElementsByTagName('head')[0].appendChild(oS);
+	}
+	
+	
+	function fn2(data){
+		console.log(data);
+		div2.style.background = data[1];
+	}
+	
+	
+	
+	function fn1(data){
+		div1.style.background = data[0];
+		//console.log(data);
+	}
+	
+
+	
+	
+	
+</script>
+</body>
+</html>

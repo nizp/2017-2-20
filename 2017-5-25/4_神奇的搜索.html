@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	var oS = null;
+	user.oninput = function(){
+//		setTimeout(function(){
+//			oS = document.createElement('script');
+//
+//			oS.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+user.value+'&json=1&cb=fn1';
+//			document.getElementsByTagName('head')[0].appendChild(oS);
+//			oS.remove();
+//		},5000);
+
+		
+		oS = document.createElement('script');
+
+		oS.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+user.value+'&json=1&cb=fn1';
+		document.getElementsByTagName('head')[0].appendChild(oS);
+		oS.remove();
+			
+	}
+	
+	function fn1(data){
+		var html = '';
+		data.s.forEach((e,i)=>{
+			if(i > 3){
+				return;
+			}
+			html += '<li>'+e+'</li>';
+		});
+		ul.innerHTML = html;
+//		oS.remove();
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<script type="text/javascript">
+	var oS = document.createElement('script');
+	oS.src = 'http://localhost/2017-5-25/1.data.php';
+	document.getElementsByTagName('head')[0].appendChild(oS);
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+	/*
+		同源：
+			同域名、同端口、同协议
+			
+		跨源请求：
+			不同源
+		
+		1.高版本浏览器XMLHttpRequest配合后端设置header权限
+		
+		2.服务器代理
+		
+		3.iframe的src
+		
+		4.flash
+		
+		5.jsonp
+		
+		
+		json + padding    fn({})
+		
+		全局要放一个跟数据对应的函数
+		
+		***静态的资源都是同步，
+		
+		***创建script标签并且插入，它的异步操作。
+		
+		
+		jsonp实现原理是什么？
+		
+			通过创建script标签动态添加到页面（因为script标签会解析js代码），相当于说调用全局的函数，将数据传入到
+			函数的实参中（说明数据必须是函数名+()的数据才能使用jsonp），全局的函数就可以直接拿到实参的数据了，从而实现跨域请求
+		
+		
+	*/
+	
+	
+	
+	
+	document.onclick = function(){
+		var oS = document.createElement('script');
+		oS.src = 'http://localhost/2017-5-25/1.data.php';
+		document.getElementsByTagName('head')[0].appendChild(oS);
+	}
+	
+	
+	function fn1(data){
+		console.log(data);
+	}
+	
+	
+	
+</script>
+<script type="text/javascript">
+	fn1([1,2,3]);
+</script>
+</body>
+</html>

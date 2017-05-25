@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	user.oninput = function (){
+		jsonp({
+			url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+			data:{
+				wd:	user.value,
+				json:1
+			},
+			callback:'cb',
+			success:function(data){
+				var html = '';
+				data.s.forEach((e,i)=>{
+					if(i > 3){
+						return;
+					}
+					html += '<li>'+e+'</li>';
+				});
+				ul.innerHTML = html;
+			}
+		});
+	}
+	
+	function jsonp(json){
+		
+		var fnName = 'fn'+ +new Date + Math.random();
+		
+		fnName = fnName.replace('.','');
+		
+		var arr = [];
+		
+		for(var attr in json.data){
+			arr.push(attr+'='+json.data[attr]);
+		}
+		
+		json.data = arr.join('&');
+		
+		//console.log(json.data)
+		
+		var oS = document.createElement('script');
+		oS.src = json.url+'?'+json.data+'&'+json.callback+'='+fnName;
+		document.getElementsByTagName('head')[0].appendChild(oS);
+		oS.remove();
+
+		window[fnName] = function (data){
+			json.success(data);
+		}
+	}
+	
+	
+
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
