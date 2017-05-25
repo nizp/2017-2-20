@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+	<div id="box"></div>
+<script src="myJsonp_1.3.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	user.oninput = function (){
+		
+		jsonp({
+			url:'http://search.yhd.com/smart_box.do',
+			data:{
+				keyword:user.value
+			},
+			callback:'callback',
+			success:function(data){
+				
+				box.innerHTML = data.value;
+				////console.log(data);
+			}
+		});
+		
+		
+		
+//		http://search.yhd.com/smart_box.do?keyword=你&leaf=0&flag=v1&hotSearchFlag=new&newSmartBoxFlag=new&callback=jQuery111304835268511889943_1495695467845&_=1495695467854
+		
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<h2>搜索</h2>
+	<input type="text" name="user" id="user" autocomplete="off" value="" />
+	<ul id="ul">
+		
+	</ul>
+	<div id="box"></div>
+<script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	const user = document.getElementById('user');
+	const ul = document.getElementById('ul');
+	user.focus();
+	user.oninput = function (){
+		
+		$.ajax({
+			url:'http://search.yhd.com/smart_box.do',
+			dataType:'jsonp',
+			data:{
+				keyword:user.value
+			},
+			callback:'callback',
+			success:function(data){
+				box.innerHTML = data.value;
+			}
+		});
+		
+		
+//		$.getJSON(
+//			'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+user.value+'&cb=?',
+//			function(data){
+//				console.log(data);
+//			//box.innerHTML = data.value;
+//		});
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

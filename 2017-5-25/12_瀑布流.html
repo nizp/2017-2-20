@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      .pic{
+        width: 236px;
+        box-shadow:0 1px 3px rgba(0,0,0,.3);
+        overflow:hidden;
+        margin-top:10px;
+      }
+      img{
+        width:236px;
+        border: none;
+        display: block;
+      }
+      ul{
+        list-style: none;
+        margin: 0 auto;
+        width:994px;
+      }
+      li{
+        float:left;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+        <li>
+          <!--<div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+        <li>
+          <!--<div class="pic" style="height:200px">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+        <li>
+          <!--<div class="pic" style="height:300px">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+        <li>
+          <!--<div class="pic" style="height:100px">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>
+          <div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>-->
+        </li>
+    </ul>
+  <script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+			如何区分接口是jsonp的还是ajax的 
+				1.接口有没有回调函数字段
+				2.拿到数据之后，在浏览器上看看，是否有函数名+括号的
+	*/
+	
+	$.getJSON('http://www.wookmark.com/api/json/popular?callback=?',function(arr){
+		console.log(arr);
+		$.each(arr,function(i,e){
+			var div = $(`<div class="pic">
+				<img src="${e.preview}"/>
+			</div>`);
+			
+			$('li').eq(minHeight()).append(div);
+			
+		});
+		
+	});
+	
+	function minHeight(){
+		var max = Infinity;
+		var index = 0;
+		$('li').each((i,e)=>{
+			if(e.scrollHeight < max){
+				max = e.scrollHeight;
+				index = i;
+			}
+		});
+		
+		return index;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jquery实现全屏雪花飘落-jq22.com</title>
+<!--<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>-->
+<script src="jquery-3.2.1.js"></script>
+<style>
+* {
+	margin:0;
+	padding:0;
+	border:0;
+	overflow:hidden;
+}
+body {
+	background-color:#000;
+}
+</style>
+</head>
+<body>
+
+<script>
+var minSize = 20; //雪花的最小的尺寸
+var maxSize = 10; //雪花最大的尺寸
+var time = 300; //时隔多长时间产生一个雪花,值越小,雪越大.
+var flake = $('<img src="flake.png"/>').css({
+	'position':'absolute',
+	'top':'-50px'
+	}); //创建一个盒子,设置绝对定位,创建雪花放进去.
+$(function() { //运用jquery设置入口函数
+    setInterval(function() { //设置定时器
+        var body = $("body"); //将body由dom元素转为jQuery对象
+        var width = $(document).width(); //获取文档宽度
+        var height = $(document).height(); //获取文档高度
+        var startLeft = Math.random() * width; //设置雪花起始left位置
+        var endLeft = Math.random() * width; //设置雪花结束left位置
+        var flakeSize = maxSize * Math.random()+minSize; //设置雪花大小
+        var flakeOpacity = 0.2 + Math.random() * 0.3; //设置雪花透明度
+        var endFlakeOpacity = 0.5 + Math.random() * 0.5; //设置运动雪花透明度
+        var durationTime = 2000 * Math.random() + 5000; //设置运动执行时间
+        flake.clone().appendTo(body).css({
+            'left': startLeft,
+            'width':flakeSize,
+            'height':flakeSize,
+            'opacity': flakeOpacity
+        }).animate({
+            'left': endLeft,
+            'opacity': endFlakeOpacity,
+            'top': height
+        },
+        durationTime,
+        function() {
+            $(this).remove(); //克隆雪花并把它放入文档中,设置雪花样式,起始大小,起始雪花透明度,起始雪花颜色,起始雪花位置.调用animate方法设置运动结束位置,运动结束透明度.运动执行时间.落地清除.
+        });
+    },
+    time);
+});
+</script>
+</body>
+</html>

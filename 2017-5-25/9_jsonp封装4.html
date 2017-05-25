@@ -20,9 +20,8 @@
 			url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
 			data:{
 				wd:	user.value,
-				json:1
+				json:1,
 			},
-			callback:'cb',
 			success:function(data){
 				var html = '';
 				data.s.forEach((e,i)=>{
@@ -32,7 +31,8 @@
 					html += '<li>'+e+'</li>';
 				});
 				ul.innerHTML = html;
-			}
+			},
+			callback:'cb'
 		});
 	}
 	
@@ -47,11 +47,18 @@
 		//存[key1=value1,key2=value2]
 		var arr = [];
 		
+		/*
+			{wd:'s',json:1,'cb':'fn3213321'} 
+		*/
+		
+		json.data[json.callback] = fnName; //给json.data添加一个json.cb的属性值为fnName
+		
 		for(var attr in json.data){
 			arr.push(attr+'='+json.data[attr]);
 		}
+		console.log(arr)
 		
-		json.data = arr.join('&');  //xx=xxx&xxx=xxxx;
+		json.data = arr.join('&');  //xx=xxx&xxx=xxxx&xx=sss;
 		
 		//console.log(json.data)
 		
@@ -59,7 +66,7 @@
 		
 		//url+xx=xxx&xxx=xxxx&cb=fn32173872931
 		
-		oS.src = json.url+'?'+json.data+'&'+json.callback+'='+fnName;
+		oS.src = json.url+'?'+json.data;
 		
 		document.getElementsByTagName('head')[0].appendChild(oS);
 		

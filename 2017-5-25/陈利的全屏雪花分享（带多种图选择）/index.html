@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script src="jquery-3.2.1.js"></script>	
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			overflow: hidden;
+		}
+		body{
+			background:#000;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var minSize=20;
+		var maxSize=50;
+		var time=100;
+		var flake=$('<img src="flake.png">').css({
+			'position':'absolute',
+			'top':'-50px'
+		})
+//		$(function(){
+			setInterval(function(){
+				var body=$('body');
+				var width=$(document).width();
+				var height=$(document).height();
+				var flakeSize=maxSize*Math.random()+minSize;
+				var startLeft=width*Math.random();
+				var endLeft=width*Math.random();
+				var startOpacity=0.2+0.3*Math.random();
+				var endOpacity=0.5+0.5*Math.random();
+				var duringTime=2000*Math.random()+2000;
+				flake.clone().appendTo(body).css({
+					'width':flakeSize,
+					'height':flakeSize,
+					'left':startLeft,
+					'opacity':startOpacity
+				}).animate({
+					'left':endLeft,
+					'top':height,
+					'opacity':endOpacity
+				},duringTime,function(){
+					$(this).remove();
+				})
+			},time)
+//		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+#div1{
+	width:640px;
+	height: 5px;
+}
+#div2{
+	transition:.2s;
+	width:0;
+	height: 2px;
+	background:lightseagreen;
+	opacity: 1;
+}
+body{
+	transition:2s;
+}
+</style>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+<script type="text/javascript">
+	
+	var arr = [
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710539471&di=77f39588af860f963c4acbcb2bba5ffe&imgtype=0&src=http%3A%2F%2Fimg1.3lian.com%2F2015%2Fa1%2F39%2Fd%2F192.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710539471&di=77f39588af860f963c4acbcb2bba5ffe&imgtype=0&src=http%3A%2F%2Fimg1.3lian.com%2F2015%2Fa1%2F39%2Fd%2F193.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710539471&di=77f39588af860f963c4acbcb2bba5ffe&imgtype=0&src=http%3A%2F%2Fimg1.3lian.com%2F2015%2Fa1%2F39%2Fd%2F194.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710678696&di=fc7b4732b52936310c0e66b4eedcb266&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F71%2F30%2F15r58PIChmX_1024.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710734719&di=66c49a08bb629d15f1369640b0af44e5&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F15%2F32%2F43x58PICgE2_1024.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710734719&di=c0a9b0301bdaa27643367244e4fe124b&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fpic%2Fitem%2F343ad4b52fc0d8a0b0fb9575.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710734718&di=20ee2affa973c79b5166b8e854045ee7&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F12%2F83%2F26%2F87R58PICrct.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495710734718&di=31d7ddfdc73f0ecfeb2950adfa674058&imgtype=0&src=http%3A%2F%2Fscimg.jb51.net%2Fallimg%2F151228%2F14-15122Q60431W4.jpg',
+		'http://pic1.win4000.com/wallpaper/2/57b7f9bd86c7e.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495711123791&di=87750e3f057afbf83d511f3c01bf0cf4&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F10%2F97%2F33%2F81u58PICTkw.jpg',
+		'http://pic33.nipic.com/20131007/13644136_140929204101_2.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495711123791&di=319a97ecab6d03e1842d2cb1efde8559&imgtype=0&src=http%3A%2F%2Fimg17.3lian.com%2Fd%2Ffile%2F201701%2F23%2F22caec632f605230b882959614369660.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495711123790&di=6836c744adfa3d40bad1c757f493bb16&imgtype=0&src=http%3A%2F%2Fsc.jb51.net%2Fuploads%2Fallimg%2F150629%2F14-15062911450U38.jpg',
+		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495711123790&di=6836c744adfa3d40bad1c757f493bb16&imgtype=0&src=http%3A%2F%2Fsc.jb51.net%2Fuploads%2Fallimg%2F150629%2F14-15062911450U39.jpg',
+		'https://timgsa.baidx.com/timg?image&sec=1495711123790&di=6836c744adfa3d40bad1c757f493bb16&imgtype=0&src.net%2Fuploads%2Fallimg%2F150629%2F14-15062911450U01.jpg'
+	];
+	
+	var num = 0;
+	arr.forEach(function(e,i){
+		
+		var img = new Image();
+		
+		img.src = e;
+		
+		img.onload = function(){
+			num++;
+			div2.style.width = (num/arr.length)*640 + 'px';
+			if(num == arr.length){
+				div2.style.opacity = 0;
+				
+				setTimeout(function(){
+					document.body.style.background = 'skyblue';
+				},500);
+				
+				console.log('完成');
+			}
+		}
+		
+		img.onerror = function(){
+			img.onload();
+		}
+		
+	});
+	
+	
+	
+	
+	
+	
+//	var img = new Image();
+//	img.src = 'http://www.wookmark.com/images/original/653470_wookmark.jpg';
+//	
+//	img.onload = function(){
+//		alert(1);
+//	}
+//	
+//	img.onerror = function(){
+//		alert(23);
+//	}
+	
+</script>
+</body>
+</html>
