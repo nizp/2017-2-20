@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			div { width:100px; height:100px; border:1px solid #000; margin:100px; position:relative; }
+			div::after{ content:''; border:20px solid transparent; border-left-color:#000; position: absolute; right:-40px; top:20px; z-index:1; }
+			div::before{ content:''; border:20px solid transparent; border-left-color:#fff; position: absolute; right:-39px; top:20px; z-index:2; }
+		</style>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

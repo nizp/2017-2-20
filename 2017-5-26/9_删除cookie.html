@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		只要设置一个已经过去的时间，那么cookie就挂了 
+	*/
+	function removeCookie(key,value){
+		function setCookie(key,value,time){
+			var odate = new Date();
+			odate.setDate(odate.getDate()+time);
+			document.cookie = key+'='+value+';expires='+(time?odate:'');
+		}
+		setCookie(key,value,-2);
+	}
+	
+	removeCookie('key','小凤')
+	
+	
+</script>
+</body>
+</html>

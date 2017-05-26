@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      .pic{
+        width: 236px;
+        box-shadow:0 1px 3px rgba(0,0,0,.3);
+        overflow:hidden;
+        margin-top:10px;
+      }
+      img{
+        width:236px;
+        border: none;
+        display: block;
+      }
+      ul{
+        list-style: none;
+        margin: 0 auto;
+        border:1px solid #000;
+        position: relative;
+      }
+      li{
+        position: absolute;
+        transition:1s;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="ul">
+    	
+    </ul>
+  <script src="jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+	/*
+		 <li>
+          <div class="pic">
+            <img src="http:\/\/www.wookmark.com\/images\/original\/638518_wookmark.jpg">
+          </div>
+        </li>
+    
+    
+    var arrT = [0,1,2,3,4];
+		因为apply的第二个参数为数组，所以说，可以借Math.min。
+		console.log(Math.min.apply(null,arrT))
+   	
+   	
+	*/
+	
+	
+	
+	const iW = 236; //一张图片的宽度
+	const clientW = $(window).innerWidth();//可视区的宽度
+	
+	const clientH = $(window).innerHeight();
+	
+	const marginW = 10; //间距的宽
+	
+	const tw = iW + marginW;  //图片加间距
+	
+	const len = Math.floor(clientW/tw); //求出当前可视区能放几个图片
+	
+	$('#ul').css('width',len*tw-marginW);
+	
+	let arrT = []; //存top值的数组
+	let arrL = [];//存left值的数组
+	
+	//初始化每个图片的top、left
+	for(var i=0;i<len;i++){
+		arrT.push(0);
+		arrL.push(i*tw);
+	}
+	
+	let num = 0;
+	let onOff = true;
+
+	function createPic(){
+		if(!onOff)return;
+		onOff = false;
+		$.ajax({
+			url:'http://www.wookmark.com/api/json/popular?callback=?',
+			data:{
+				'page':num
+			},
+			dataType:'jsonp',
+			success:function(arr){
+				//console.log(arr);
+				$.each(arr,function(i,e){
+					var h = e.height*(iW/e.width);//求出当前pic的高度
+					
+					let $img = $('<img />');
+					
+					$img.attr('src',e.preview); //给图片url
+					
+					$img[0].onload = function(){ //当图片加载完成
+						
+								let $li = $(`<li class="pic"></li>`);
+								
+								$li.append($img);
+								
+								//设置css样式
+								$li.css({
+									left:arrL[minIndex().index],
+									top:arrT[minIndex().index],
+									height:h
+								});
+								
+								$('#ul').append($li);
+								
+								//添加完成之后，把当前最小的数值追加当前插入li的高度，以便于下次去匹配
+								arrT[minIndex().index] += (h+10);
+								
+								//t[200,100,60,70,80]
+								
+								//l[0,246,492,738,984]
+								
+								//console.log($li[0]);
+							}
+				});
+				onOff = true;
+			}
+		});
+	}
+	createPic();
+	$(document).scroll(function(){
+				
+				if(clientH + $(window).scrollTop() >= minIndex().find){
+					if(onOff){
+						num ++;
+						createPic();
+					}
+				}
+	});
+	
+	
+	$(window).resize(function(){
+		
+		const clientW = $(window).innerWidth();
+		
+		const marginW = 10; //间距的宽
+	
+		const tw = iW + marginW;  //图片加间距
+	
+		const len = Math.floor(clientW/tw); //求出当前可视区能放几个图片
+	
+		$('#ul').css('width',len*tw-marginW);
+		
+	 	arrT.length = 0;// [0,0,0,0]
+	 	
+	 	arrL.length = 0;
+	 	
+	 	for(var i=0;i<len;i++){
+	 		arrT.push(0);
+	 		arrL.push(tw*i);
+	 	}
+	 	
+	 	
+	 	$('li').each(function(i,e){
+	 		//console.log(e.style.top)
+	 		$(e).css({
+	 			left:arrL[minIndex().index],
+	 			top:arrT[minIndex().index]
+	 		});
+	 		
+	 		arrT[minIndex().index] += ($(e).height()+10);
+	 		
+	 	});
+		
+		//console.log(arrL,arrT);
+		
+	});
+	
+	
+	
+	function minIndex(){
+		let find = Math.min.apply(null,arrT);
+		let index = arrT.findIndex((e)=>{
+				return e == find;
+		});
+		return {
+			index,
+			find
+		}
+	}
+		
+	//console.log(minIndex().index)	;
+		
+	
+		
+		//let index = arrT.findIndex(find);
+	
+	
+	
+	console.log()
+	
+	
+	
+		
+	
+	
+</script>
+</body>
+</html>

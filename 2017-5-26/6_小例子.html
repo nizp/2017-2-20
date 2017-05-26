@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input type="text" name="" id="user" value="" />
+	密码:<input type="password" name="" id="pass" value="" />
+	<input type="button" id="btn" value="登录" />
+<script type="text/javascript">
+	 var user = document.getElementById('user');
+	 var pass = document.getElementById('pass');
+	 var btn = document.getElementById('btn');
+	 
+	 
+	 
+	 
+	 btn.onclick = function(){
+	 	var uVal = user.value;
+	 	var pVal = pass.value;  //name->momo
+
+	 	if(getCookie(uVal)==-1){
+	 		setCookie(uVal,pVal,1);
+	 	}
+	 	
+	 	window.location.reload();
+	 }
+	 
+	 if(getCookie('name') == 'xm'){
+	 	btn.value = '欢迎小明来的魔法的世界!';
+	 	user.style.display = 'none';
+	 	pass.style.display = 'none';
+	 	btn.disabled = true;
+	 }else{
+	 	btn.value = '登录';
+	 	user.style.display = 'block';
+	 	pass.style.display = 'block';
+	 	btn.disabled = false;
+	 }
+	 
+	 
+	 
+	
+	 function getCookie(key){
+		var arr = document.cookie.split('; ');
+		for(var i=0;i<arr.length;i++){
+			var arr2 = arr[i].split('=');
+			if(arr2[0] === key){
+				return arr2[1];
+			}
+		}
+		return -1;
+	}
+	 
+	function setCookie(key,value,time){
+		var odate = new Date();
+		odate.setDate(odate.getDate()+time);
+		document.cookie = key+'='+value+';expires='+(time?odate:'');
+	}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{ margin:0; padding:0; }
+			body{ background:#000; }
+			.box { width:1200px; height:1200px; position:relative; margin: 0 auto; }
+			div[class*=bor]{ border-radius:50%; border:1px solid #fff; }
+			.box div { position:absolute; }
+			
+			.b1-bor { width:150px; height:150px; top:525px; left:525px;
+			 }
+			.b2-bor { width:250px; height:250px; top:475px; left:475px; }
+			.b3-bor { width:350px; height:350px; top:425px; left:425px; }
+			.b4-bor { width:450px; height:450px; top:375px; left:375px; }
+			.b5-bor { width:600px; height:600px; top:300px; left:300px; }
+			.b6-bor { width:750px; height:750px; top:225px; left:225px; }
+			.b7-bor { width:900px; height:900px; top:150px; left:150px; }
+			.b8-bor { width:1050px; height:1050px; top:75px; left:75px; }
+			
+			.b0 { width:100px; height:100px; background:url(img/0.png) 0 0 no-repeat; top:550px; left:550px; }
+			.b1 { width:50px; height:50px; background:url(img/2.png) 0 0 no-repeat; left:650px; top:575px;
+			transform-origin:-50px 25px ;
+			animation: rotation 2s linear infinite;
+			 }
+			.b2 { width:50px; height:50px; background:url(img/3.png) 0 0 no-repeat; left:700px; top:575px;
+			transform-origin:-100px 25px ;
+			animation: rotation 3s linear infinite;
+			 }
+			.b3 { width:50px; height:50px; background:url(img/4.png) 0 0 no-repeat; left:750px; top:575px;
+			transform-origin:-150px 25px ;
+			animation: rotation 4s linear infinite;
+			 }
+			.b4 { width:50px; height:50px; background:url(img/5.png) 0 0 no-repeat; left:800px; top:575px;
+			transform-origin:-200px 25px ;
+			animation: rotation 5s linear infinite;
+			 }
+			.b5 { width:100px; height:100px; background:url(img/6.png) 0 0 no-repeat; left:850px; top:550px;
+			transform-origin:-250px 50px ;
+			animation: rotation 6s linear infinite;
+			 }
+			.b6 { width:100px; height:100px; background:url(img/7.png) 0 0 no-repeat; left:925px; top:550px;
+			transform-origin:-325px 50px ;
+			animation: rotation 7s linear infinite;
+			 }
+			.b7 { width:100px; height:100px; background:url(img/8.png) 0 0 no-repeat; left:1000px; top:550px;
+			transform-origin:-400px 50px ;
+			animation: rotation 8s linear infinite;
+			 }
+			.b8 { width:100px; height:100px; background:url(img/9.png) 0 0 no-repeat; left:1075px; top:550px;
+			transform-origin:-475px 50px ;
+			animation: rotation 9s linear infinite;
+			 }
+			 @keyframes rotation{
+			 	to{
+			 		transform: rotate(-360deg);
+			 	}
+			 }
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="b0"></div>
+			
+			<div class="b1-bor"></div>
+			<div class="b1"></div>
+			<div class="b2-bor"></div>
+			<div class="b2"></div>
+			<div class="b3-bor"></div>
+			<div class="b3"></div>
+			<div class="b4-bor"></div>
+			<div class="b4"></div>
+			<div class="b5-bor"></div>
+			<div class="b5"></div>
+			<div class="b6-bor"></div>
+			<div class="b6"></div>
+			<div class="b7-bor"></div>
+			<div class="b7"></div>
+			<div class="b8-bor"></div>
+			<div class="b8"></div>
+		</div>
+	</body>
+</html>

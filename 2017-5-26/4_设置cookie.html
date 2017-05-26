@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		cookie（必须放在服务器环境下）:
+			自定义属性,获取出来的都是字符串。
+			
+		指某些网站为了辨别用户身份、进行 session 跟踪而储存在用户本地终端上的数据.
+		设置之后会存在浏览器的缓存中并且浏览器调试工具可以捕捉到。
+		
+		cookie体积在低版本浏览器下是字字千金。
+		
+		一般来说每个域有50个左右限制
+		
+		设置：
+			document.cookie = xx
+			
+			document.cookie = key=value
+			
+		生命周期：
+			默认的生命周期为本次浏览器关闭之前
+			不同的浏览器不共享cookie
+			
+			
+			
+			
+			
+	*/
+	
+//	document.index = 0;
+	
+//	document.cookie = 0;
+//	
+//	document.cookie = 1;
+
+//	document.cookie = 'name=leo';
+//	
+	//document.cookie = 'name=momo';
+	
+	//console.log(document.cookie)
+	
+	var odate = new Date();
+	odate.setDate(odate.getDate()+1);
+	
+	//console.log(odate)
+	
+	//document.cookie = 'name=momo;expires='+odate;
+	
+//	function setCookie(key,value,time){
+//		time = time || 0;
+//		var odate = new Date();
+//		odate.setDate(odate.getDate()+time);
+//		document.cookie = key+'='+value+';expires='+odate;
+//	}
+//	
+
+
+	function setCookie(key,value,time){
+//		if(time){
+//			var odate = new Date();
+//			odate.setDate(odate.getDate()+time);
+//			document.cookie = key+'='+value+';expires='+odate;
+//		}else{
+//			document.cookie = key+'='+value+';expires=';
+//		}
+
+		var odate = new Date();
+		odate.setDate(odate.getDate()+time);
+		document.cookie = key+'='+value+';expires='+(time?odate:'');
+		
+	}
+	
+	
+	setCookie('name','小明',1000);
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
