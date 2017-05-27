@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				/*为了使超出后不出滚动条*/
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" background="#111"></canvas>
+	</body>
+	<script type="text/javascript">
+		//获取画布对象
+		var canvas = document.getElementById('canvas');
+		//获取画布的上下文
+		var context = canvas.getContext("2d");
+		//获取浏览器屏幕的宽度和高度
+		var W = window.innerWidth;
+		var H = window.innerHeight;
+		//设置canvas的宽度和高度
+		canvas.width = W;
+		canvas.height = H;
+		//每个文字的字体大小
+		var fontSize = 20;
+		//计算当前屏幕所能容下几列
+		var colunms = Math.floor(W/fontSize);
+		//记录每列文字的y轴坐标
+		var drops = [];
+		//给每一个文字一个起始点的位置
+		for(var i=0;i<colunms;i++){
+			drops.push(0);
+		}
+		//运动的文字
+		var str = "0 1 0 1 0 1 00 11 0011 001  011";
+		//fillText(str,x,y),去更改y轴的坐标
+		//绘画函数
+		function draw(){
+			//给canvas设置背景颜色
+			context.fillStyle = "rgba(0,0,0,0.05)";
+			context.fillRect(0,0,W,H);
+			//给字体设置样式
+			context.font = "800 "+fontSize+"px 微软雅黑";
+			//给字体添加颜色
+			context.fillStyle = "#0c3";
+			//写入画布
+			for(var i=0;i<colunms;i++){
+				//根据字符串长度生成随机数
+				var index = Math.floor(Math.random()*str.length);
+				//x轴的随机位置
+				var x = i * fontSize;
+				//y轴的随机位置
+				var y = drops[i] * fontSize;
+				//fillText(在画布输出的文字，开始绘制文本的x轴坐标，开始绘制文本的y轴坐标)
+				context.fillText(str[index],x,y);
+				//如果要改变时间，肯定要每次的起点
+				if(y>=canvas.height && Math.random()>0.99){
+					drops[i]=0
+				}
+				drops[i]++;
+			}
+		}
+		setInterval(draw,50);
+	</script>
+</html>

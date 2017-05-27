@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<button>点击创建</button>
+	<button>点击删除</button>
+<script type="text/javascript">
+	
+	/*
+		storage:
+			**当前页面绑定**这个事件之后，如果在浏览器上删除本地数据，就会在**当前页面**触发这个事件 
+			
+		storage这个事件更擅长通过操作本地数据来通知当前浏览器的除自身的其他兄弟页面。
+		前提条件是在兄弟页面在一个域中才能操作。
+			
+			
+	*/
+	
+	
+	var btns = document.querySelectorAll('button');
+	
+	btns[0].onclick = function(){
+		localStorage.setItem('age',25);
+	}
+	
+	btns[1].onclick = function(){
+		localStorage.removeItem('age');
+	}
+	
+	window.addEventListener("storage",function(){
+		console.log('你是大山?');
+	},false)
+	
+	
+</script>
+</body>
+</html>

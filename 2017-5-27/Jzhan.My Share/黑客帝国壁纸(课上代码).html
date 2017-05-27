@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html{
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="can"></canvas>
+	<script>
+		var can = document.getElementById('can');
+		//创建绘制环境
+		var context = can.getContext('2d');
+		var W = window.innerWidth;
+		var H = window.innerHeight;
+		
+		can.width = W;
+		can.height = H;
+		var fontSize = 20;
+		//
+		var columns = Math.floor(W/fontSize);
+		var arr = [];
+		for(var i=0;i<columns;i++){
+			arr.push(0);
+		}
+		var str = "0998hfhf877777";
+		function draw(){
+			//填充颜色
+			context.fillStyle = "rgba(0,0,0,0.05)";
+			//画一个方块
+			context.fillRect(0,0,W,H);
+			context.font = "800 "+fontSize+"px 微软雅黑";
+			context.fillStyle = "#0c3";
+			for(var i=0;i<columns;i++){
+				var index = Math.floor(Math.random()*str.length);
+				var x = i*fontSize;
+				var y = arr[i]*fontSize;
+				context.fillText(str[index],x,y);
+				if(y>=can.height&&Math.random()>0.99){
+					arr[i] = 0;
+				}
+				arr[i]++;
+			}
+		}
+		setInterval(draw,50);
+	</script>
+</body>
+</html>

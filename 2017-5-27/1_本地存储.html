@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		cookie:它本身不是前端技术，但是现在很多处理cookie都由前端搞
+		
+		最大的缺点就是小。
+		
+		只要是前端的东西都不安全。
+		
+		localStorage:
+			目前有5M，但是以后应该还会扩充
+		
+		setItem(key,val)  设置本地存储的数据
+		getItem(key)  获取本地存储的数据
+		removeItem(key)  删除本地存储的数据
+		
+		clear():清空本地存储的数据
+		
+		生命周期：
+			只要你不删永远在！
+			
+		
+				
+	*/
+	
+//	localStorage
+
+	localStorage.setItem('name','小明');
+	localStorage.setItem('name1','小明');
+	localStorage.setItem('name2','小明');
+	
+//	console.log(localStorage.getItem('name'))
+
+	//localStorage.removeItem('name');
+	
+	
+	localStorage.clear();
+	
+	console.dir(localStorage);
+	
+	
+	
+</script>
+</body>
+</html>
