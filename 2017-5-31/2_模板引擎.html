@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	color:red;
+}
+</style>
+</head>
+<body>
+	<div id="app"></div>
+<script src="template.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/html" id="temp">
+	<h1><%=title%></h1>
+	<ul>
+		<%for(var i=0;i<list.length;i++){%>
+			<%if(list[i] == '摄影'){%>
+				<li class="red"><%=list[i].replace('摄','she')%></li>
+			<%}else{%>
+				<li><%=list[i]%></li>
+			<%}%>
+		<%}%>
+	</ul>
+</script>
+<script type="text/javascript">
+	
+	/*
+		<%=title%>  //输出
+		<%for(){%>  //标签对
+		
+		<%}%>
+		
+		
+		1.引入template.js
+		
+		2.创建script标签并且type="text/html"  给id
+			
+			模板代码就放到这个script标签中
+			
+		
+		3.页面中创建一个box，给id
+		
+		4.在自己的script中，调用template
+			
+			第一个参数:第2步的ID
+			第二个参数:放入数据
+			
+		5.将template的返回值放到第三步的容器中
+		
+	*/
+	
+	var data = {
+	    title: '标签',
+	    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+	};
+	
+	var html = template('temp',data);
+	document.getElementById('app').innerHTML = html;
+	
+</script>
+</body>
+</html>

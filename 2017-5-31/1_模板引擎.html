@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		
+	</ul>
+	
+<script type="text/javascript">
+	/*
+		模板引擎:
+			template
+		${}
+		
+		js ->  JQ  ->  template(相对JQ提升了性能问题)[artTemplate]
+		
+		
+		
+		chrome
+			342	
+			5
+			13   5
+		iE
+			2689
+			
+			122
+			
+			196   17
+			
+		
+
+		
+		
+	*/
+	
+	
+	var oul = document.getElementById('ul');
+	var html = '';
+	//console.time('计时器');
+	var data = +new Date;
+	for(var i=0;i<1000;i++){
+		//oul.innerHTML += '<li>'+(i+1)+'</li>';
+		
+		html += '<li>'+(i+1)+'</li>'
+		
+//		var li = document.createElement('li');
+//		li.innerHTML = (i+1);
+//		
+//		ul.appendChild(li);
+		
+	}
+	oul.innerHTML = html;
+	
+	alert(+new Date - data)
+	//console.timeEnd('计时器');
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

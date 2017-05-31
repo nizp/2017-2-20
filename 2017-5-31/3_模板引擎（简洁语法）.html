@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	color:red;
+}
+</style>
+</head>
+<body>
+	<div id="box"></div>
+<script src="template_min.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/html" id="temp">
+	
+	<h1>{{title}}</h1>
+	<ul>
+		{{each list}}
+			{{if list[$index] == '陈晓凤'}}
+				<li class="red">{{list[$index]}}</li>
+			{{else}}
+				<li>{{list[$index]}}</li>
+			{{/if}}
+		{{/each}}
+	</ul>
+	
+</script>
+<script type="text/javascript">
+	
+	var data = {
+		title:'同学名单',
+		list:[
+			'陈晓凤',
+			'张梦龙',
+			'陈美莲',
+			'马赛豪',
+			'刘钊',
+			'陈利',
+			'康智',
+			'王宇'
+		]
+	}
+	var html = template('temp',data);
+	document.getElementById('box').innerHTML = html;
+</script>
+</body>
+</html>
