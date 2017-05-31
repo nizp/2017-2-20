@@ -172,12 +172,17 @@ $(function(){
 		$.each(data,function(i,e){
 			var $tr = createTr(e);
 			$tr.appendTo(tBody);
-//			arr.push(e.id);
+			arr.push(e.id);
 		});
 	}
 	view();
 
 	var num = Math.max.apply(null,arr);
+
+	
+//	console.log(num);
+	
+	
 	//[1,2,3]
 	tBody.on('click','input[value=上移]',function(){
 		var a = data[$(this).closest('tr').index()];
@@ -199,7 +204,11 @@ $(function(){
 		var a = $(this).closest('tr').index();
 		data.splice(a,1);
 		view();
-		yixin();
+		if(data.length){
+			yixin();
+		}else{
+			$('#checkAll').prop('checked',false);
+		}
 	});
 	
 	//全选
@@ -211,6 +220,15 @@ $(function(){
 	//点击全选
 	$('#checkAll').click(function(){
 		tBody.find('input[type=checkbox]').prop('checked',$(this).prop('checked'));
+		
+		//点击全选的时候，将所有的数据checked对应全选
+		
+		const $this = $(this);
+		
+		$.each(data,function(i,e){
+			e.checked = $this.prop('checked');
+		});
+
 	});
 	
 	//一心想判断是否需要全选
@@ -224,55 +242,65 @@ $(function(){
 	
 	
 	var inputs = $('.addPre').find('input');
-	
+
+	//添加
 	inputs.eq(2).click(function(){
 		var name = inputs.eq(0).val();
 		var age = inputs.eq(1).val();
 
-		var tr = createTr({
+		var tr = {
 	        'id' : ++num,
 	        'name' : name,
-	        'price' : age
-	   	});
-		tBody.append(tr);
+	        'price' : age,
+	        'checked':false
+	   	};
+		
+		data.push(tr);
+		view();
 		inputs.eq(0).val('');
 		inputs.eq(1).val('');
 	});
 
+
+
 	//排序
 	
-	let nextLi = $('.addPre').next();
+	let nextLi = $('.addPre').next();//包这排序的li
 	
 	let seles = nextLi.find('select');
 	
-	let nextLi_btns = nextLi.find('input[type="button"]');
+	let nextLi_btns = nextLi.find('input[type="button"]');//提交和批量删除
 	
+	//点击提交排序
 	nextLi_btns.eq(0).click(function(){
-		var oVal = seles.eq(0).val();
-		var tVal = seles.eq(1).val();//id p
-		var trs = Array.from(tBody.find('tr'));
+		var oVal = seles.eq(0).val();//price   id
+		var tVal = seles.eq(1).val();//2（高到低） 1（低到高）
 		
 		if(tVal == 2){//从小到大还是从大到小
 			//从大到小
-			trs.sort(function(a,b){
-				return $(b).attr(oVal) - $(a).attr(oVal); 
+			data.sort(function(a,b){
+				return  b[oVal] - a[oVal]; 
 			});
 		}else{
 			//console.log(oVal)
-			trs.sort(function(a,b){
-				return $(a).attr(oVal) - $(b).attr(oVal)
+			data.sort(function(a,b){
+				return  a[oVal] - b[oVal]; 
 			});
 		}
 		
-		tBody.html('');
-		
-		tBody.html(trs);
-		
+		view();
 	});
+	
+	
 	
 	//批量删除：
 	nextLi_btns.eq(1).click(function(){
-		tBody.find('input:checked').closest('tr').remove();
+
+		data = data.filter((e)=>{
+			return !e.checked
+		});
+		
+		view();
 	});
 	
 	
