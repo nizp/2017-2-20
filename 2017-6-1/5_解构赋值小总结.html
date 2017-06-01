@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	let {push} = Array.prototype;
+
+	let obj = {
+		name:{
+			x:'n',
+			z:'a',
+			l:'m'
+		},
+		age:{
+			x:function(){
+				return 12;
+			},
+			z:24,
+			l:88
+		}
+	}
+	
+	let {age} = obj;
+	
+	
+	
+	console.log(age.x() + 12);
+	
+	
+	
+	//console.log(push)
+	
+</script>
+</body>
+</html>

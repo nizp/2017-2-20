@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		String.fromCodePoint:
+			将超出0xFFFF的进制数转成对应的字符
+			
+		str.codePointAt:
+			将中文的生僻字（超出了0xFFFF范围 ）转成进制数
+			
+			
+		110 ->  10
+		
+		
+		0x2^0 + 1x2^1 + 1x2^2 = 6
+		0 + 2 + 4
+	*/
+	
+	//var str = '饕餮';//0xFFFF
+	
+	var str = '𠮷'; //超出了0xFFFF范围  0x20BB7
+	
+	
+//	console.log(str.charCodeAt(0));//55362
+//	console.log(str.charCodeAt(1))//57271
+
+	
+	//console.log(str.codePointAt(0));//134071
+	//console.log(str.codePointAt(1));//57271
+	//console.log(str.length);
+	
+	
+	//console.log(str.codePointAt(0).toString(16)) ;//20bb7
+	
+	
+	function is32Bit(c) {
+	  return c.codePointAt(0) > 0xFFFF;
+	}
+
+	//console.log(is32Bit("𠮷"));//这个判断用来判断某个字符有没有超过0xFFFF
+	
+	
+	console.log(String.fromCodePoint(0x20BB7));
+	
+	
+	
+	//console.log(str.length);
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		函数的形参支持数组格式 。
+	*/
+	
+//	function fn([a,b,c,d]){
+//		console.log(b+c);
+//	}
+//	
+//	var arr = [100,120,80,99];
+//	
+//	fn(arr);
+
+//	
+//	var arr = [[1,2],[3,4]];
+//	
+//	console.log(arr.map(([a,b])=> a+b));
+
+//	
+//	function move(a=1,b=2) {
+//		console.log(a+b);
+//	}
+//	move();
+	
+	/*
+		如果不传空对象，传参的时候一定要写个空对象 
+	*/
+
+	function move({x=1,y=2}={}) {
+	  return [x, y];
+	}
+////	
+	console.log(move({}));
+	
+	
+	
+	
+//	function fn(json){
+		var settings = {
+			url:'',
+			success:function(){},
+			error:function(){}
+		}
+//		for(var attr in json){
+//			settings[attr] = json[attr];
+//		}
+//		
+//		console.log(settings)
+//	}
+//	
+	
+	function fn(
+		{
+			success=function(){},
+			error=function(){},
+			age=23
+		}
+	){
+		console.log(age)
+	}
+	
+	fn({
+		age:55
+	})
+	
+	
+	
+</script>
+</body>
+</html>

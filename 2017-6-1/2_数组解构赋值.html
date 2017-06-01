@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		解构赋值:
+			有对象的和数组的解构赋值
+	*/
+//	var a = 10;
+//	var b = 5;
+//	
+//	var [b,a] = [a,b];
+//	console.log(a,b);
+	
+//	let c = a;
+//	
+//	a = b;
+//	b = c;
+	
+	
+//	var arr = [1, [[2], 3]];
+//	
+//	let [a,[[b],c]]  = arr;
+
+//	var arr = [12,[6,[5,[4,[3]]]],7]
+//
+//	let [f,[d,[c,[b,[a]]]],e] = arr;
+//	
+//	console.log(a,b,c,d,e,f);
+
+	
+//	let [x,, y] = [1, 2, 3];
+//	
+//	console.log(x,y)
+
+	//报错
+//	let [foo] = 1; //数字不能解构
+//	let [foo] = false;  //布尔值不能解构
+//	let [foo] = NaN; //NaN也不能解构
+//	let [foo] = undefined;//
+//	let [foo] = null;
+//	let [foo] = {};
+//	let [fn] = function fn2(){}
+	
+	//小总结，如果使用数组的方式去解构，那么除了数组别的数据解构都报错
+	
+	//console.log(fn)
+	
+	
+	
+//	let [x, y='b'] = ['a'];
+	
+	//let [x, y=x] = ['a']; //a,a
+	
+	//let [x, y=x] = [,'a']; //有配置走配置，没配置走默认
+	
+	//console.log(x,y); //undefined 'a'
+	
+	//let [x, y=x] = []; //如果没有数组中没有传，那么默认就是undefined
+	
+	
+	/*
+		
+		如果一个数组中有个变量且这个变量没有赋值，那么会报错
+		
+		当使用解构赋值之后（前提条件用var来声明解构），数组不会因为a而报错
+		
+		这个时候发生什么事呢？
+		
+			解构之后，如果使用了var，那么会先给左边的变量预解析，
+			然后右边赋值给左边，左边再去读取刚才右边的每个值。
+		
+		
+		***使用let的时候一定要注意没有预解析的问题。
+	*/
+	
+//	var [a,b] = [1,a];
+	
+	//var [a,b] = [1,a];
+	
+	//var [a,b] = [,a]; // a = 10;
+	
+	//console.log(c,b);
+	
+	
+	
+//	function f() {
+//	  console.log('aaa');
+//	}
+//
+//	let [x = f()] = [1];
+//	
+//	console.log(x); //1
+	
+	
+	
+//	let x;
+//	if ([1][0] === 1) {
+//	  x = f();
+//	} else {
+//	  x = [1][0];
+//	}
+//	console.log(x);
+
+//	let [x = 1, y = x] = [];//1,1
+	
+//	let [x = 1, y = x] = [2]
+
+//	let [x = 5, y = x] = [1, 2];
+
+//	var [x = y, y = 1] = [];
+	
+	console.log(x,y);
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

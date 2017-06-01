@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:300px;
+	height: 200px;
+	background: greenyellow;
+	position: absolute;
+	left:0;
+	top:100px;
+	font-size:20px;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+	
+//	var [a,b] = [];
+
+//	var [a=5,b=a] = [1];
+
+//	var [a=b,b] = [1,3];
+	
+//	let [a=b,b] = [,3];
+
+//	let [a] = 12;
+
+//	let [a,[b]] = [12,[3]]
+
+//	console.log(a,b);
+
+	
+//	let { foo, bar } = { foo: "aaa", bar: "bbb" };
+
+	//当左边解构赋值之后还取了别名，key值就失效，正确找法，找冒号右边的变量
+	//let { foo:a, bar:b } = { foo: "aaa", bar: "bbb" };
+
+	
+//	let obj = { first: 'hello', last: 'world' };
+//	let { first: f, last: l } = obj;
+//	console.log(f,l);
+
+	
+	//不管数组还是对象的解构，最左边都是以逗号分隔
+	var div1 = document.getElementById('div1');
+	//let {width:w,height:h,fontSize:f} = getComputedStyle(div1);
+	//console.log(w,h,f);
+	//console.log(width,height,fontSize);
+
+	
+	//解构的值并不是克隆，只是读取的一种方式,如果操作，其实还是操作对象本身的属性。
+//	let obj = {
+//		arr:[1,2,3,4],
+//		age:20,
+//		name:'周庆林'
+//	}
+//	
+//	let {arr:a,age:b} = obj;
+//	
+//	//a.push(5);
+//	
+////	var arr = obj.arr;
+////	var age = obj.age;	
+//	console.log(a,b);
+
+	
+//	let foo;
+//	let {foo} = {foo: 1};  //报错
+
+	
+//	let obj = {
+//	  p: [
+//	    'Hello',
+//	    { y: 'World' }
+//	  ]
+//	};
+//
+//	let {p} = obj;
+//	
+//	let [a,{y}] = p;
+//	
+//	console.log(a,y)
+
+	
+//	var node = {
+//	  loc: {
+//	    start: {
+//	      line: 1,
+//	      column: 5
+//	    }
+//	  }
+//	};
+//
+//	let {loc:{start:{line:abc,column}}} = node;
+//	
+//	console.log(column,b)
+
+	
+//	//有配置走配置，没配置走默认
+//	var {x:y} = {};
+//	console.log(y)
+	
+	
+	
+//	let str = 'miaov';
+////	let {length:l} = str;
+//	let [a,b,c,d] = str;
+//	
+//	console.log(a);
+	
+	//console.log(l);
+
+	
+	//查看下面数据是不是数组
+//	let arr = [1,2,3,4];
+//	let {push} = arr;
+//	console.log(push == Array.prototype.push);
+
+//	let arr = [1,2,3,4];
+//	let {hehe} = arr;
+//	console.log(hehe)
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+</script>
+</body>
+</html>
