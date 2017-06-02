@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	姓名:<input type="text" id="user"  autocomplete="off"/><span id="span"></span>
+<script type="text/javascript">
+	
+	var user = document.getElementById('user');
+	var span = document.getElementById('span');
+	
+	user.onblur = function(){
+		
+		var ajax = getJSON('php/get.php?user='+this.value);
+		
+		ajax.then((data)=>{
+			span.innerHTML = data;
+			console.log(11111);
+		});
+		
+		console.log(123);
+		
+	}
+	
+	
+	function getJSON(url){
+		var promis = new Promise((succ,error)=>{
+			var ajax = new XMLHttpRequest();
+			ajax.open('get',url);
+			ajax.send();
+			
+			ajax.onload = function(){
+				if(ajax.status>=200 && ajax.status <= 207 ){
+					succ(ajax.responseText);
+				}else{
+					error(ajax.status)
+				}
+			}
+		});
+		return promis;
+	}
+	
+	
+</script>
+</body>
+</html>

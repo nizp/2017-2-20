@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	console.log(new Array(3)); //length为3
+
+	//Array.of方法用于将一组值，转换为数组。
+	//console.log(Array.of(3)); // [3]
+	
+	
+	//copyWithin
+	
+	//上面代码表示将从3号位直到数组结束的成员（4和5），复制到从0号位开始的位置，结果覆盖了原来的1和2。
+//	console.log([1, 2, 3, 4, 5].copyWithin(0, 3));
+	
+//	console.log([1, 2, 3, 4, 5].copyWithin(0, 2));
+
+	//console.log([1, 2, 3, 4, 5].copyWithin(0, 3, 4))
+	
+//	console.log([1, 2, 3, 4, 5].copyWithin(2, 2, 3));
+
+//	console.log([1, 2, 3, 4, 5].copyWithin(0, 3, 4))//42345
+
+
+//	var arr = [{id:1},{id:2},{id:3},{id:4}]; 
+//	
+//	console.log(arr.find((e)=> e.id==2)); //找到复合条件的并且返回出来
+//	
+//	
+//	console.log(arr.findIndex((e)=> e.id==2));
+
+
+	/*
+		for of 只能在有Symbol.iterator遍历接口的数据下遍历，没有就不能使用
+		
+		默认，数组和字符串有遍历接口
+		
+	*/
+	var arr = [1,2,3,4];
+	var obj = {};
+	let str = 'miaov';
+	
+	//console.dir(new String)
+	
+	console.dir(arr);
+	
+	
+	/*
+		keys，得到的是数组中的key值 
+	*/
+	
+//	for(var i of arr.keys()){
+//		console.log(i);
+//	}
+
+	/*
+		entries:可以读取到key和val
+	*/
+	for(var [key,val] of arr.entries()){
+		console.log(key,val)
+	}
+	
+	
+</script>
+</body>
+</html>

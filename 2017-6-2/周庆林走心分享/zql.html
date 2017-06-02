@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" style="display: block; background: #000; margin: 50px auto; "></canvas>
+	<script>
+		const canvas = document.querySelector('#canvas');
+		const ctx = canvas.getContext('2d');
+		let n = 0;
+		canvas.width = 600;
+		canvas.height = 600;
+		ctx.translate(300,300);
+		
+		function drawCircle(){
+			ctx.beginPath();
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = '#49f';
+			ctx.arc(0,0,150,0,2*Math.PI);
+			ctx.stroke();
+		};
+		//drawCircle();
+		function drawText(num){
+			ctx.beginPath();
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.fillStyle = '#49f';
+			ctx.font = '60px Arial';
+			ctx.fillText(num+ '%',0,0)
+			
+		}
+		//drawText();
+		
+		function drawRate(n){
+			ctx.beginPath();
+			ctx.lineWidth = 15;
+			ctx.arc(0,0,150,-0.5*Math.PI,(n-0.5)*Math.PI);
+			ctx.stroke();	
+		}
+		setInterval(function(){
+			n += 0.03;
+			if(n>2){
+				n=0;
+			}
+			ctx.clearRect(-300,-300,600,600);
+			drawCircle();
+			drawText(Math.floor(n/2*100));
+			drawRate(n)
+			
+		},300)
+		
+	</script>
+</body>
+</html>

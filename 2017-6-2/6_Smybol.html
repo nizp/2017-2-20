@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		第7个数据类型
+			Symbol：唯一
+	*/
+	
+	var s1 = Symbol();
+	var s2 = Symbol();
+
+	//console.log(s1 == s2)
+	 // false
+
+//// 有参数的情况
+//var s1 = Symbol('foo');
+//var s2 = Symbol('foo');
+//
+//console.log(s1 == s2);
+
+	
+
+var mySymbol = Symbol();
+
+// 第一种写法
+//var a = {};
+//a[mySymbol] = 'Hello!';
+//
+//a[mySymbol] = 'hehe'
+//console.log(a[mySymbol])
+
+	var mySymbol = Symbol();
+	var a = {};
+
+	a.mySymbol = 'Hello!';
+	a[mySymbol] // undefined
+	a['mySymbol'] // "Hello!"
+
+
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		Iterator 
+	*/
+	
+	var obj2 = {
+		name:'momo',
+		age:23,
+		say:'123'
+	}
+	
+//	obj2[Symbol.iterator] = function(){
+//		var keys = Object.keys(obj2);//数组  length
+//		var i = 0;
+//		var len = keys.length;
+//		return {
+//			next(){
+//				if(i < len){
+//					return {
+//						value:{
+//							key:keys[i],
+//							val:obj2[keys[i++]]
+//						},
+//						done:false
+//					}
+//				}else{
+//					return {
+//						value:null,
+//						done:true
+//					}
+//				}
+//			}
+//		}
+//	}
+	
+	
+	Object.prototype[Symbol.iterator] = function(){
+		var _this = this;
+		var keys = Object.keys(this);
+		var i = 0;
+		var len = keys.length;
+		return {
+			next(){
+				
+				if(len > i){
+					
+					return {
+						value:{
+							key:keys[i], 
+							val:_this[keys[i++]]//obj.name = momo
+						},
+						//是否循环，true就终止循环，false就循环
+						done:false
+					}
+					
+				}else{
+					
+					return {
+						value:null,//
+						//是否循环，true就终止循环，false就循环
+						done:true
+					}
+				}
+			}
+		}
+	}
+	
+	//console.dir(Object)
+
+	for(var i of obj2){
+		console.log(i)
+	}
+	
+	
+	
+</script>
+</body>
+</html>

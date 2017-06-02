@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。 
+		
+		add(value)：添加某个值，返回Set结构本身。
+		delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+		has(value)：返回一个布尔值，表示该值是否为Set的成员。
+		clear()：清除所有成员，没有返回值。
+		
+	*/
+	
+//	var arr = [1,2,3,2,1,4,5,6,6];
+//	
+//	console.log(...new Set(arr))
+//	
+//	console.log([...new Set(arr)]);
+
+	const s = new Set();
+	
+	
+	s.add(1)
+	
+	console.log(s.has(1)); //只能判断简单类型是否被Set包含
+	
+	//s.delete({name:'momo'})
+	
+	
+	console.dir(s)
+	
+//	var arr = [2, 3, 5, 4, 5, 2, 2]
+//	arr.forEach(x => s.add(x));
+//	
+//	let {assign} = Object.prototype;
+	
+//	console.log(s.assign == assign);
+	
+//	for (let i of s) {
+//	  console.log(i);
+//	}
+	
+</script>
+</body>
+</html>

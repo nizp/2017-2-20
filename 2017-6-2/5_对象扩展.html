@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		Object.assign：
+			方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+	*/
+	
+	var obj = {
+		name:'leo',
+		age:99,
+	}
+	var obj2 = {
+		name:'momo',
+		age:23,
+		say:'123'
+	}
+	
+//	console.log(Object.assign(obj2,obj));
+
+	
+	
+	//console.log(Object.is(0,-0)) ;//左值等不等于右值 ，可以用在NaN中
+	
+	
+	//console.log(Object.keys(obj2));//把对象的key找到并且存到数组中
+	
+	
+	/*
+		让对象能够使用for of 
+	*/
+	
+	let {keys, values, entries} = Object;
+	
+	//console.log(keys(obj2))
+	
+//	for(var key of keys(obj2)){  //key
+//		console.log(obj2[key])
+//	}
+
+
+//	for(var val of values(obj2)){  //key
+//		console.log(val)
+//	}
+
+	for(var [key,val] of entries(obj2)){  //key
+		console.log(key,val)
+	}
+	
+	
+	//console.log(values(obj2))
+	
+	//let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+	
+	let [x,y,...z] = [1,2,3,4,5,6,7,8];
+	
+	console.log(z);
+	
+</script>
+</body>
+</html>

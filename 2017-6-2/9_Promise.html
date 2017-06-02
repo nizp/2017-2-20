@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		有三种状态：
+		Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）
+		
+	*/
+	
+	var a = 10;
+
+//	setTimeout(function(){
+//		a = 20;
+//	});
+//	
+//	alert(a);
+	
+//	var a = 10;
+//	var p1 = new Promise(function(resolve,reject){//第一参数是成功，第二参数失败
+//		setTimeout(function(){
+//			a = 20;
+//			resolve(a);
+//		},1000);
+//		
+//		setTimeout(function(){
+//			reject('失败');
+//		},2000);
+//		
+//	});
+//	p1.then(function(a){
+//		alert(a);
+//	},function(b){
+//		alert(b)
+//	});
+	
+	
+	
+	var src = 'http://img1.qcdqcdn.com/group1/M00/0F/D7/oYYBAFi6gL6AcADEAADatiVD9-4778_300x200.jpg';
+	
+	Promise.resolve({
+		then(succ,error){
+			
+			var img = new Image();
+			img.src = src;
+			
+			img.onload = function(){
+				succ(this);
+			}
+			
+			img.onerror = function(){
+				error(new Error('就是失败'));
+			}
+		}
+	}).then((a)=>{
+		console.log(a)
+	});
+	
+	
+//	var p1 = new Promise((succ,error)=>{
+//		
+//		var img = new Image();
+//		img.src = src;
+//		
+//		img.onload = function(){
+//			succ(this);
+//		}
+//		
+//		img.onerror = function(){
+//			error(new Error('就是失败'));
+//		}
+//		
+//	});
+//	
+//	p1.then((that)=>{
+//		document.body.appendChild(that);
+//	});
+
+	//console.log(p1)
+	
+	
+	function p(src){
+		var p1 = new Promise((succ,error)=>{
+			var img = new Image();
+			img.src = src;
+			
+			img.onload = function(){
+				succ(this);
+			}
+			
+			img.onerror = function(){
+				error(new Error('就是失败'));
+			}
+		});
+		return p1;
+	}
+	
+	
+	var arr = [
+		'http://img1.qcdqcdn.com/group1/M00/02/71/oYYBAFkcC5qAC91BAAKTtUpR7zA081_300x200.png',
+		'http://img1.qcdqcdn.com/group1/M00/0F/DA/oYYBAFi6gOiAScIxAAC-pcO2ZcI823_300x200.jpg',
+		'http://img1.qcdqcdn.com/group1/M00/01/5D/o4YBAFjeKYCAIZI6AAOK-EXhOWo852_300x200.ppx'
+	];
+	
+	//all只有所有的都成功，才执行then成功做的事情
+	var p3 = Promise.all([p(arr[0]),p(arr[1]),p(arr[2])]);
+	
+	p3.then((all)=>{ //所有成功之后返回的元素
+		for(var i of all){
+			document.body.appendChild(i);
+		}
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>
