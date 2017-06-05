@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	//{},{}
+	function fn1(){
+		var x = 0;
+		var y = 10;
+	
+		return {
+			x,
+			y,
+			fn(){
+				alert(123)
+			}
+		};//直接使用变量名即可，已逗号分隔多个
+//		return {
+//			x:x,
+//			y:y,
+//			fn:function(){
+//				alert(1);
+//			}
+//		}
+	}
+	
+//	var f = fn1();
+//	f.fn();
+
+	/*
+		object原本是不允许key为有变量的值，但是现在可以将key用中括号包一下
+		这个时候就可以使用变量了
+	*/
+	var n1 = '1';
+	var n2 = '2';
+	
+	var obj = {
+		['name'+'1']:'momo',
+		['name'+'2']:'leo'
+	}
+	
+	console.log(obj['name'+n2]);
+	
+	
+	
+	
+	//console.log(fn1())
+	
+	
+</script>
+</body>
+</html>
