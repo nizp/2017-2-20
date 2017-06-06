@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+<script src="jquery-3.2.1.js" charset="utf-8"></script>
+  <!-- <div style="width:100px;height:100px;background:green"></div> -->
+  <input type="text" value="" id="user"><br />
+  <input type="password" value="" id="pass"><br />
+  <input type="button" value="注册" id="add">
+  <input type="button" value="登录" id="login">
+<script type="text/javascript">
+  $('#add').click(function(){
+    //http://localhost:8088/user?act=login&user=oldGod&pass=123
+    $.ajax({
+      url:'http://localhost:8088/user',
+      data:{
+        act:'add',
+        user:$('#user').val(),
+        pass:$('#pass').val()
+      },
+      dataType:'json',
+      success:function(data){
+        if(data.code){
+          //失败
+          $('#user').css('border','1px solid red');
+        }else{
+          //成功
+          $('#user').css('border','1px solid green');
+        }
+      }
+    });
+  });
+  
+  //http://localhost:8088/user?act=login&user=oldGod&pass=123
+  $('#login').click(function(){
+    $.ajax({
+      url:'http://localhost:8088/user',
+      data:{
+        act:'login',
+        user:$('#user').val(),
+        pass:$('#pass').val()
+      },
+      dataType:'json',
+      success:function(data){
+        if(data.code){
+          alert(data.msg);
+        }else{
+          alert(data.msg);
+          window.location.href = 'http://www.miaov.com';
+        }
+      }
+    });
+  });
+  
+  
+  
+  
+</script>
+</body>
+</html>

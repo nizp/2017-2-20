@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		#stage{
+			width:900px;
+			margin: 200px auto;
+			perspective: 800px;
+			position: relative;
+		}
+		#container{
+			width: 135px;
+			height: 100px;
+			position: absolute;
+			left: 50%;
+			margin-left: -64px;
+			transition: 1s;
+			transform-style: preserve-3d;
+		}
+		img{
+			width: 135px;
+			height: 200px;
+			position:absolute;
+			bottom: 0;
+		}
+		img:nth-of-type(1){
+			transform: rotateY(40deg) translateZ(300px);
+		}
+		img:nth-of-type(2){
+			transform: rotateY(80deg) translateZ(300px);
+		}
+		img:nth-of-type(3){
+			transform: rotateY(120deg) translateZ(300px);
+		}
+		img:nth-of-type(4){
+			transform: rotateY(160deg) translateZ(300px);
+		}
+		img:nth-of-type(5){
+			transform: rotateY(200deg) translateZ(300px);
+		}
+		img:nth-of-type(6){
+			transform: rotateY(240deg) translateZ(300px);
+		}
+		img:nth-of-type(7){
+			transform: rotateY(280deg) translateZ(300px);
+		}
+		img:nth-of-type(8){
+			transform: rotateY(320deg) translateZ(300px);
+		}
+		img:nth-of-type(9){
+			transform: rotateY(360deg) translateZ(300px);
+		}
+	</style>
+</head>
+<body>
+	<div id="stage">
+		<div id="container">
+			<img src="images/1.jpg" alt="" />
+			<img src="images/2.jpg" alt="" />
+			<img src="images/3.jpg" alt="" />
+			<img src="images/4.jpg" alt="" />
+			<img src="images/5.jpg" alt="" />
+			<img src="images/6.jpg" alt="" />
+			<img src="images/7.jpg" alt="" />
+			<img src="images/8.jpg" alt="" />
+			<img src="images/9.jpg" alt="" />
+		</div>
+	</div>
+	<script>
+		const container = document.getElementById('container');
+		const deg = -40;
+		let i = 0;
+		container.onclick = function(){
+			this.style.transform = 'rotateY('+(deg*(i++))+'deg)'
+		}
+	</script>
+</body>
+</html>
