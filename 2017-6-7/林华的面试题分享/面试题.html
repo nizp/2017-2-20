@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/*
+				预解析
+				function Foo()
+				var getName
+				function getName()
+			 
+			*/
+			
+			
+			//Foo().getName()
+			function Foo(){
+				getName = function(){
+					alert(1);
+				}
+				return this;
+			}
+			
+			Foo.getName = function(){
+				alert(2);
+			}
+			
+			Foo.prototype.getName = function(){
+				alert(3);
+			}
+			
+			var getName = function(){
+				alert(4);
+			}
+			
+			function getName(){
+				alert(5);
+			}
+			Foo.getName();//2
+			getName();//4
+			Foo().getName();//1
+			getName();//1
+			new Foo.getName();//2
+			(new Foo()).getName();//3
+			new ((new Foo()).getName());//3
+			
+			/*
+			 构造函数没有返回值
+			 返回实例化对象
+			 构造函数有返回值
+				 简单类型
+				 	返回实例化对象
+				 对象类型
+				 	返回对象类型
+				 	
+				 	
+			1.js
+			
+			var module = {
+				exports:{
+					a:temp,
+					b:temp
+				}
+			}
+			
+			(function(){
+				
+				var temp = 1;
+				module.exports = temp
+				return module.exports;
+				
+			});
+			
+				 	
+			2.js
+			
+			(function(){
+				
+				var temp = 2;
+				module.exports = temp;
+				return module.exports;
+				
+			})
+			
+			
+				 	
+			
+			 * 
+			 * 
+			 * */
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

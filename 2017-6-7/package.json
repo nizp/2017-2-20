@@ -1,0 +1,25 @@
+{
+  "name": "myclass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nizp": "webpack -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-webpack-plugin": "^2.28.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^2.1.0",
+    "style-loader": "^0.18.2"
+  }
+}

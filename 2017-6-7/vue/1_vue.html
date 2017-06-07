@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div id="temp">
+    <ul v-if="list">
+      <li v-for="val,key in list">{{key}}:{{val}}</li>
+    </ul>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    vue : view
+    中国人:尤雨溪（男）
+    
+    angular
+    react
+    vue
+    
+    更专注于数据，只专注数据的操作即可，不用关心DOM。
+    
+    MVC ->  vue -> V层-> 帮你渲染视图
+    
+    mvvm框架
+    
+    m  数据
+    v  视图
+    vm vue
+    mvx
+    mv*
+  */
+  var v = new Vue({
+    el:'#temp',
+    data:{
+      //list:[1,2,3,4]
+      list:null
+    }
+  });
+  setTimeout(function(){
+    v.list = {
+      a:1,
+      b:3,
+      c:2,
+      d:5,
+      f:6
+    }
+  },2000)
+</script>
+</body>
+</html>
