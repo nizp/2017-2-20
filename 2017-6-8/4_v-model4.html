@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  #div1{
+    width:10px;
+    height: 10px;
+    background: green;
+  }
+</style>
+</head>
+<body>
+  <div class="red">
+    <select v-model="selected" v-on:change="change">
+     <option>上海</option>
+     <option>深圳</option>
+     <option>北京</option>
+     <option></option>
+   </select>
+   <div id="div1"></div>
+   <span>Selected: {{ selected }}</span>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    当使用select框的时候，定义一个初始值选择的就是初始值这个
+    option，当切换option的时候，状态随着内容所改变。
+    数据本身也进行了改变
+  */
+  var v = new Vue({
+    el:'.red',
+    data:{
+      selected:''
+    },
+    methods:{
+      change(ev){
+        let div = ev.target.nextElementSibling;
+        switch (this.selected) {
+          case '上海':
+            div.style.width = '100px';
+            break;
+          case '深圳':
+            div.style.height = '100px';
+            break;
+          case '北京':
+            div.style.background = 'red';
+            break;
+          default:
+            div.style.cssText = '';
+            break;
+        }
+        //console.log(ev.target.nextElementSibling)
+      }
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  #div1{
+    width:100px;
+    height: 100px;
+    background: green;
+  }
+  #div1.red{
+    background:red;
+  }
+  #div1.bor{
+    border: 10px solid #000;
+  }
+  
+</style>
+</head>
+<body>
+  <div id="red">
+    <!-- <input type="text" @keyup.13="fn1"> -->
+    <div
+      style="width:100px;height:100px;border:1px solid #000"
+      @click="fn1"
+      @mouseover.self="fn3"
+    >
+      <div
+        style="width:50px;height:50px;background:red"
+        @click.stop.once="fn5"
+      ></div>
+    </div>
+    <img
+      src="img/0.png"
+      @mousedown.prevent="fn2"
+    >
+    <!-- <ul >
+      <li>1</li>
+      <li>2</li>
+    </ul> -->
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    stop:阻止冒泡
+    prevent：阻止默认行为
+    self:只在触发事件元素身上才会调用
+    once：事件只触发一次
+    left - (2.2.0) 只当点击鼠标左键时触发。
+    right - (2.2.0) 只当点击鼠标右键时触发。
+    middle - (2.2.0) 只当点击鼠标中键时触发。
+  */
+  var v = new Vue({
+    el:'#red',
+    data:{
+      v:false
+    },
+    methods:{
+      fn1(){
+        alert('呵呵哒')
+      },
+      fn2(){
+        //alert('呵呵哒')
+      },
+      fn3(){
+        alert(3);
+      },
+      fn5(){
+        alert('5');
+      }
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  #div1{
+    width:100px;
+    height: 100px;
+    background: green;
+  }
+  #div1.red{
+    background:red;
+  }
+  #div1.bor{
+    border: 10px solid #000;
+  }
+  
+</style>
+</head>
+<body>
+  <div id="red">
+    <button v-on:click="fn">点击开变</button>
+    <!-- <div id="div1" v-bind:class="[red]"></div> -->
+    <div id="div1" v-bind:class="{red:v}"></div>
+    <!-- <div id="div1" v-bind:class="[red,{bor:true}]"></div> -->
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    v-bind:class="[{}]"
+    v-bind:style="[{}]"
+    
+    如果使用数组，那么class值要为数据中的值{
+      class="red"
+      v-bind:class="[redA]"
+      data : {
+        redA:'red'
+      }
+    }
+    
+    如果使用对象，那么class值是{red(className):boolean}
+    如果boolean为true:添加这个className，false,不添加这个className
+    
+    
+    
+    
+  */
+  var v = new Vue({
+    el:'#red',
+    data:{
+      v:false,
+      red:'red'
+    },
+    methods:{
+      fn(){
+        this.v = !this.v;
+      }
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

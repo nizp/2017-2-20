@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div class="red">
+    <ul>
+      <!-- <li v-for="val in list">{{val}}</li> -->
+      <!-- <li v-for="val,index in list">{{index}}:{{val}}</li> -->
+      <li v-for="val,key in list">{{key}}:{{val}}</li>
+    </ul>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    不管是数组还是对象都是通过in来遍历（v-for）
+    v-for：
+      如果是数组 val in data
+        这个val 数组中的每项
+        如果要找下标
+      val,index in data
+      
+    如果是对象:
+      val,key in data
+      
+      
+      
+  */
+  var dataArr = {
+    name:'张杰',
+    age:18,
+    sex:'妹纸'
+  }//[1,2,3];
+  
+  new Vue({
+    el:'.red',
+    data:{
+      list:dataArr
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

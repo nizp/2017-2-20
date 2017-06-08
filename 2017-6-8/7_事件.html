@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  #div1{
+    width:100px;
+    height: 100px;
+    background: green;
+  }
+  #div1.red{
+    background:red;
+  }
+  #div1.bor{
+    border: 10px solid #000;
+  }
+  
+</style>
+</head>
+<body>
+  <div id="red">
+    <!-- <button @click="fn">点击开变</button> -->
+    <button @click="fn(5,$event)">点击开变</button>
+    <div id="div1"></div>
+    
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    添加事件：
+      v-on:click="事件绑定函数"
+      缩写：@click="事件绑定函数"
+    
+    事件函数一般都写在  methods中，methods是实例化对象上的一个属性
+    ***this，指向实例化对象.
+    methods:{
+      fn1(){}
+      fn2(){}
+    }
+    
+  */
+  var v = new Vue({
+    el:'#red',
+    data:{
+      v:false
+    },
+    methods:{
+      // fn(ev){//在不传参的时候，ev就为事件对象
+      //   //this
+      //   const div = document.getElementById('div1');
+      //   div.style.background = 'red';
+      //   console.log(ev);
+      // }
+      //如果事件绑定函数中第一个参数传入了别的值（不是event）
+      //那么需要手动添加第二个参数为$event,它就是事件对象
+      fn(ev,$event){
+        console.log(ev,$event);
+      }
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

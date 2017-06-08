@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div class="red">
+    <ul>
+      <li v-for="val,key in list">
+        <input
+          type="checkbox"
+          v-on:click="click(val)"
+          v-model="val.checked"
+        ><span>{{val.content}}</span>
+      </li>
+    </ul>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var dataArr = [{
+		content:'早餐很辣2',
+		checked:false
+	}];
+  
+  var v = new Vue({
+    el:'.red',
+    data:{
+      list:dataArr
+    },
+    methods:{
+      click(val){
+        // val.checked = !val.checked;
+        // console.log(this.list)
+      }
+    }
+  });
+//  console.log( v.$data.list )
+  
+  
+</script>
+</body>
+</html>

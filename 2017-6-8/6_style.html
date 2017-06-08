@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  #div1{
+    width:100px;
+    height: 100px;
+    background: green;
+  }
+  #div1.red{
+    background:red;
+  }
+  #div1.bor{
+    border: 10px solid #000;
+  }
+  
+</style>
+</head>
+<body>
+  <div id="red">
+    <button v-on:click="fn">点击开变</button>
+    
+    <!-- <div id="div1" v-bind:style="{background:red}"></div> -->
+    <div v-bind:style="[{background:red}]"></div>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    v-bind:style="{background:red}"
+    v-bind:style="redA"
+    data{
+      redA:{background:red}
+    }
+    
+    v-bind:style="[{}]"
+    
+    缩写:
+      :
+    
+    注意：
+      如果使用数组的方式添加样式，那么数组中必须要为对象，
+      直接写样式是不认的
+    
+  */
+  var v = new Vue({
+    el:'#red',
+    data:{
+      v:false,
+      red:'red',
+      baseStyles:{
+        background:'blue'
+      }
+    }
+  });
+  
+  
+</script>
+</body>
+</html>
