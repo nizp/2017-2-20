@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <my-hezi></my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  /*
+    建议使用烤串命名:
+      my-hezi
+      myHezi
+    创建子组件的时候，名字虽然可以使用驼峰命名，但是在添加到
+    父组件的时候，要使用烤串命名
+    
+    ****先声明子组件，再写父组件
+    
+    ****声明子组件的时候，顶层不能有多个标签，如果要使用多个标签
+    ****那么在多个标签中包一个空标签，使得这个组件顶层就一个标签
+      <div>div</div><span>span</span>   ×
+      
+      <div>
+        <div>div</div><span>span</span> √
+      </div>
+    
+    ****不然会报错。
+    
+    建议（小技巧）：
+      如果要使用驼峰，那么用烤串命名，这样添加到父组件的时候不会乱。
+      
+    
+      
+      
+  */
+  
+  // Vue.component('my-hezi', {
+  //    template:'<div><span>我是span</span></div>'
+  // });
+  
+  var temp = `<div><div>div</div><span>我是span</span></div>`;
+  
+  Vue.component('my-hezi', {
+     template:temp
+  });
+  
+  Vue.component('my-box', {
+     template:temp
+  });
+  
+  
+  //根组件
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

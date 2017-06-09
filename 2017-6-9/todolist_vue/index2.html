@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="src/css/base.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input
+                  class="new-todo"
+                  placeholder="请输入内容"
+                  v-model.trim="val"
+                  @keyup.13="keyup"
+                >
+            </header>
+            <section class="main">
+                <input
+                  class="toggle-all"
+                  type="checkbox"
+                  v-model="allcheck"
+                >
+                <ul class="todo-list">
+                    <li v-bind:class="{completed:val.checked}" v-for="val,index in changeView">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="val.checked">
+                            <label>{{val.content}}</label>
+                            <button class="destroy" @click="remove(index)"></button>
+                        </div>
+                        <!-- <input class="edit" value="多多对对对"> -->
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{len}}</strong>
+	            	<span>条未选中</span>
+	            </span>
+              <ul class="filters">
+                <li>
+                  <a href="#/all" :class="{selected:isSelected=='all'}">全部</a>
+                </li>
+                <li>
+                  <a href="#/active" :class="{selected:isSelected=='active'}">未完成</a>
+                </li>
+                <li>
+                  <a href="#/completed" :class="{selected:isSelected=='completed'}">已完成</a>
+                </li>
+              </ul>
+              <button
+                class="clear-completed"
+                @click="clear"
+              >
+                  清除完成项
+              </button>
+            </footer>
+        </div>
+    </section>
+<script src="src/js/vue.js" charset="utf-8"></script>
+<script src="comm/app2.js" charset="utf-8"></script>
+</body>
+</html>

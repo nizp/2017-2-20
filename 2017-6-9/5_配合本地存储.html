@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" @keyup.13="keyup" v-model="val">
+    <ul>
+      <li v-for="val,key in list">
+        <input type="checkbox" v-model="val.checked">
+        <span>{{val.content}}</span>
+      </li>
+    </ul>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  let list = [
+    {
+      content:'早餐很辣',
+      checked:false
+    },
+    {
+      content:'早餐很辣2',
+      checked:false
+    }
+  ]
+  var v = new Vue({
+    el:'#app',
+    data:{
+      list:getData(),
+      val:''
+    },
+    //本地存储通过watch的深度监听来监控数据的变化，当数据发生变化的
+    //时候将新的数据放到本地
+    watch:{
+      list:{
+        handler: function (newVal, oldVal) {
+          // console.log(newVal, oldVal);
+          createData(newVal);
+        },
+        deep: true
+      }
+    },
+    methods:{
+      keyup(){
+        this.list.push({
+          content:this.val,
+          checked:false
+        });
+        this.val = '';
+      }
+    }
+  });
+  
+  // v.list = [{content:1,checked:true}]
+  
+  //把数据存到本地
+  function createData(data){
+    localStorage.setItem('list',JSON.stringify(data));
+  }
+  //获取本地数据
+  function getData(){
+    return JSON.parse(localStorage.getItem('list')||'[]');
+  }
+  
+  
+</script>
+</body>
+</html>

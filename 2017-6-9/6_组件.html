@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <table>
+      <tr is="my-tr"></tr>
+    </table>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    固定格式的标签使用组件的时候需要先写一个正确的
+    格式，然后在这个格式下写is="组件名"，这个时候
+    就不会出现标签乱套的情况。
+  */
+  
+  Vue.component('my-tr',{
+    template:'<tr><td>tttt</td></tr>'
+  })
+  
+  //根组件
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

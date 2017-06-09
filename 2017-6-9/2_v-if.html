@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+.red{
+  background: red;
+}
+.green{
+  background: green;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li
+        class="red"
+        v-for="val,index in list"
+        @click="click(val)"
+        v-if="val.status"
+      >{{val.c}}</li>
+      <li
+        class="green"
+        @click="click(val)"
+        v-else
+      >{{val.c}}</li>
+    </ul>
+  </div>
+  
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    v-if是当某个条件成立的情况下插入某个（些）元素，是直接操作DOM
+    性能相对来说不是太好（show）
+   */
+  new Vue({
+    el:'#app',
+    data:{
+      list:[
+        {c:'1',status:false},
+        {c:'2',status:true},
+        {c:'3',status:false},
+        {c:'4',status:true},
+        {c:'5',status:false}
+      ]
+    },
+    methods:{
+      click(val){
+        val.status = !val.status;
+        // console.log(val)
+      }
+    }
+  });
+</script>
+</body>
+</html>

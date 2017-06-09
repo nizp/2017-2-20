@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+#box{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+}
+.red{
+  background: red;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="显示" @click="click">
+    <!-- <div id="box" v-if="onOff"></div> -->
+      <div id="box" v-show="onOff"></div>
+  </div>
+  
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    v-if是当某个条件成立的情况下插入某个（些）元素，是直接操作DOM
+    性能相对来说不是太好（show）
+    
+    如果频繁操作DOM的显示或者隐藏，那么建议用show
+    如果通过某个判断渲染次数较少，可以用v-if
+    
+    如果使用if-else,v-for可以不用写，用if的for即可。
+    
+    如果要使用else-if，那么要紧跟if的下面。
+      v-if
+      v-else-if
+    
+   */
+  new Vue({
+    el:'#app',
+    data:{
+      onOff:true
+    },
+    methods:{
+      click(val){
+        this.onOff = !this.onOff;
+      }
+    }
+  });
+</script>
+</body>
+</html>

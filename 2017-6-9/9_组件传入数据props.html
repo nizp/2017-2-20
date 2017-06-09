@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <my-hezi num="10" number="20"></my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    当组件嵌入根元素中的时候，填写的数据是通过
+    props来进行传递，数组[],每个数据都为字符串以逗号分隔
+    
+  */
+  var temp = `<div>{{num}}::{{number}}</div>`;
+  
+  var data = {
+    num:0
+  }
+  Vue.component('my-hezi', {
+     props:['num','number'],
+     template:temp
+  });
+  
+  
+  //根组件
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <my-hezi></my-hezi>
+    <my-hezi></my-hezi>
+    <my-hezi></my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  /*
+    注意：
+      在组件中data是个函数，不是一个对象方式显示
+      data:{}  ×
+      data(){} | data:function(){}  √
+      
+      var json = {};
+      data:function(){
+        return {}  √
+        return json ×  不能为变量名
+      }
+      
+  */
+  
+  var temp = `<div @click="num+=1">{{num}}</div>`;
+  
+  var data = {
+    num:0
+  }
+  Vue.component('my-hezi', {
+     template:temp,
+     data(){
+       return {
+         num:0
+       }
+     }
+    //  data(){
+    //    return data
+    //  }
+  });
+  
+  
+  //根组件
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

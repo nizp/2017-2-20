@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数式编程说明</title>
+</head>
+<body>
+  
+
+<script>
+/**
+ * 纯函数 
+ * 纯函数的定义是，对于相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用，也不依赖外部环境的状态。
+ */ 
+
+// Array.slice是纯函数，因为它没有副作用，对于固定的输入，输出总是固定的
+// 可以，这很函数式
+var arr = [1, 2, 3, 4, 5]
+console.log(arr.slice(0, 3))
+//=> [1, 2, 3]
+console.log(arr.slice(0, 3))
+//=> [1, 2, 3]
+
+// Array.splice是不纯的，它有副作用，对于固定的输入，输出不是固定的
+// 这不函数式
+console.log(arr.splice(0, 3))
+//=> [1, 2, 3]
+console.log(arr.splice(0, 3))
+//=> [4, 5]
+console.log(arr.splice(0, 3))
+//=> []
+
+/**
+ * 为什么我们推荐用纯函数呢, 
+ * 因为有时候, 我们想截取数组前三位, 但是不能更改数组本身的内容
+ *  因为其他模块可能依赖这个数组的内容, 所以要用slice 这种纯的函数来处理数组 
+ */
+
+//不纯的
+var min = 18
+var checkage = age => age > min
+
+/**
+ * 对外部有依赖
+ */ 
+var checkage = function (age) {
+  return age > min
+}
+
+// 纯的
+// 缺点: 可以注意到，纯的 checkage 把关键数字 18 硬编码在函数内部，扩展性比较差，
+//我们可以在后面的柯里化中看到如何用优雅的函数式解决这种问题
+var checkage = age => age > 18
+console.log(checkage(20))
+
+
+/**
+ * 函数 curry 化
+ * 传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。
+ * 先看例子
+ */
+
+// 1 加法函数
+var add = (x, y) => x + y
+var add = x => (y => x + y)
+
+/**
+ * var add = function (x) {
+ *  return function (y) {
+ *    return x + y
+ *  }
+ * }
+ */ 
+
+//试试看
+// 把 2 缓存起来, 纯函数写法
+var add2 = add(2)
+
+console.log(add2(2)) // =>4
+console.log(add2(10)) // =>12
+
+/**
+ * 为什么要cuury化呢, 因为可以缓存一些计算, 
+ * 事实上柯里化是一种“预加载”函数的方法，通过传递较少的参数，得到一个已经记住了这些参数的新函数，
+ * 某种意义上讲，这是一种对参数的“缓存”，是一种非常高效的编写函数的方法：
+ */ 
+
+// 2 优化 checkAge
+var checkage = min => (age => age > min)
+
+var checkage = function (min) {
+  return function (age) {
+    return age > min
+  }
+}
+
+var checkage18 = checkage(18)
+console.log(checkage18(20))
+console.log(checkage18(17))
+
+var checkage30 = checkage(30)
+
+console.log(checkage30(19))
+console.log(checkage30(31))
+
+// =>true
+
+// 3 更熟悉的案例 Function.prototype.bind
+// const loadHandler = function () {
+//   console.log('load context: ', this)
+// }
+// window.addEventListener('load', loadHandler)
+
+// window.addEventListener('load', loadHandler.bind({ name: 'qiao' }))
+
+// Function.prototype.bind
+
+/**
+ * 高阶函数: 
+ * 函数是Javascript中的一等公民，不仅能被赋值，也能和普通变量一样，作为函数的参数。
+ * 将函数作为参数
+ */
+Array.prototype.map
+
+var arr = [1, 2, 3]
+
+// 操作器
+var operator = (x) => x * 2
+
+console.log(arr.map(operator))
+
+Array.prototype.some
+Array.prototype.every
+Array.prototype.filter
+
+Array.prototype.map = function (operator) {
+  var newResult = []
+  for (var i = 0, len = this.length; i < len; i++) {
+    newResult.push(operator.call(this[i], this[i], i))
+  }
+  return newResult
+}
+
+console.log(arr.map(function (x) {
+  return x * 2;
+}))
+
+/**
+ * 谓词函数
+ */ 
+
+
+
+</script>
+
+</body>
+</html>
