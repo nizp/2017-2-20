@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+</style>
+</head>
+<body>
+  <div id="app">
+    <my-hezi :nnum="number" :list="list"></my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  var temp = `<div>
+    <input  type="button" value="点击" @click="onOff = !onOff" />
+    <ul v-show="onOff">
+      <li v-for="val,key in list">{{val}}</li>
+    </ul>
+  </div>`;
+  Vue.component('my-hezi', {
+     template:temp,
+     data(){
+       return {
+         onOff:false
+       }
+     },
+     props:['nnum','list']
+  });
+  
+  //根组件
+  new Vue({
+    el:'#app',
+    data:{
+      number:0,
+      list:[1,2,3,4]
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <my-hezi>
+      
+      <!-- <div>123</div>
+      <span>456</span> -->
+      
+      <template slot="1">
+        <div>123</div>
+        <span>456</span>
+      </template>
+    </my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    slot分发内容
+    
+    slot创建是在模板树中定义，可以编写默认的样式，如果在目录树中没有设置
+    那么走默认，否则走配置。
+    
+    如果要配置(目录树中)，那么在模板中必须要有slot标签，不然无效.
+    
+    在组件中配置，在模板中必须要有slot
+    
+    当页面中有多个slot的时候，需要给每个slot加上name属性
+    在定制的时候，通过slot属性去对应name
+    
+    如果在一个slot中定制多套标签，这个时候一般
+      <p slot="1">1</p>
+      <p slot="1">2</p>
+      <p slot="1">3</p>
+      
+    但是上面的方式每个定制都要写一遍slot，这样感觉比较麻烦，所以使用
+    template标签对去包含一下。
+      
+    <template slot="1">
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+    </template>
+    
+   */
+  
+  Vue.component('my-hezi',{
+    template:`
+      <div>
+          <slot name="1">
+            <span>haha</span>
+          </slot>
+          <slot name="2">
+            <span>hehe</span>
+          </slot>
+        <p>我是谁?</p>
+      </div>
+    `
+  });
+  
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

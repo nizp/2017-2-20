@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <!-- 目录树 -->
+  <div id="app">
+    <!-- <my-hezi :suibian="100"></my-hezi> -->
+    <my-hezi :suibian="font"></my-hezi>
+  </div>
+  
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  /*
+    数据如果是不是从父组件传递到子组件的，那么属性类型只能为数字（不然会报错）
+    
+    如果渲染到页面的内容不是数字，那么可以通过监听父级的数据或者
+    子组件设置一个制定数据进行渲染。
+  */
+  
+  //模板树
+  const templateX = `<div>
+    <p>{{suibian}}</p>
+    <p>{{nm}}</p>
+  </div>`
+  
+  Vue.component('my-hezi',{
+    props:['suibian'],
+    data(){
+      return {
+        nm:'我是子的数字'
+      }
+    },
+    template:templateX
+  });
+  
+  new Vue({
+    el:'#app',
+    data:{
+      font:'我是数字'
+    }
+  });
+  
+  
+  
+</script>
+</body>
+</html>

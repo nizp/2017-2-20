@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <!-- 目录树 -->
+  <div id="app">
+    <p @click="yui">点击找下面的组件</p>
+    <my-hezi ref="hz"></my-hezi>
+  </div>
+  
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  
+  /*
+    ref：给组件或者模板元素加上一个的标记，可以通过$refs去直接获取
+    
+    定义：ref="xxx"   获取: vue.$refs.xxx
+    
+    注意：
+    同名的标记如果出现多个，那么后设置的会把前设置的给覆盖（只能取到一个）
+    
+  */
+  
+  //模板树
+  const templateX = `<div ref="d">
+    <h2 ref="h2">子组件</h2>
+    <h2 ref="h5">子组件2</h2>
+    <button @click="childChange">点击数字变</button>
+  </div>`
+  
+  Vue.component('my-hezi',{
+    template:templateX,
+    methods:{
+      childChange(){
+        console.log(this.$refs.d.children[1])
+      }
+    }
+  });
+  
+  
+
+  new Vue({
+    el:'#app',
+    data:{
+      font:100
+    },
+    methods:{
+      changeFn(val){
+        this.font = val;
+        console.log(val);
+      },
+      yui(){
+        console.log(this.$refs.hz.$refs)
+      }
+    }
+  });
+  
+  
+  
+</script>
+</body>
+</html>

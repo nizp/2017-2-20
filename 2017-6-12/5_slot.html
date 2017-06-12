@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <my-hezi>
+      <div>1235</div>
+      <div>789</div>
+      <p>10jqk</p>
+    </my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+    slot分发内容
+    
+    slot创建是在模板树中定义，可以编写默认的样式，如果在目录树中没有设置
+    那么走默认，否则走配置。
+    
+    如果要配置(目录树中)，那么在模板中必须要有slot标签，不然无效.
+    
+    在组件中配置，在模板中必须要有slot
+    
+    
+    
+    
+    
+    
+    
+   */
+  
+  Vue.component('my-hezi',{
+    template:`
+      <div>
+        <slot>
+          <span style="color:red">哒哒哒</span>
+        </slot>
+        <p>我是谁?</p>
+      </div>
+    `
+  });
+  
+  new Vue({
+    el:'#app'
+  });
+  
+  
+</script>
+</body>
+</html>

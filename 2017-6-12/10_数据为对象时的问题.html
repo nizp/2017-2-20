@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <h2>父组件</h2>
+    <div>{{num}}</div>
+    <hr />
+    <my-hezi :num="num"></my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  Vue.component('my-hezi',{
+    props:['num'],
+    data(){
+      return {
+        arr:this.num
+      }
+    },
+    template:`
+      <div>
+        <button @click="childChange">点击数字变</button>
+        <h2>子组件</h2>
+        <p>{{arr}}</p>
+      </div>
+    `,
+    methods:{
+      childChange(){
+        //如果数据为对象，并且子组件要操作，那么在操作之前保存一份
+        //操作保存的那个数据，最后赋值。
+        var arr = this.arr.slice();
+        arr.push(6);
+        this.arr = arr;
+        // console.log()
+      }
+    }
+  });
+  
+  new Vue({
+    el:'#app',
+    data:{
+      num:[1,2,3]
+    }
+  });
+  
+  
+</script>
+</body>
+</html>

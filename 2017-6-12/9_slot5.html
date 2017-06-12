@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <my-hezi :num="num">
+      <template slot="2" scope="props">
+        <div>{{props.arr[0]}}</div>
+        <div>{{props.arr[1]}}</div>
+        <div>{{props.arr[2]}}</div>
+        <div>{{num}}</div>
+      </template>
+      <div slot="1">123</div>
+    </my-hezi>
+  </div>
+<script src="vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  Vue.component('my-hezi',{
+    data(){
+      return {
+        arr:['你','好','吗']
+      }
+    },
+    template:`
+      <div>
+        <slot name="1">
+          <p>我是谁?</p>
+        </slot>
+        <slot name="2" :arr="arr">
+          <p>我是谁2?</p>
+        </slot>
+      </div>
+    `
+  });
+  
+  new Vue({
+    el:'#app',
+    data:{
+      num:10
+    }
+  });
+  
+  
+</script>
+</body>
+</html>
