@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--echarts（官网）-->
+		<script src="1.js"></script>
+	</head>
+	<body>
+		<div id="main" style="width: 600px;height:400px;"></div>
+		<script type="text/javascript">
+			var m = echarts.init(document.getElementById('main'));
+			var option = {
+				title:{
+					
+						text:'echarts demo'
+					},
+					xAxis:{
+						data:["衬衫","羊毛衫","雪绒衫","裤子","高跟鞋","袜子"]
+					},
+					yAxis:{},
+					series:[{
+						name:'销量',
+						type:'bar',
+						data:[15,22,35,33,22,24]
+					}]
+					
+				}
+			
+			m.setOption(option);
+		</script>
+	</body>
+</html>

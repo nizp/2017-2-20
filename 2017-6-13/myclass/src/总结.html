@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+<script type="text/vue">
+  vue-router
+  import Router from "vue-router";
+  import ppx from "./ppx";
+  Vue.use(Router) //中间件
+  
+  export default new Router({
+    routes:[
+      如果说路径/news/news1/day/3就自动跳转到首页
+      {
+        path:'/news/news1/day/3',
+        redirect:'/'
+      },
+      {
+        path:'/',
+        component:引什么组件就写什么名字(ppx)
+      },
+      {
+        path:'/news',
+        component:引什么组件就写什么名字(ppx),
+        children:[
+          {
+            path:'news1',
+            component:'news1',
+            children:[
+              {
+                //路径必须为/news/news1/color/12
+                ///news/news1/12都不认
+                //id只是为了可以通过this.$route.params去查看
+                path:'/news/news1/color/:id'
+            
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  })
+  
+  渲染路由视图：
+    路由组件想在哪渲染就写在哪里
+  <router-view></router-view>
+  
+  小技巧:
+    在router-view外包一个<keep-alive></keep-alive>
+    因为已经渲染过的组件会被缓存起来。
+    
+  <router-link to="/edu">
+  //上面没冒号
+  <router-link :to="'/edu'">
+  <router-link :to="{path:'/edu',params:{userId: 123}}">
+  </router-link>
+  默认为a标签，如果有定制的标签，
+  那么可以使用tag="标签名，比如（button）"
+  
+  重定向:
+    redirect
+  
+  
+    
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</script>
+</body>
+</html>
