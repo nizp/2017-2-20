@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#canvas{
+				background: url(universe.jpg) no-repeat;
+				//transform: rotate(30deg);
+			 	position:relative;
+			 	animation:change 2s linear infinite;
+			 	}
+
+			
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="1366" height="768"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			var r = canvas.width/12;
+			var num = 30;
+			context.translate(canvas.width/2,canvas.height/2);
+//				context.translate((canvas.height/2)*Math.cos(num*Math.PI/180)+canvas.width/2,(canvas.height/2)*Math.sin(num*Math.PI/180));
+			function drawCircle(){
+				context.lineWidth = 5;
+				context.strokeStyle = 'white';
+				context.moveTo(0,0);
+				context.lineTo(0,(-canvas.height/2)-r);
+				context.stroke();
+				context.beginPath();
+				context.arc(0,0,r,0,2*Math.PI,true);
+				context.stroke();
+				var c = context.createRadialGradient(0,0,0,0,0,r);
+				c.addColorStop(0,'#22f');
+				c.addColorStop(1,'#0ef');
+				context.fillStyle = c;
+				context.shadowBlur = 50;
+				context.shadowColor = 'white';
+				context.fill();
+				//context.rotate(120*Math.PI/360);
+				context.restore();
+				context.closePath();
+			}
+			function drawClockScale(){
+				var rad = 0,angle,font,fontX,fontY;
+				context.fillStyle='white';
+				for(var i=0;i<60;i++){
+					context.save();
+					rad = i*6*Math.PI/180;
+					context.rotate(rad);
+					context.fillRect(r-10,0,6,2);
+					context.restore();
+				}
+				//分针刻度
+				for(var i=0;i<12;i++){
+					context.save();
+					rad = i*30*Math.PI/180;
+					context.rotate(rad);
+					context.fillRect(r-15,0,10,3);
+					context.restore();
+				}
+				for(var i=0;i<12;i++){
+					angle = i*30*Math.PI/180;
+					font = (i+3)>12?i+3-12 : i+3;
+					fontX = Math.round(Math.cos(angle)*(r-30));
+					fontY = Math.round(Math.sin(angle)*(r-30));
+					context.font = "bold 16px 微软雅黑";
+					context.fillText(font,fontX-5,fontY+7)
+				}
+				
+				
+			}
+				function drawhand(rotate,width,height){
+					context.save();
+					rotate = rotate*Math.PI/180;
+					context.rotate(rotate);
+					context.fillRect(-10,-2,width,height);
+					context.restore();
+				}
+				function setTime(){
+					var hour = new Date().getHours();
+					var minute = new Date().getMinutes();
+					var second = new Date().getSeconds();
+				
+					var hourRotate,minuteRotate,secondRotate;
+					//计算秒针弧度
+					secondRotate = second*6-90;
+					drawhand(secondRotate,r-30,2);
+					
+					minuteRotate = minute*6-90;
+					drawhand(minuteRotate,r-50,4);
+					
+					hourRotate = hour*30-90;
+					drawhand(hourRotate,r-70,5);
+				}
+				function fontZ(){
+					context.save();
+					context.strokeStyle="#fff";
+					context.font=' 20px Arial';
+					context.textAlign='center';
+					context.lineWidth = 1;
+					context.textBaseline='middle';
+					context.strokeText('canvas',0,65); 
+					context.restore();
+				}
+				
+				//context.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
+//				drawCircle();
+//				drawLine();
+//				drawClockScale();
+//				setTime();
+					drawCircle();
+					drawClockScale();
+					setTime();
+					fontZ();
+				//
+				setInterval(function(){
+					
+					context.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
+					drawCircle();
+					drawClockScale();
+					setTime();
+					fontZ();
+				},1000)
+		</script>
+	</body>
+</html>

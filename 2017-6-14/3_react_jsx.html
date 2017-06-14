@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+.active{
+  color: red;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+<script src="src/react.js" charset="utf-8"></script>
+<script src="src/react-dom.js" charset="utf-8"></script>
+<script src="src/browser.min.js" charset="utf-8"></script>
+<script type="text/babel">
+  //jsx语法
+  /*
+    1.class必须叫className
+    2.顶层只能有一层标签
+    3.表单元素必须要闭合
+    4.组件名首写字母必须大写
+  */
+  let H2 = React.createClass({
+    render:function(){
+      return (
+        <div>
+          <h1 className="active">你好,世界!</h1>
+          <div>hehe</div>
+          <input type="text" />
+        </div>
+      )
+    }
+  });
+  //H其实就是虚拟，是数据（它描述了一个真实的DOM）
+  // console.log(H);
+  ReactDOM.render(
+    <H2 /> ,
+    document.getElementById('app'),
+    function(){
+      console.log('渲染完成');
+    }
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+.active{
+  color: red;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+<script src="src/react.js" charset="utf-8"></script>
+<script src="src/react-dom.js" charset="utf-8"></script>
+<script src="src/browser.min.js" charset="utf-8"></script>
+<script type="text/babel">
+  let Hezi = React.createClass({
+    click:function(){
+      //改变状态
+      this.setState({ //第二棵树
+        num:++this.state.num
+      });
+    },
+    render:function(){
+      return (
+        <div>
+          <button onClick={this.click}>点击就加</button>
+          <p>
+            {this.state.num}
+          </p>
+        </div>
+      )
+    },
+    getInitialState:function(){
+      return {
+        num:0
+      }
+    }
+  });
+  
+  
+  ReactDOM.render(<Hezi />,document.getElementById('app'));
+  
+  
+  
+  
+</script>
+</body>
+</html>

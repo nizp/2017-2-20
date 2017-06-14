@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#canvas{
+				background: url(universe.jpg) no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="1366" height="768"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById('canvas');
+			var content = canvas.getContext('2d');
+			content.translate(canvas.width/2,canvas.height/2);
+			var r = canvas.width/12;
+//			content.arc(0,0,0,弧度*Math.PI/180,clockwise/anticlockwise);
+
+			function drawCircle(){
+				content.strokeStyle = "white";
+				var c = content.createRadialGradient(0,0,0,0,0,r);
+				c.addColorStop(0,'#22f');
+				c.addColorStop(1,'#0ef');
+				content.fillStyle = c;
+				content.shadowBlur = 40;
+				content.shadowColor = 'white';
+				content.arc(0,0,r,0,360*Math.PI/180,false);
+				content.stroke();
+				content.fill();
+			}
+			function drawClockScale(){
+				content.fillStyle = 'white';
+				var rad =0,angle,font,fontX,fontY;
+				for(var i=0;i<60;i++){
+					content.save();
+					rad = 6*i*Math.PI/180;
+					content.rotate(rad);
+					content.fillRect(r-10,0,10,2);
+					content.restore();
+				}
+				for(var i=0;i<60;i++){
+					content.save();
+					rad = 30*i*Math.PI/180;
+					content.rotate(rad);
+					content.fillRect(r-13,0,13,5);
+					content.restore();
+				}
+				for(var i=0;i<12;i++){
+					
+					angle = 30*i*Math.PI/180;
+					fontX = Math.round(Math.cos(angle)*(r-30));
+					fontY = Math.round(Math.sin(angle)*(r-30));
+					font = (i+3)>12?i+3-12 : i+3;
+					content.font = "bold 16px 微软雅黑";
+					content.fillRect(r-13,0,13,5);
+					content.fillText(font,fontX-5,fontY+7);
+				}
+			}
+				function drawHand(rotate,width,height){
+					content.save();
+					rotate = rotate*Math.PI/180;
+					content.rotate(rotate);
+					content.fillRect(-10,0,width,height);
+					content.restore();
+				}
+				function setTime(){
+					var hour = new Date().getHours();
+					var minute = new Date().getMinutes();
+					var second = new Date().getSeconds();
+					
+					var hourRotate = hour*30-90;
+					drawHand(hourRotate,r-70,5);
+					var minuteRotate = minute*6-90;
+					drawHand(minuteRotate,r-50,4);
+					var secondRotate = second*6-90;
+					drawHand(secondRotate,r-30,2);
+					console.log(hour)
+				}
+			drawCircle();
+			drawClockScale();
+			setTime();
+			setInterval(function(){
+				content.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
+				drawCircle();
+				drawClockScale();
+				setTime();
+			},1000)
+		</script>
+	</body>
+</html>

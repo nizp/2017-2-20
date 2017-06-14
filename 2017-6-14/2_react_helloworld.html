@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+.active{
+  color: red;
+}
+</style>
+</head>
+<body>
+  <div id="app"></div>
+<script src="src/react.js" charset="utf-8"></script>
+<script src="src/react-dom.js" charset="utf-8"></script>
+<script type="text/javascript">
+  //jsx语法
+  let H = React.createElement('h1',{className:'active'},'你好!世界!');
+  //H其实就是虚拟，是数据（它描述了一个真实的DOM）
+  // console.log(H);
+  ReactDOM.render(
+    H ,
+    document.getElementById('app'),
+    function(){
+      console.log('渲染完成');
+    }
+  );
+</script>
+</body>
+</html>
