@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		#box{
+			width:400px;
+			height:400px;
+			border:1px solid #000;
+			margin:0 auto;
+		}
+	</style>
+</head>
+<body>
+	<!--
+		什么是svg
+			在网页上绘制图形的一种技术
+		与canvas区别
+			矢量图形
+			xml
+		引入的方式
+			<img src="">
+			background url()
+			iframe src=""
+		
+		path标签属性
+			d=""
+			M L A H V Z
+			C Q 
+		
+		获取属性
+		style的方式获取不到
+		getAttribute('属性')
+		
+		设置
+			setAttribute('属性',值)
+		
+		动态创建标签
+			document.createElementNS('标签名')
+		
+		
+	-->
+	<div id="box">
+		<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+			<!--<circle cx="100" cy="100" r="100" fill="orange" stroke="red" stroke-width="3"></circle>-->
+			<!--<rect width="100" height="100" fill="orange" rx="50%" ry="50%"></rect>-->
+			<!--<line x1="50" y1="50" x2="100" y2="100" stroke="red" stroke-width="5"></line>-->
+			
+			<!--<path d="M100 100L200 200L100 200Z" stroke="red" fill="none" stroke-width="5"></path>-->
+			<path d="" stroke="red" stroke-width="1" fill="none"></path>
+			
+			
+		</svg>
+	</div>
+	<script>
+		let box = document.getElementById('box');
+		let path = document.getElementsByTagName('path')[0];
+		
+		let pd='';
+		box.onmousedown = (ev)=>{
+			ev = ev || window.event;
+			let oldX = ev.clientX - box.offsetLeft;
+			let oldY = ev.clientY - box.offsetTop;
+			pd += 'M'+oldX+' '+oldY;
+			
+			box.onmousemove = (ev)=>{
+				ev = ev || window.event;
+				let newX = ev.clientX - box.offsetLeft;
+				let newY = ev.clientY - box.offsetTop;
+				pd += 'L'+newX+' '+newY;
+				
+				path.setAttribute('d',pd);
+				
+				
+			}
+			box.onmouseup = ()=>{
+					box.onmousemove = box.onmouseup =null;
+				}
+		}
+	</script>
+</body>
+</html>
