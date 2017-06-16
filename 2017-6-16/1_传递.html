@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+<script type="text/react">
+
+    从上往下传递：
+      父传子：<App {...data}/>
+      子接收父组件的数据：
+        this.props
+      子组件的constructor可以接收this.props（一次）
+      render中this.props->只要父类、自身状态发生改变都能获取到。
+      
+      this.state
+      this.setState
+      props
+      你自己的设计方案。业务逻辑
+      render渲染机制
+      
+    从下往上传递:
+      回调函数
+      
+      在父组件身上定义一个回调函数，修改父类状态
+      需要把这个回调函数传递给子组件，当子组件某个行为触发的时候，
+      调用父类的回调函数，从而让父类改变状态，达到子组件也更新数据的行为
+      
+      
+      
+    
+      
+      
+      
+      
+
+</script>
+</body>
+</html>
