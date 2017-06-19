@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li1">1</li>
+		<li class="li1">2</li>
+		<li class="li1">3</li>
+		<li class="li1">4</li>
+		<li class="li1">5</li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		getElementsByClassName IE9以上浏览器. 
+	*/
+	
+	
+	var ul = document.getElementById('ul');
+	
+	function getByClass(sClass,parent){
+		parent = parent?parent:document;
+		var arr = [];
+		var result = parent.getElementsByTagName('*');
+		var re = new RegExp('\\b'+sClass+'\\b');
+		for(var i=0,len = result.length; i<len ; i++){
+			if(re.test(result[i].className)){
+				arr.push(result[i]);
+			}
+		}
+		
+		return arr;
+		
+	}
+	
+	
+	var lis = getByClass('li1',ul);//ul.getElementsByClassName('li1');
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.background = 'red';
+	}
+	
+	
+	
+</script>
+</body>
+</html>

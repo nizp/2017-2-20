@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	background: red;
+	position:absolute;
+	left:0;
+	top:0;
+	height: 100px;
+	overflow: hidden;
+}	
+</style>
+</head>
+<body >
+	<div id="div">
+dsdsadsadsa
+	</div>
+<script type="text/javascript">
+	
+	/*
+		addEventListener  IE9以下浏览器不兼容
+		
+		attachEvent;
+		
+			没有捕获有冒泡
+			事件名称带 on
+			
+		removeEventListener
+		
+		detachEvent('on'+事件名,事件函数);
+			
+	*/
+	
+	
+//	div.addEventListener('click',fn);
+
+	//div.attachEvent('onclick',fn);
+	
+	
+	function addEvent(obj,Event,fn){
+		if(obj.attachEvent){
+			return obj.attachEvent('on'+Event,function(){
+				fn.call(obj);
+			});
+		}else{
+			return obj.addEventListener(Event,fn);
+		}
+	}
+	
+	
+	addEvent(div,'click',fn)
+	
+	
+	function fn(){
+		//alert(1);
+		//console.log(this.id);
+		//div.detachEvent('onclick',fn);	
+		
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

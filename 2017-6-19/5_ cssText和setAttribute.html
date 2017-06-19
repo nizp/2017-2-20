@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.a{
+	width:100px;
+	background: red;
+	position:absolute;
+	left:0;
+	top:0;
+	height: 100px;
+	_transform: scale(.5);
+	transform:translate(10px,20px);
+}	
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<img src="logo.png" id="img"/>
+<script type="text/javascript">
+	
+	/*
+		cssText和setAttribute 
+		 
+		
+		cssText批量设置样式，是都兼容的
+		setAttribute：IE下不兼容
+		 
+	*/
+	
+	
+	//div.style.cssText = 'width:200px;height:200px';
+	
+	
+	div.setAttribute('style','width:200px;height:300px');
+	
+//	div.setAttribute('class','a'); //class(高版本)  className(低版本)
+	
+	
+	console.log(img.getAttribute('src',2));//IE7以下浏览器，获取src的时候加第二个参数为2即可取得真正想要的地址。
+	
+</script>
+</body>
+</html>

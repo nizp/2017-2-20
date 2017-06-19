@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+
+</head>
+<body>
+	<ul id="ul">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		firstElementChild;
+		lastElementChild
+		nextElementSibling
+		previousElementSibling
+		
+		
+		
+		低版本浏览器：
+			注意：
+				
+				下面这些属性，其实高版本和低版本都兼容
+				低版本下为元素节点
+				高版本下为所有的节点（注释、空文本...）
+				
+				
+			firstChild;
+			lastChild
+			nextSibling
+			previousSibling
+		
+	*/
+	
+	var ul = document.getElementById('ul');
+	
+//	ul.firstElementChild.style.background = 'red';
+//	
+//	ul.lastElementChild.style.background = 'yellow';
+//	
+//	ul.lastElementChild.previousElementSibling.style.background = 'pink'
+//	
+//	ul.firstElementChild.nextElementSibling.style.background = 'green'
+	
+	
+	var f = ul.firstElementChild || ul.firstChild;
+	
+	//var n = f.nextElementSibling || f.nextSibling;
+	
+	var n = f.previousElementSibling || f.previousSibling;
+	
+	console.log(f.previousElementSibling)
+	
+	
+	function nn(obj){
+		if(obj.previousElementSibling){
+			return obj.previousElementSibling;
+		}
+		
+		if(obj.previousSibling){
+			if(obj.previousSibling.nodeType == 1){
+				return obj.previousSibling;
+			}	
+		}
+		return null;
+	}
+	
+	
+	
+	if(nn(f)){//n的时候，高版本为真，低版本为假，因为高版本前面的条件不成立会走后面的语句，而后面为空文本节点，所以就为真。
+		alert('真')
+	}else{
+		alert('假')
+	}
+	
+	
+	
+//	n.style.background = 'red';
+	
+	
+//	f.style.background = 'red';
+//	
+//	//ul.firstChild.style.background = 'red';
+	
+	
+</script>
+</script>
+</body>
+</html>

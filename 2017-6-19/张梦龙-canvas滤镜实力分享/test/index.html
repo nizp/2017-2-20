@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas滤镜</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<header>canvas滤镜</header>
+<section id="wrap">
+    <!--滤镜区-->
+    <section id="filter-area">
+        <div class="filter">原图</div>
+        <div class="filter">曝光滤镜</div>
+        <div class="filter">变暗滤镜</div>
+        <div class="filter">暖色滤镜</div>
+        <div class="filter">反色滤镜</div>
+        <div class="filter">黑白滤镜</div>
+        <div class="filter">复古滤镜</div>
+        <div class="filter">阈值滤镜</div>
+        <div class="filter">动态模糊</div>
+    </section>
+
+    <!--图片区-->
+    <section id="photo-area">
+        <canvas class="canvas"></canvas>
+    </section>
+
+    <!--功能区-->
+    <section id="func-area">
+        <label class="load">
+            选择图片
+            <input class="upload imgfile" type="file">
+        </label>
+        <a href="" class="download load" download="图片">下载图片</a>
+    </section>
+</section>
+<script src="filter.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

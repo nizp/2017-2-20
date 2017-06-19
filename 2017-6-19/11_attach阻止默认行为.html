@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	background: red;
+	position:absolute;
+	left:0;
+	top:0;
+	height: 100px;
+	overflow: hidden;
+}	
+</style>
+</head>
+<body style="height: 3000px;">
+	<div id="div">
+dsdsadsadsa
+	</div>
+<script type="text/javascript">
+	
+	/*
+		addEventListener  IE9以下浏览器不兼容
+		
+		attachEvent;
+		
+			没有捕获有冒泡
+			事件名称带 on
+			
+			阻止默认行为
+				return false;
+			
+			阻止冒泡:
+				event.cancelBubble = true
+			
+		removeEventListener
+		
+		detachEvent('on'+事件名,事件函数);
+			
+	*/
+	
+	
+//	div.addEventListener('click',fn);
+
+	//div.attachEvent('onclick',fn);
+	
+	
+	function addEvent(obj,Event,fn){
+		if(obj.attachEvent){
+			return obj.attachEvent('on'+Event,function(){
+				fn.call(obj);
+			});
+		}else{
+			return obj.addEventListener(Event,fn);
+		}
+	}
+	
+	
+	addEvent(document,'keydown',fn)
+	
+	
+	function fn(ev){
+		
+		//ev.preventDefault();
+		
+		if(event.keyCode == '32'){
+			//alert(1)
+			return false;
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

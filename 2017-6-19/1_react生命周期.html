@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="box">
+      
+    </div>
+<script src="src/react.js" charset="utf-8"></script>
+<script src="src/react-dom.js" charset="utf-8"></script>
+<script src="src/browser.min.js" charset="utf-8"></script>
+<script src="src/jquery-3.1.1.js" type="text/javascript">
+  
+</script>
+  <script type="text/babel">
+    
+    /*
+      this.props.children:
+        
+      React.Children.map是react的方法。
+    */
+    // React.Children.map(this.props.children,function(children){
+    //   //children
+    // })
+    
+    // <Hehe>呵呵</Hehe>
+    //
+    // render(
+    //   <div>{this.props.children}</div>
+    // )
+    
+    // var H1 = React.createClass({
+    //   render:function(){
+    //     return (
+    //       <div>
+    //         {
+    //           React.Children.map(this.props.children,function(children){
+    //             return <p>{children}</p>
+    //           })
+    //         }
+    //       </div>
+    //     );
+    //   }
+    // });
+    //
+    // ReactDOM.render(
+    //   <H1>
+    //     <span>hello</span>
+    //     <span>world</span>
+    //   </H1>,
+    //   document.getElementById('box')
+    // );
+    //
+    
+    
+    //import $ from "jquery";
+    //
+    
+    
+    
+    
+    
+    
+    
+    var H1 = React.createClass({
+      getInitialState:function(){
+        return {
+          data:null
+        }
+      },
+      
+      click:function(ev){
+        
+        let _this = this;
+        $.ajax({
+          url:'http://api.douban.com/v2/movie/search?callback=?',
+          dataType:'jsonp',
+          data:{
+            q:ev.target.innerHTML
+          },
+          success:function(data){
+            _this.setState({
+              data:data
+            })
+            //console.log(data);
+          }
+        });
+      },
+      
+      componentDidMount:function(){
+        
+        let _this = this;
+        $.ajax({
+          url:'http://api.douban.com/v2/movie/search?callback=?',
+          dataType:'jsonp',
+          data:{
+            q:'变5'
+          },
+          success:function(data){
+            _this.setState({
+              data:data
+            })
+            //console.log(data);
+          }
+        });
+        
+      },
+      render:function(){
+        console.log('烟雾弹');
+        //异步操作不应该放在这里。
+        // let _this = this;
+        // $.ajax({
+        //   url:'http://api.douban.com/v2/movie/search?callback=?',
+        //   dataType:'jsonp',
+        //   data:{
+        //     q:'变5'
+        //   },
+        //   success:function(data){
+        //     _this.setState({
+        //       data:data
+        //     })
+        //
+        //     console.log(data);
+        //   }
+        // });
+        let lis = null;
+        var _this = this;
+        if(this.state.data){
+          lis = this.state.data.subjects.map(function(e,i){
+            return <li key={i} onClick={_this.click}>{e.title}</li>
+          })
+        }
+        //console.log(this.state.data)
+        
+        return (
+          <div>
+            <ul>
+              {lis}
+            </ul>
+          </div>
+        );
+      }
+    
+    });
+    
+    ReactDOM.render(
+      <H1>
+        <span>hello</span>
+        <span>world</span>
+      </H1>,
+      document.getElementById('box')
+    );
+    
+    
+    
+    
+    
+    
+    
+  </script>
+  </body>
+</html>

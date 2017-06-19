@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li1">1</li>
+		<li class="li1">2</li>
+		<li class="li1">3</li>
+		<li class="li1">4</li>
+		<li class="li1">5</li>
+	</ul>
+<script type="text/javascript">
+	
+	/*
+		getElementsByClassName IE9以上浏览器. 
+	*/
+	
+	
+	var ul = document.getElementById('ul');
+	
+	
+	function querySelectorAll(){
+		var arg = arguments[0];
+		var e = arg.charAt(0)
+		var result = document.getElementsByTagName('*'); 
+		var arr = [];
+		
+		if(e === '.'){
+			
+			var re = new RegExp('\\b'+arg.substring(1)+'\\b');
+			for(var i=0;i<result.length;i++){
+				if(re.test(result[i].className)){
+					arr.push(result[i]);
+				}
+			}
+			return arr;
+		}else if(e === '#'){
+			return document.getElementById(arg.substring(1));
+		}
+		
+	};
+	
+	
+	
+	var ul1 = querySelectorAll('#ul');
+	
+	ul1.style.border = '10px solid #000'
+	
+	
+	
+	var lis = querySelectorAll('.li1')//document.querySelectorAll('.li1');
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.background = 'red';
+	}
+	
+	
+	
+</script>
+</body>
+</html>
