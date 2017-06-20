@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}	
+#box div{
+	width: 150px;
+	height: 150px;
+	border: 1px solid #000;
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+
+</style>
+</head>
+<body>
+	<div id="box"></div>
+<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//2
+class Tab{
+	constructor(){
+		this.settings = {
+			title:[
+				'前端',
+				'新闻',
+				'娱乐'
+			],
+			content:[
+				'框架好多,学不完了',
+				'武汉2妹子拍照掉悬崖',
+				'希哥是最好的男演员'
+			],
+			events:'click'
+		};
+	}	
+}
+
+//Tab.prototype继承一个对象，而用对象的目的是为了好管理代码
+//3
+$.extend(Tab.prototype,{
+	
+	init:function(opt,that){
+		
+		$.extend(this.settings,opt);
+		
+		
+		this.createBtn(that);
+		
+		this.createDiv(that);
+
+		this.change(that);
+		
+	},
+	createBtn:function(that){
+		this.settings.title.forEach((e,i)=>{
+			
+			that.append($(`<button class="${(i == 0)?'active':''}">${e}</button>`));
+			
+		});
+	},
+	createDiv:function(that){
+		
+		this.settings.content.forEach((e,i)=>{
+
+			that.append($(`<div class="${i==0?'show':''}">${e}</div>`));
+			
+		});
+		
+	},
+	change:function(that){
+		
+		$('button').on(this.settings.events,function(){
+			
+			$(this).addClass('active').siblings('button').removeClass('active');
+			
+			that.find('div').eq($(this).index()).show().siblings('div').hide();
+			
+		});
+		
+	}
+
+});
+
+
+
+
+//通过$.fn.extend扩展插件
+
+//1
+$.fn.extend({
+	tabs:function(opt){
+		//this  $('#box')
+		let t = new Tab;
+
+		
+		t.init(opt,this);
+		//return t;
+	}
+});
+
+
+
+	
+	
+$(function(){
+	$('#box').tabs({
+		events:'mouseover',
+		title:[
+			'学校',
+			'体育',
+			'游戏',
+			'心情'
+		],
+		content:[
+			
+			'高考结束，学校一个人影都没有，只能乖乖在宿舍搞直播',
+			'中国队冲出宇宙',
+			'俄罗斯方块又出新版本了',
+			'阴转晴'
+		]
+	});
+});
+	
+	
+</script>
+</body>
+</html>

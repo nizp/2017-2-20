@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	
+	<textarea name="" rows="10" cols="20" id="txt"></textarea>
+	
+<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		
+		插件/组件的作用主要是方便复用，节省开发成本，也给一些不会敲代码的人，提供便利（拿来直接用）。
+		
+		插件：基于（依赖）某个对象的（某套框架的）
+		
+		组件: 造轮子的。
+		
+		他们都有上面的功能
+		
+		$('box').css({width:100})//插件
+		
+		$.ajax({}) //组件
+		
+		
+//		$.extend()
+
+		还可以写插件。
+			
+	*/
+	
+	
+	var str = '   dsadas   ';
+	
+	//console.log($.trim(str));
+	
+	var obj = {
+		name:'nizp'
+	}
+	
+//	var newObj = $.extend({job:'web',name:'momo'},obj);//继承（拷贝）
+//	
+//	console.log(newObj);
+
+	
+	//组件的写法（工具方法）
+	$.extend({
+		trimLeft:function(str){
+			return str.replace(/^\s+/,'');
+		},
+		trimRight:function(str){
+			return str.replace(/\s+$/,'');
+		}
+	});
+	
+	
+	
+//	console.log($.trimLeft(str));
+//	console.log($.trimRight(str))
+
+	//插件的写法（功能方法用$.fn.extend）
+	$.fn.extend({
+		scrollHeight:function(){
+			//console.log(this); //this使用这个方法的对象。
+			return this[0].scrollHeight;
+		}
+	});
+	
+	$(document).click(function(){
+		console.log($('#txt').scrollHeight());
+		//console.log($('#txt').height());
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+</script>	
+</body>
+</html>
