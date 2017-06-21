@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="css/demo.css">
+
+<style type="text/css">
+#bar{
+	height:4px;
+}
+#bar div{
+	height:4px;
+	background-color:#77B6FF;
+	width:0;
+}
+</style>
+</head>
+<body>
+	<section id="box">
+		<div id="bar">
+			<div></div>
+		</div>
+		<header>
+			<input type="file" name="" id="file">
+			<a href="javascript:;">上传</a>
+		</header>
+		<div class="drag">
+			<span>请将图片拖拽至此处</span>
+		</div>
+		<div class="preview">
+			<ul id="ul">
+				
+			</ul>
+		</div>
+		<a href="javascript:;" id="upload">确认上传</a>
+	</section>
+<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="uploads.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		1.上传
+		2.显示上传的图片
+		3.删除功能
+		4.拖拽
+		5.上传的进度
+	*/
+	
+	var u = $('#box').uploads({
+		
+		fileEle:$('#file'),
+		
+		btn:$('#upload'),
+		
+		url:'php/post_file.php',
+		
+		drag:$('.drag').eq(0),
+		
+		ondraghover1:function(that){
+			
+			that.hover(function(){
+				$('.drag').eq(0).css({
+					borderWidth:'2px'
+				})
+			},function(){
+				$('.drag').eq(0).css({
+					borderWidth:'1px'
+				})
+			})
+			
+		},
+		
+		ondragup:function(){
+			
+			$('.drag').eq(0).css({
+				borderWidth:'1px'
+			});
+		},
+		
+		view:function(data1){
+			
+			
+			u.fileReader(data1,function(data){
+				
+				$(`<li>
+					<button>删除</button>
+					<img src="${data}"/>
+				</li>`).
+				appendTo($('#ul'))
+				.on('click','button',{
+					
+					name:data1.name
+					
+				},function(ev){
+					var li = $(this).parent('li');
+					
+					//删除数据
+					u.removeData(ev.data.name,function(dd){
+						li.remove();
+						
+					});
+				});
+				
+			});
+		},
+		onsedend:function(){
+			$('#ul').html('');
+		},
+		
+		onprogress:function(loaded,total){
+			
+			$('#bar > div').stop().animate({
+				width:(loaded/total)*600,
+				opacity:0
+			},function(){
+				$('#bar > div').css({
+					opacity:1,
+					width:0
+				})
+			});
+		}
+	});
+	
+	
+
+	
+	
+
+
+	
+	
+	
+
+</script>
+</body>
+</html>
