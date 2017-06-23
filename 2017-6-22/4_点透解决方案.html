@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	opacity: .5;
+	position: relative;
+	z-index:2;
+	
+}
+.a{
+	position: absolute;
+	top:30px;
+	left:30px;
+	z-index:1;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<div class="a" data-href="http://www.miaov.com">我在下面</div>
+	<!--<a class="a" href="http://www.miaov.com">我在下面</a>-->
+<script type="text/javascript">
+	
+	/*
+		
+		穿透：
+			当touch事件在某个元素上触发的时候，如果它下面有个焦点元素，那么
+			在快速点击之后（300ms左右）此元素消失或者漂移时,浏览器会监听点击时的坐标，这个时候会触发下面焦点元素的事件绑定函数。
+			
+			
+		解决方案：
+			1.不用焦点元素，但是搜索引擎抓取不到关键的数据,对于企业不太友好（BTA级别的可以忽略）
+			
+			2.开个定时器时间定为300ms左右再让该元素消失或者漂移。但是300ms
+			会降低用户体验，当然可以把时间调小一点，比如：80ms，但是每个浏览器
+			是不一样的，设置的时间效果也有差异，所以说没有固定的小值，需要大量的
+			测试才能确定一个范围，增加开发的成本。
+			
+			3.
+			可以在document的touchstart上添加阻止默认行为可以解决，但是
+			下层的焦点元素就失效了:
+			
+				所以有以下2个解决方案：
+					1.给每个焦点元素加js跳转
+					2.在上层元素身上添加一个事件默认行
+			为，就能阻止下层焦点事件不触发穿透当上层元素隐藏之后，
+			点击焦点元素依然好使。
+			
+		
+	*/
+	
+	
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault();
+	});
+	
+	div.addEventListener('touchstart',fn1);
+
+	div.addEventListener('touchmove',fn2);
+	
+	div.addEventListener('touchend',fn3);
+	
+	
+	
+	document.body.addEventListener('touchend',function(ev){
+		if(ev.target.tagName === 'DIV' && ev.target.dataset.href){
+			window.location.href = ev.target.dataset.href;
+		}
+	});
+	
+	
+	
+//	document.querySelectorAll('.a')[0].addEventListener('touchstart',function(){
+//		window.location.href="http://www.miaov.com";
+//		//console.log('我是a');
+//	});
+	
+	
+	
+	function fn1(ev){
+		console.log('按下');
+		
+		
+		div.style.display = 'none';
+		
+		//ev.preventDefault();
+		
+		
+//		setTimeout(function(){
+//			div.style.display = 'none';
+//		},320);
+		
+	}
+	
+	function fn2(){
+		console.log('移动');
+	}
+	function fn3(){
+		console.log('抬起');
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

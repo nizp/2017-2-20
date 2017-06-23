@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+	opacity: .5;
+	position: relative;
+	z-index:2;
+	
+}
+.a{
+	position: absolute;
+	top:30px;
+	left:30px;
+	z-index:1;
+}
+#div2{
+	width:3000px;
+	height: 200px;
+	background: yellow;
+}
+body{
+	overflow: hidden;
+}
+
+
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<input type="text" id="txt"/>
+	<div id="div2"></div>
+	<!--<textarea name="" rows="" cols="" id="txt"></textarea>-->
+<script type="text/javascript">
+
+	/*
+		
+		当页面某个元素超出了可视区的范围，这个时候会出现滚动条，
+		影响产品设计方案，使用overflow:hidden,是解决不了的
+		这个时候就要在document下touchstart阻止默认行为，就能得到完美的解决。
+		
+			
+	*/
+
+//	document.addEventListener('touchstart',function(ev){
+//		ev.preventDefault();
+//	});
+	var input = document.querySelector('#txt');
+	
+	input.addEventListener('touchstart',function(ev){
+		//alert(1);
+		ev.stopPropagation();
+	});
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	/*
+		
+		手机的三大事件：
+			
+			touchstart：
+				手指按下
+			touchmove：
+				手指移动
+			touchend：
+				手指抬起
+			
+		对于手机事件在真机上测试，不管用不用on的方式都能显示的。
+		但是一般调试的时候，pc浏览器有些时候不兼容on的方式
+		
+	*/
+	
+//	div.ontouchstart = function(){
+//		alert(1);
+//	}
+	
+	
+	/*
+		不管是touchmove，还是touchend都需要触发了start才能触发它们。
+		
+		PC事件和移动端事件最大的区别：
+			
+			1.pc上如果给某个元素绑定了事件函数，那么一定是在该元素身上触发某个
+			    事件的时候才会触发
+			    
+			  移动端如果给某个元素绑定了事件函数，如果一套（按下、移动、抬起）事件还没结束，那么
+			 这套没完事件对象不管在不在这个对象身上都会触发。
+			  
+			2.pc的事件比移动端的事件要慢很多，根据浏览器来决定的。			
+		
+	*/
+	
+	div.addEventListener('touchstart',fn1);
+
+	div.addEventListener('touchmove',fn2);//必须手指按下之后才会触发
+	
+	div.addEventListener('touchend',fn3);
+	
+	
+	
+	
+	
+	//div.addEventListener('mousemove',fn2);//鼠标移动就会触发
+	
+//	div.addEventListener('mouseup',fn3);
+
+	div.addEventListener('mousedown',fnx);
+	
+	function fn1(){
+		console.log('按下');
+		console.time(1);
+		
+	}
+	function fnx(){
+		console.log('鼠标按下');
+		console.timeEnd(1);
+	}
+	
+	
+	function fn2(){
+		console.log('移动');
+	}
+	function fn3(){
+		console.log('抬起');
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	
+	
+	div.addEventListener('touchstart',fn1);
+
+	div.addEventListener('touchmove',fn2);
+	
+	div.addEventListener('touchend',fn3);
+	
+	
+	div2.addEventListener('touchstart',fn1);
+
+	div2.addEventListener('touchmove',fn2_1);
+	
+	div2.addEventListener('touchend',fn3);
+	
+	
+	function fn1(){
+		console.log('按下');
+		console.time(1);
+		
+	}
+	function fn2_1(){
+		console.log('移动2');
+	}
+	
+	function fn2(){
+		console.log('移动');
+	}
+	function fn3(){
+		console.log('抬起');
+	}
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

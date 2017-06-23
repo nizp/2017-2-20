@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+.nav {
+	margin: 30px auto 0;
+	overflow: hidden;
+	width: 200px;
+}
+.nav a {
+	box-sizing: border-box;
+	float: left;
+	width: 50px;
+	font: 14px/30px "宋体";
+	border: 1px solid #000;
+	text-align: center;
+}
+.nav .active {
+	background: #ccc;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var navs = document.querySelectorAll('nav a');
+	for(var i = 0; i < navs.length; i++){
+		navs[i].addEventListener('touchend', function(e) {	
+			for(var i = 0; i < navs.length; i++){
+				navs[i].className = "";
+			}
+			this.className = "active";
+		});
+	}
+	var inner = "";
+	for(var i = 0; i < 100; i++){
+		inner += '<li> <a href="http://www.baidu.com">这是第'+i+'个li</a></li>'
+	}
+	list.innerHTML = inner;
+};	
+
+</script>
+</head>
+<body>
+
+<nav class="nav">
+	<a href="javascript:;" class="active">百度</a>
+	<a href="javascript:;">百度</a>
+	<a href="javascript:;">百度</a>
+	<a href="javascript:;">百度</a>
+</nav>	
+<ul id="list"></ul>
+</body>
+</html>
