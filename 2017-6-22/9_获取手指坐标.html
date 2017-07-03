@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+<style>
+#div{
+	width:200px;
+	height:200px;
+	background: red;
+	position: relative;
+	z-index:2;
+	
+}
+.a{
+	position: absolute;
+	top:30px;
+	left:30px;
+	z-index:1;
+}
+#div2{
+	width:3000px;
+	height: 200px;
+	background: yellow;
+}
+/*body{
+	overflow: hidden;
+}*/
+
+
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<p id="p"></p>
+<script type="text/javascript">
+	
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault()
+	})
+	
+	var p = document.getElementById('p');
+	document.getElementById('div').addEventListener('touchstart',function(ev){
+		/*
+			changedTouches:
+				手指**同时**放到元素身上，这个时候会显示手指的个数
+			
+			touches
+				手指依次放到元素身上，放一个加一个，减少就少一个（一般减少是在抬起的时候监听）
+			
+			targetTouches
+			
+			获取坐标都是通过它们的[0]去获取坐标。
+				
+		*/
+		
+		
+		p.innerHTML = ev.touches.length;
+		
+		console.log(ev)
+		
+	})
+	
+	
+</script>
+</body>
+</html>

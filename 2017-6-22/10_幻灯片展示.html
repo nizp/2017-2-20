@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" charset="utf-8">
+	var w = window.innerWidth;
+	document.documentElement.style.fontSize = w / 16 + 'px';
+</script>
+<style type="text/css" id="css">
+body {
+	margin: 0;
+}
+.wrap {
+	position: relative;
+	overflow: hidden;
+}
+.list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	transform: translate3d(0,0,0);
+	overflow: hidden;
+}
+.list li {
+	width:16rem;
+	float: left;
+}	
+.list img {
+	width: 100%;
+	vertical-align: top;
+}
+.nav {
+	position: absolute;
+	left: 0;
+	bottom: 5px;
+	width: 100%;
+	text-align: center;
+	height: 10px;
+}
+.nav span {
+	vertical-align: top;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: #ccc;
+	border-radius: 5px;
+}
+.nav .active {
+	background: red;
+}
+</style>
+</head>
+<body>
+<section class="wrap">
+	<ul class="list">
+		<li><a href="http://www.baidu.com"><img src="img/img1.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img2.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img3.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img4.jpg"/></a></li>
+	</ul>	
+	<nav class="nav">
+		<span class="active"></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</nav>
+</section>
+<script type="text/javascript">
+	
+	var ul = document.querySelector('.list');
+	var lis = ul.querySelectorAll('li');
+	var spans = document.querySelectorAll('.nav span');
+	var warp = document.querySelector('.wrap');
+	
+	ul.innerHTML += ul.innerHTML;
+	
+	ul.style.width = w * ul.children.length + 'px';
+	
+	
+	ul.addEventListener('touchstart',start);
+	ul.addEventListener('touchmove',move);
+	ul.addEventListener('touchend',end);
+	
+	var pageX = 0;
+	var offsetL = 0;
+	var l = 0;
+	
+	
+	function start(ev){
+		ul.style.transition = 'none';
+		pageX = ev.changedTouches[0].pageX;
+		
+		var now = Math.abs(Math.round(l/w));
+		
+		if(now == 0){
+			now = spans.length;
+			
+			offsetL = -now*w;
+			
+			ul.style.transform = 'translateX('+(offsetL)+'px)';
+			
+		}
+		
+		if(now == ul.children.length-1){
+			now = spans.length-1;
+			
+			offsetL = -now*w;
+			
+			ul.style.transform = 'translateX('+(offsetL)+'px)';
+		}
+		
+		
+		//console.log(now);
+		
+		//offsetL = this.offsetLeft;
+		
+	}
+	
+	function move(ev){
+		
+		var moveX = ev.changedTouches[0].pageX;
+
+		l = offsetL+(moveX-pageX)
+		
+		ul.style.transform = 'translateX('+l+'px)';
+		
+	}
+	
+	function end(ev){
+		var now = Math.abs(Math.round(l/w));
+		offsetL = -now*w;
+		
+		ul.style.transition = '.5s';
+		
+		ul.style.transform = 'translateX('+(-now*w)+'px)';
+		
+		for(var i=0;i<spans.length;i++){
+			spans[i].className = '';
+		}
+		
+		spans[now%spans.length].className = 'active';
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

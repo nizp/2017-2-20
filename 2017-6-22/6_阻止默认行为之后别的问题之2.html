@@ -25,9 +25,9 @@
 	height: 200px;
 	background: yellow;
 }
-body{
+/*body{
 	overflow: hidden;
-}
+}*/
 
 
 </style>
@@ -35,7 +35,7 @@ body{
 <body>
 	<div id="div"></div>
 	<input type="text" id="txt"/>
-	<div id="div2"></div>
+	<div id="div2">dsadsadsadsadsads</div>
 	<!--<textarea name="" rows="" cols="" id="txt"></textarea>-->
 <script type="text/javascript">
 
@@ -45,12 +45,26 @@ body{
 		影响产品设计方案，使用overflow:hidden,是解决不了的
 		这个时候就要在document下touchstart阻止默认行为，就能得到完美的解决。
 		
+		
+		
+		取消document的touchstart的默认事件
+		1. 解决整个文档中事件点透问题
+		2. 阻止了系统默认的滚动条(包含橡皮筋效果)
+		3. 阻止整个页面的鼠标事件（包括a标签的href）
+		4. 阻止默认菜单（文字,链接,图片）
+		5. 阻止输入框输入
+		6. 解决IOS10下，禁止用户缩放无效的问题
+		在元素上加阻止冒泡，可以使该元素，重新可以（输入）（跳转）等等功能（参考上述6条）,但是效果不好，最好可以参考淘宝在产品需求中解决
+		
+		
+		
+		
 			
 	*/
-
-//	document.addEventListener('touchstart',function(ev){
-//		ev.preventDefault();
-//	});
+//
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault();
+	});
 	var input = document.querySelector('#txt');
 	
 	input.addEventListener('touchstart',function(ev){

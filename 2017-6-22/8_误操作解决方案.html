@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+.nav {
+	margin: 30px auto 0;
+	overflow: hidden;
+	width: 200px;
+}
+.nav a {
+	box-sizing: border-box;
+	float: left;
+	width: 50px;
+	font: 14px/30px "宋体";
+	border: 1px solid #000;
+	text-align: center;
+}
+.nav .active {
+	background: #ccc;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	
+	/*
+		有些时候可能会误操作,就是按下之后并不想点击,
+		这个时候会下意识的把手移出点击范围，应该来说不应该触发点击行为
+		但是因为移动端的事件有个特性，一套事件没完之前焦点都在这个元素
+		身上，所以会引发点击的行为。
+		
+		
+		解决：
+			按下的时候能够获取到坐标点x,y当抬起的时候判断一下坐标值是否相差10
+			如果是就不用执行点击行为 。比如：切换。
+	*/
+	
+	
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault();
+	});
+	
+	
+	var navs = document.querySelectorAll('nav a');
+	
+	for(var i = 0; i < navs.length; i++){
+		
+		navs[i].addEventListener('touchstart', function(e) {	
+			this.touchStartXY = {
+				x:e.touches[0].pageX,
+				y:e.touches[0].pageY
+			}
+			
+			document.getElementById('div1').innerHTML = this.touchStartXY.x + '||' +this.touchStartXY.y
+			
+			//console.log()
+		});
+		
+		
+		navs[i].addEventListener('touchend', function(e) {	
+			
+			this.touchEndXY = {
+				x:e.changedTouches[0].pageX,
+				y:e.changedTouches[0].pageY
+			}
+			
+			document.getElementById('div1').innerHTML = this.touchEndXY.x + '||' +this.touchEndXY.y
+			
+			if(Math.abs(this.touchEndXY.x - this.touchStartXY.x) > 10 || Math.abs(this.touchEndXY.y - this.touchStartXY.y) > 10){
+				return;
+			}
+			
+			for(var i = 0; i < navs.length; i++){
+				navs[i].className = "";
+			}
+			this.className = "active";
+		});
+	}
+	
+	
+	
+};	
+
+</script>
+</head>
+<body>
+
+<nav class="nav">
+	<a href="javascript:;" class="active">百度</a>
+	<a href="javascript:;">百度</a>
+	<a href="javascript:;">百度</a>
+	<a href="javascript:;">百度</a>
+</nav>	
+<div id="div1"></div>
+<ul id="list"></ul>
+</body>
+</html>

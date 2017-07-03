@@ -24,6 +24,10 @@
 </style>
 <script type="text/javascript">
 window.onload = function(){
+	
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault();
+	})
 	var navs = document.querySelectorAll('nav a');
 	for(var i = 0; i < navs.length; i++){
 		navs[i].addEventListener('touchend', function(e) {	
@@ -33,11 +37,14 @@ window.onload = function(){
 			this.className = "active";
 		});
 	}
-	var inner = "";
-	for(var i = 0; i < 100; i++){
-		inner += '<li> <a href="http://www.baidu.com">这是第'+i+'个li</a></li>'
-	}
-	list.innerHTML = inner;
+	
+	/*
+		有些时候可能会误操作,就是按下之后并不想点击,
+		这个时候会下意识的把手移出点击范围，应该来说不应该触发点击行为
+		但是因为移动端的事件有个特性，一套事件没完之前焦点都在这个元素
+		身上，所以会引发点击的行为。
+	*/
+	
 };	
 
 </script>

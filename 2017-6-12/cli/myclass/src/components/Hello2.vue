@@ -1,15 +1,12 @@
 <template>
   <div class="hello">
-    <h2>我在这</h2>
-    <h1>{{ msg }}</h1>
-    <router-link to="/Hello2" >点击跳到2</router-link>
-    <router-view></router-view>
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
+  name: 'hello2',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -20,6 +17,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.hello{
+  width:20rem;
+  height: 20rem;
+  background: yellow;
+}
+
 h1, h2 {
   font-weight: normal;
 }
